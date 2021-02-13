@@ -2,7 +2,8 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
-CONFIG += c++11
+CONFIG += c++17
+
 TARGET=Tank
 # You can make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -20,13 +21,10 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-#win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../view/release/ -lview
-#else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../view/debug/ -lview
-#else:unix: LIBS += -L$$OUT_PWD/../view/ -lview
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../view/release/ -llibview
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../view/debug/ -llibview
+else:unix: LIBS += -L$$OUT_PWD/../view/ -llibview
 
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../main/release -lview
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../main/debug -lview
-else:unix: LIBS += -L$$OUT_PWD/../view/ -lview
 
 INCLUDEPATH += $$PWD/../view
 DEPENDPATH += $$PWD/../view

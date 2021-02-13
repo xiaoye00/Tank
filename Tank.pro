@@ -2,6 +2,8 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     main \
-    view
+    view \
+    util
 
 main.depends=view
+view.depends=util
