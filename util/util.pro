@@ -1,3 +1,5 @@
+
+QT+=xml
 CONFIG += c++17
 
 INCLUDEPATH += . ..
