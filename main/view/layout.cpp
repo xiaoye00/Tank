@@ -1,6 +1,6 @@
 #include "layout.h"
 #include "item_pace.h"
-#include "util/config.h"
+#include "../../util/config.h"
 
 Layout::Layout() {
     item_manager = new ItemManager;

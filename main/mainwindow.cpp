@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 
-#include "graphics_view.h"
+#include "view/graphics_view.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)

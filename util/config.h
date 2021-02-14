@@ -18,8 +18,9 @@ class Config {
     int map_size_h_{0};
     int origin_point_x_{0};
     int origin_point_y_{0};
-    int pace_size_w{0};
-    int pace_size_h{0};
+    int pace_size_w_{0};
+    int pace_size_h_{0};
+    int interval_size_{0};
 
     std::list<ConfigData> config_data_list_;
 };

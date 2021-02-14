@@ -1,0 +1,42 @@
+<setting>
+    <item category="map size">
+        <sizew>1000</sizew>
+        <sizeh>1000</sizeh>
+    </item>
+    <item category="pace size">
+        <sizew>30</sizew>
+        <sizeh>30</sizeh>
+    </item>
+    <item category="interval size">
+        <sizew>10</sizew>
+        <sizeh>10</sizeh>
+    </item>
+
+    <item category="pace">
+        <orient>origin</orient>
+        <startx>150</startx>
+        <starty>150</starty>
+    </item>
+
+    <placement>
+
+        <item category="pace">
+            <orient>tr</orient>
+            <num>30</num>
+        </item>
+        <item category="pace">
+            <orient>td</orient>
+            <num>30</num>
+        </item>
+        <item category="pace">
+            <orient>tl</orient>
+            <num>30</num>
+        </item>
+        <item category="pace">
+            <orient>tu</orient>
+            <num>30</num>
+        </item>    
+    </placement>
+</setting>
+
+

@@ -9,30 +9,29 @@ TARGET=Tank
 # In order to do so, uncomment the following line.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-SOURCES += \
-    main.cpp \
-    mainwindow.cpp
+SOURCES += $$files("*.cpp", true)
+HEADERS += $$files("*.h", true)
 
-HEADERS += \
-    mainwindow.h
+
+
+DEFINES -= QT_NO_DEBUG_OUTPUT
+
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../view/release/ -llibview
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../view/debug/ -llibview
-else:unix: LIBS += -L$$OUT_PWD/../view/ -llibview
+#use static lib
+#win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../util/release/ -llibutil
+#else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../util/debug/ -llibutil
+#else:unix: LIBS += -L$$OUT_PWD/../util/ -llibutil
 
-
-INCLUDEPATH += $$PWD/../view
-DEPENDPATH += $$PWD/../view
-
-
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../util/release/ -llibutil
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../util/debug/ -llibutil
-else:unix: LIBS += -L$$OUT_PWD/../util/ -llibutil
+#use dynamic lib
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../main/release/ -lutil
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../main/debug/ -lutil
+else:unix: LIBS += -L$$OUT_PWD/../main/ -lutil
 
 
 INCLUDEPATH += $$PWD/../util
