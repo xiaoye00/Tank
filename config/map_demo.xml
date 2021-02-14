@@ -12,8 +12,7 @@
         <sizeh>10</sizeh>
     </item>
 
-    <item category="pace">
-        <orient>origin</orient>
+    <item category="start pos">
         <startx>150</startx>
         <starty>150</starty>
     </item>
