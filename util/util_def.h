@@ -6,3 +6,11 @@ enum class UtilDef{
  kLineRight,
  kLineBottom
 };
+
+
+enum class UtilOrient{
+ kToRight,
+ kToDown,
+ kToLeft,
+ kToUp
+};
