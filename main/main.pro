@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -28,5 +28,14 @@ else:unix: LIBS += -L$$OUT_PWD/../view/ -llibview
 
 INCLUDEPATH += $$PWD/../view
 DEPENDPATH += $$PWD/../view
+
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../util/release/ -llibutil
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../util/debug/ -llibutil
+else:unix: LIBS += -L$$OUT_PWD/../util/ -llibutil
+
+
+INCLUDEPATH += $$PWD/../util
+DEPENDPATH += $$PWD/../util
 
 

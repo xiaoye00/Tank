@@ -1,5 +1,7 @@
 #pragma once
 
+#include "layout.h"
+
 #include <QGraphicsView>
 
 class GraphicsView : public QGraphicsView {
@@ -16,9 +18,11 @@ class GraphicsView : public QGraphicsView {
 
   private:
     //scene of this view
-    // GraphicsScene* scene_;
+    GraphicsScene* scene_;
     //for singleton pattern
     static GraphicsView* inst_;
+
+    Layout* layout_;
 
     GraphicsView(QWidget* parent = nullptr);
 };

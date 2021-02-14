@@ -1,6 +1,6 @@
 #pragma once
 
-#include <QDomComment>
+#include <QDomDocument>
 
 class XmlParse : public QDomDocument {
   public:

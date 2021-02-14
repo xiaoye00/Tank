@@ -7,12 +7,14 @@
 
 class Layout {
 
+  public:
     Layout();
     ~Layout();
 
     void addScene(GraphicsScene* scene) { scene_ = scene; };
     void createPace(int x, int y);
     void setPaceSize(int size) { pace_size_ = size; };
+    void initiation();
 
   private:
     GraphicsScene* scene_{nullptr};
