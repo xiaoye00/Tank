@@ -1,9 +1,12 @@
 #pragma once
 
+#include <tuple>
+
 #include "config.h"
 #include "util_def.h"
 
 class Box;
+class Point;
 
 class BoxCreator {
   public:
@@ -12,7 +15,7 @@ class BoxCreator {
 
     void setConfig(Config* config) { config_ = config; };
 
-    bool createBox(UtilBoxType type, int x, int y, int num);
+    Box createBox(UtilBoxType type, int x, int y, int num);
 
   private:
     Config* config_{nullptr};
@@ -20,14 +23,45 @@ class BoxCreator {
 
 class Box {
   public:
-    Box();
-    Box(int lux, int luy, int rlx, int rly);
-    int LUX() { return lux_; };
-    int LUY() { return luy_; };
-    int RLX() { return rlx_; };
-    int RLY() { return rly_; };
-    int Width() { return lux_ - rlx_; };
-    int Height() { return luy_ - rly_; };
+    Box(){};
+    ~Box(){};
+    Box(int lux, int luy, int rlx, int rly) {
+        setLUX(lux);
+        setLUY(luy);
+        setRLX(rlx);
+        setRLY(rly);
+    };
+    Box(Point center_point, int w, int h) {
+        setLUX(center_point.rx() - w / 2);
+        setLUY(center_point.ry() - h / 2);
+        setRLX(center_point.rx() + w / 2);
+        setRLY(center_point.ry() + h / 2);
+    };
+    int  LUX() { return lux_; };
+    int  LUY() { return luy_; };
+    int  RLX() { return rlx_; };
+    int  RLY() { return rly_; };
+    int  Width() { return -lux_ + rlx_; };
+    int  Height() { return -luy_ + rly_; };
+    auto getNextBoxCenter(UtilOrient orient) {
+
+        switch (orient) {
+        case UtilOrient::kToRight:
+            /* code */
+            break;
+        case UtilOrient::kToDown:
+            /* code */
+            break;
+        case UtilOrient::kToLeft:
+            /* code */
+            break;
+        case UtilOrient::kToUp:
+            /* code */
+            break;
+        default:
+            break;
+        }
+    };
 
     void setLUX(int lux) { lux_ = llx_ = lux; };
     void setLUY(int luy) { luy_ = ruy_ = luy; };
@@ -43,4 +77,23 @@ class Box {
     int rly_{0};
     int rux_{0};
     int ruy_{0};
+};
+
+class Point {
+  public:
+    Point(){};
+    Point(int x, int y) {
+        x_ = x;
+        y_ = y;
+    };
+    ~Point(){};
+
+    int rx() { return x_; };
+    int ry() { return y_; };
+    void setX(int x) { x_ = x; };
+    void setY(int y) { y_ = y; };
+
+  private:
+    int x_{0};
+    int y_{0};
 };

@@ -2,8 +2,10 @@
 Transform::Transform() {
 }
 
-Transform::~Transform() {
+Transform::Transform(int w, int h) {
+    setSceneW(w);
+    setSceneH(h);
 }
 
-void Transform::createRectItem(UtilDef def, int start, int unit) {
+Transform::~Transform() {
 }
