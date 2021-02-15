@@ -52,10 +52,10 @@ bool Config::loadDesign(char* path) {
                     auto child_list = e.childNodes();
                     auto child_e    = child_list.at(0).toElement();
                     auto str        = child_e.text();
-                    start_pos_x_    = str.toUInt();
+                    origin_point_x_    = str.toUInt();
                     child_e         = child_list.at(1).toElement();
                     str             = child_e.text();
-                    start_pos_y_    = str.toUInt();
+                    origin_point_y_    = str.toUInt();
                 }
             } else if (node.nodeName() == "placement") {
                 //paces

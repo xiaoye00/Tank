@@ -6,6 +6,8 @@ GraphicsView::GraphicsView(QWidget* parent) : QGraphicsView(parent) {
     layout_->addScene(scene_);
     layout_->initiation();
     setScene(scene_);
+    viewport()->update();
+    show();
 }
 
 

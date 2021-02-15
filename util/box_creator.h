@@ -15,10 +15,29 @@ class BoxCreator {
 
     void setConfig(Config* config) { config_ = config; };
 
-    Box createBox(UtilBoxType type, int x, int y, int num);
+    Box createBox(UtilBoxType type, int x, int y);
 
   private:
     Config* config_{nullptr};
+};
+
+class Point {
+  public:
+    Point(){};
+    Point(int x, int y) {
+        x_ = x;
+        y_ = y;
+    };
+    ~Point(){};
+
+    int  rx() { return x_; };
+    int  ry() { return y_; };
+    void setX(int x) { x_ = x; };
+    void setY(int y) { y_ = y; };
+
+  private:
+    int x_{0};
+    int y_{0};
 };
 
 class Box {
@@ -43,24 +62,39 @@ class Box {
     int  RLY() { return rly_; };
     int  Width() { return -lux_ + rlx_; };
     int  Height() { return -luy_ + rly_; };
+    auto getCenterPoint() {
+        auto center_x = (llx_ + rlx_) / 2;
+        auto center_y = (luy_ + lly_) / 2;
+        return Point(center_x, center_y);
+    };
     auto getNextBoxCenter(UtilOrient orient) {
-
+        auto center_point = getCenterPoint();
         switch (orient) {
-        case UtilOrient::kToRight:
-            /* code */
-            break;
+        case UtilOrient::kToRight: {
+            center_point.setX(center_point.rx() + Width());
+            return center_point;
+        } break;
         case UtilOrient::kToDown:
-            /* code */
+            center_point.setY(center_point.ry() + Height());
+            return center_point;
             break;
         case UtilOrient::kToLeft:
-            /* code */
+            center_point.setX(center_point.rx() - Width());
+            return center_point;
             break;
         case UtilOrient::kToUp:
-            /* code */
+            center_point.setY(center_point.ry() - Height());
+            return center_point;
             break;
         default:
+            return center_point;
             break;
         }
+    };
+
+    auto getNextBox(UtilOrient orient) {
+        auto point = getNextBoxCenter(orient);
+        return Box(point, Width(), Height());
     };
 
     void setLUX(int lux) { lux_ = llx_ = lux; };
@@ -77,23 +111,4 @@ class Box {
     int rly_{0};
     int rux_{0};
     int ruy_{0};
-};
-
-class Point {
-  public:
-    Point(){};
-    Point(int x, int y) {
-        x_ = x;
-        y_ = y;
-    };
-    ~Point(){};
-
-    int rx() { return x_; };
-    int ry() { return y_; };
-    void setX(int x) { x_ = x; };
-    void setY(int y) { y_ = y; };
-
-  private:
-    int x_{0};
-    int y_{0};
 };

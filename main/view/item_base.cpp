@@ -1,5 +1,8 @@
 #include "item_base.h"
+
+#include <QPainter>
 ItemBase::ItemBase(QGraphicsItem* parent) : QGraphicsItem(parent) {
+    setVisible(true);
 }
 
 void ItemBase::setItemSize(int w, int h) {
@@ -26,6 +29,7 @@ QRectF ItemBase::boundingRect() const {
 void ItemBase::paint(QPainter*                       painter,
                      const QStyleOptionGraphicsItem* option,
                      QWidget*                        widget) {
+    draw(painter);
 }
 
 QPixmap* ItemBase::resizeMap(int w, int h) {
@@ -39,4 +43,10 @@ QPixmap* ItemBase::resizeMap(int w, int h) {
     }
 
     return img_;
+}
+
+void ItemBase::draw(QPainter* painter) {
+    if (img_) {
+        painter->drawPixmap(0, 0, *img_);
+    }
 }

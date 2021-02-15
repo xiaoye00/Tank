@@ -9,11 +9,13 @@ class ItemBase : public QGraphicsItem {
     ItemBase(QGraphicsItem* parent = nullptr);
     ~ItemBase(){};
 
-    void     setItemSize(int w, int h);
-    void     setImg(QPixmap* img) { img_ = img; };
-    QPixmap* fillMapToTransparency();
-    QPixmap* resizeMap(int w, int h);
-    void     setType(LayoutItemType type) { type_ = type; };
+    void         setItemSize(int w, int h);
+    void         setImg(QPixmap* img) { img_ = img; };
+    QPixmap*     fillMapToTransparency();
+    QPixmap*     resizeMap(int w, int h);
+    void         setType(LayoutItemType type) { type_ = type; };
+    virtual void preDraw(){};
+    virtual void draw(QPainter* painter);
 
   protected:
     QPixmap*       img_{nullptr};
@@ -23,7 +25,6 @@ class ItemBase : public QGraphicsItem {
                        const QStyleOptionGraphicsItem* option,
                        QWidget*                        widget = nullptr) override;
 
-  private:
     int            w_{0};
     int            h_{0};
     LayoutItemType type_;

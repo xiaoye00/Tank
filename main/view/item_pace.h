@@ -6,4 +6,5 @@ class ItemPace : public ItemBase {
   public:
     ItemPace(QGraphicsItem* parent = nullptr);
     ~ItemPace();
+    virtual void preDraw() override;
 };

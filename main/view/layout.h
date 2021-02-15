@@ -4,6 +4,7 @@
 
 #include "graphics_scene.h"
 #include "item_manager.h"
+#include "layout_def.h"
 
 class Layout {
 
