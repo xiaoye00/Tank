@@ -37,7 +37,7 @@
     <placement>
         <item street="road1">
             <orient>tr</orient>
-            <num>10</num>
+            <num>9</num>
             <building>
                 <type>defalt</type>
                 <type>mall</type>
@@ -47,11 +47,11 @@
         </item>
         <item street="road2">
             <orient>td</orient>
-            <num>10</num>
+            <num>9</num>
         </item>
         <item street="road3">
             <orient>tl</orient>
-            <num>10</num>
+            <num>9</num>
         </item>
         <item street="road4">
             <orient>tu</orient>

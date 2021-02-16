@@ -87,11 +87,11 @@ bool Config::loadDesign(char* path) {
             } else if (node.nodeName() == "placement") {
                 BoxCreator creator;
                 creator.setConfig(this);
-                
+
                 Transform transform_map(map_size_w_, map_size_h_);
-                Box       pace_box = creator.createBox(UtilBoxType::kPace, origin_point_x_, origin_point_y_);
-                auto      box = transform_map.translateToSceneBox(pace_box);
-                pace_box_list_.push_back(box);
+                // Box       pace_box = creator.createBox(UtilBoxType::kPace, origin_point_x_, origin_point_y_);
+                // auto      box = transform_map.translateToSceneBox(pace_box);
+                // pace_box_list_.push_back(box);
                 auto anchor_point = Point(origin_point_x_, origin_point_y_);
                 //paces
                 auto list_nodes = node.childNodes();
@@ -116,12 +116,18 @@ bool Config::loadDesign(char* path) {
                     } else if (str == "tu") {
                         orient = UtilOrient::kToUp;
                     }
-
+                    Box pace_box;
                     for (int i = 0; i < num; i++) {
-                        auto point = creator.calcuNextBoxCenter(orient, UtilBoxType::kPace, pace_box);
-                        pace_box   = creator.createBox(UtilBoxType::kPace, point.rx(), point.ry());
-                        auto box   = transform_map.translateToSceneBox(pace_box);
-                        pace_box_list_.push_back(box);
+                        if (i == 0) {
+                            pace_box = creator.createBox(UtilBoxType::kPace, anchor_point.rx(), anchor_point.ry());
+                            auto box = transform_map.translateToSceneBox(pace_box);
+                            pace_box_list_.push_back(box);
+                        } else {
+                            auto point = creator.calcuNextBoxCenter(orient, UtilBoxType::kPace, pace_box);
+                            pace_box   = creator.createBox(UtilBoxType::kPace, point.rx(), point.ry());
+                            auto box   = transform_map.translateToSceneBox(pace_box);
+                            pace_box_list_.push_back(box);
+                        }
                     }
 
                     //building
