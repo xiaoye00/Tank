@@ -8,8 +8,8 @@
         <sizeh>30</sizeh>
     </item>
     <item category="interval size">
-        <sizew>10</sizew>
-        <sizeh>10</sizeh>
+        <sizew>0</sizew>
+        <sizeh>0</sizeh>
     </item>
 
     <item category="mall size">
@@ -28,8 +28,8 @@
     </item>
 
     <item category="start pos">
-        <startx>150</startx>
-        <starty>150</starty>
+        <startx>300</startx>
+        <starty>300</starty>
     </item>
 
 

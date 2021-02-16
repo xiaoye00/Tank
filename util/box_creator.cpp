@@ -44,16 +44,15 @@ Point BoxCreator::calcuNextBoxCenter(UtilOrient orient, UtilBoxType box_type, Bo
     auto center_point = box.getCenterPoint();
     switch (orient) {
     case UtilOrient::kToRight: {
-        center_point.setX(center_point.rx() + box.Width() / 2);
         switch (box_type) {
         case UtilBoxType::kPace: {
             auto [w, h] = config_->paceSize();
-            center_point.setX(center_point.rx() + w / 2);
+            center_point.setX(center_point.rx() + w);
         } break;
         case UtilBoxType::kMall: {
             auto [w, h] = config_->mallSize();
-            center_point.setX(center_point.rx() + w / 2);
-            center_point.setY(center_point.ry() - box.Height() / 2);
+            center_point.setX(center_point.rx() - box.Width() / 2 + w / 2);
+            center_point.setY(center_point.ry() + box.Height() / 2);
             center_point.setY(center_point.ry() - config_->intervalSize());
             center_point.setY(center_point.ry() - h / 2);
         } break;
@@ -182,7 +181,5 @@ Point BoxCreator::calcuNextBoxCenter(UtilOrient orient, UtilBoxType box_type, Bo
 
     return center_point;
 };
-
-
 
 int BoxCreator::global_index_ = 0;

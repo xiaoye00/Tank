@@ -138,7 +138,23 @@ bool Config::loadDesign(char* path) {
                         if (building == "defalt") {
 
                         } else if (building == "mall") {
+                            // Box  pace_box(anchor_point, pace_size_w_, pace_size_h_);
+                            // auto point    = creator.calcuNextBoxCenter(orient, UtilBoxType::kMall, pace_box);
+                            // auto mall_box = Box(point, mall_size_w_, mall_size_h_);
+                            // mall_box = transform_map.translateToSceneBox(mall_box);
+                            // pace_box_list_.push_back(mall_box);
 
+                            Box pace_box(anchor_point, pace_size_w_, pace_size_h_);
+                            pace_box      = transform_map.translateToSceneBox(pace_box);
+                            auto pace_lux = pace_box.LUX();
+                            auto pace_luy = pace_box.LUY();
+
+                            Box mall_box(Point(360, 270), mall_size_w_, mall_size_h_);
+                            mall_box      = transform_map.translateToSceneBox(mall_box);
+                            auto mall_lux = mall_box.LUX();
+                            auto mall_luy = mall_box.LUY();
+
+                            pace_box_list_.push_back(mall_box);
                         } else if (building == "shop") {
                         }
                     }
