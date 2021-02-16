@@ -12,30 +12,52 @@
         <sizeh>10</sizeh>
     </item>
 
+    <item category="mall size">
+        <sizew>3</sizew>
+        <sizeh>3</sizeh>
+    </item>
+
+    <item category="shop size">
+        <sizew>2</sizew>
+        <sizeh>2</sizeh>
+    </item>
+
+    <item category="defalt size">
+        <sizew>1</sizew>
+        <sizeh>1</sizeh>
+    </item>
+
     <item category="start pos">
         <startx>150</startx>
         <starty>150</starty>
     </item>
 
-    <placement>
 
-        <item category="pace">
+
+    <placement>
+        <item street="road1">
             <orient>tr</orient>
             <num>10</num>
+            <building>
+                <type>defalt</type>
+                <type>mall</type>
+                <type>shop</type>
+                <type>defalt</type>
+            </building> 
         </item>
-        <item category="pace">
+        <item street="road2">
             <orient>td</orient>
             <num>10</num>
         </item>
-        <item category="pace">
+        <item street="road3">
             <orient>tl</orient>
             <num>10</num>
         </item>
-        <item category="pace">
+        <item street="road4">
             <orient>tu</orient>
-            <num>10</num>
+            <num>9</num>
         </item>    
-    </placement>
+    </placement>   
 </setting>
 
 

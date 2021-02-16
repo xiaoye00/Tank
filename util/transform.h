@@ -16,8 +16,9 @@ class Transform {
         auto luy = -scene_h_ / 2 + box.LUY();
         auto rlx = -scene_w_ / 2 + box.RLX();
         auto rly = -scene_h_ / 2 + box.RLY();
-
-        return Box(lux, luy, rlx, rly);
+        Box ret(lux, luy, rlx, rly);
+        ret.setIndex(box.Index());
+        return ret;
     };
 
     void setSceneW(int w) { scene_w_ = w; };

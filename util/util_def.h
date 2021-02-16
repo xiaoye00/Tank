@@ -1,10 +1,10 @@
 #pragma once
 
-enum class UtilDef {
-    kLineTop,
-    kLineLeft,
-    kLineRight,
-    kLineBottom
+enum class UtilBoxType {
+    kPace,
+    kMall,
+    kShop,
+    kDefaltBuilding
 };
 
 enum class UtilOrient {
@@ -14,6 +14,3 @@ enum class UtilOrient {
     kToUp
 };
 
-enum class UtilBoxType {
-    kPace
-};

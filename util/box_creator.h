@@ -2,11 +2,11 @@
 
 #include <tuple>
 
-#include "config.h"
 #include "util_def.h"
 
 class Box;
 class Point;
+class Config;
 
 class BoxCreator {
   public:
@@ -17,8 +17,11 @@ class BoxCreator {
 
     Box createBox(UtilBoxType type, int x, int y);
 
+    Point calcuNextBoxCenter(UtilOrient orient, UtilBoxType box_type, Box box);
+
   private:
-    Config* config_{nullptr};
+    Config*    config_{nullptr};
+    static int global_index_;
 };
 
 class Point {
@@ -62,39 +65,12 @@ class Box {
     int  RLY() { return rly_; };
     int  Width() { return -lux_ + rlx_; };
     int  Height() { return -luy_ + rly_; };
+    void setIndex(int index) { index_ = index; };
+    int  Index() { return index_; };
     auto getCenterPoint() {
         auto center_x = (llx_ + rlx_) / 2;
         auto center_y = (luy_ + lly_) / 2;
         return Point(center_x, center_y);
-    };
-    auto getNextBoxCenter(UtilOrient orient) {
-        auto center_point = getCenterPoint();
-        switch (orient) {
-        case UtilOrient::kToRight: {
-            center_point.setX(center_point.rx() + Width());
-            return center_point;
-        } break;
-        case UtilOrient::kToDown:
-            center_point.setY(center_point.ry() + Height());
-            return center_point;
-            break;
-        case UtilOrient::kToLeft:
-            center_point.setX(center_point.rx() - Width());
-            return center_point;
-            break;
-        case UtilOrient::kToUp:
-            center_point.setY(center_point.ry() - Height());
-            return center_point;
-            break;
-        default:
-            return center_point;
-            break;
-        }
-    };
-
-    auto getNextBox(UtilOrient orient) {
-        auto point = getNextBoxCenter(orient);
-        return Box(point, Width(), Height());
     };
 
     void setLUX(int lux) { lux_ = llx_ = lux; };
@@ -111,4 +87,5 @@ class Box {
     int rly_{0};
     int rux_{0};
     int ruy_{0};
+    int index_{0};
 };
