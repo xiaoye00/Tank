@@ -52,20 +52,20 @@ Point BoxCreator::calcuNextBoxCenter(UtilOrient orient, UtilBoxType box_type, Bo
         case UtilBoxType::kMall: {
             auto [w, h] = config_->mallSize();
             center_point.setX(center_point.rx() - box.Width() / 2 + w / 2);
-            center_point.setY(center_point.ry() + box.Height() / 2);
+            center_point.setY(center_point.ry() - box.Height() / 2);
             center_point.setY(center_point.ry() - config_->intervalSize());
             center_point.setY(center_point.ry() - h / 2);
         } break;
         case UtilBoxType::kShop: {
             auto [w, h] = config_->shopSize();
-            center_point.setX(center_point.rx() + w / 2);
+            center_point.setX(center_point.rx() - box.Width() / 2 + w / 2);
             center_point.setY(center_point.ry() - box.Height() / 2);
             center_point.setY(center_point.ry() - config_->intervalSize());
             center_point.setY(center_point.ry() - h / 2);
         } break;
         case UtilBoxType::kDefaltBuilding: {
             auto [w, h] = config_->defaltBuildingSize();
-            center_point.setX(center_point.rx() + w / 2);
+            center_point.setX(center_point.rx() - box.Width() / 2 + w / 2);
             center_point.setY(center_point.ry() - box.Height() / 2);
             center_point.setY(center_point.ry() - config_->intervalSize());
             center_point.setY(center_point.ry() - h / 2);
@@ -76,31 +76,30 @@ Point BoxCreator::calcuNextBoxCenter(UtilOrient orient, UtilBoxType box_type, Bo
         }
     } break;
     case UtilOrient::kToDown:
-        center_point.setY(center_point.ry() + box.Height() / 2);
         switch (box_type) {
         case UtilBoxType::kPace: {
             auto [w, h] = config_->paceSize();
-            center_point.setY(center_point.ry() + h / 2);
+            center_point.setY(center_point.ry() + h);
         } break;
         case UtilBoxType::kMall: {
             auto [w, h] = config_->mallSize();
-            center_point.setX(center_point.rx() + w / 2);
+            center_point.setX(center_point.rx() + box.Width() / 2 + w / 2);
             center_point.setX(center_point.rx() + config_->intervalSize());
-            center_point.setY(center_point.ry() + box.Height() / 2);
+            center_point.setY(center_point.ry() - box.Height() / 2);
             center_point.setY(center_point.ry() + h / 2);
         } break;
         case UtilBoxType::kShop: {
             auto [w, h] = config_->shopSize();
-            center_point.setX(center_point.rx() + w / 2);
+            center_point.setX(center_point.rx() + box.Width() / 2 + w / 2);
             center_point.setX(center_point.rx() + config_->intervalSize());
-            center_point.setY(center_point.ry() + box.Height() / 2);
+            center_point.setY(center_point.ry() - box.Height() / 2);
             center_point.setY(center_point.ry() + h / 2);
         } break;
         case UtilBoxType::kDefaltBuilding: {
             auto [w, h] = config_->defaltBuildingSize();
-            center_point.setX(center_point.rx() + w / 2);
+            center_point.setX(center_point.rx() + box.Width() / 2 + w / 2);
             center_point.setX(center_point.rx() + config_->intervalSize());
-            center_point.setY(center_point.ry() + box.Height() / 2);
+            center_point.setY(center_point.ry() - box.Height() / 2);
             center_point.setY(center_point.ry() + h / 2);
         } break;
 
@@ -109,31 +108,30 @@ Point BoxCreator::calcuNextBoxCenter(UtilOrient orient, UtilBoxType box_type, Bo
         }
         break;
     case UtilOrient::kToLeft:
-        center_point.setX(center_point.rx() - box.Width() / 2);
         switch (box_type) {
         case UtilBoxType::kPace: {
             auto [w, h] = config_->paceSize();
-            center_point.setX(center_point.rx() - w / 2);
+            center_point.setX(center_point.rx() - w);
         } break;
         case UtilBoxType::kMall: {
             auto [w, h] = config_->mallSize();
-            center_point.setX(center_point.rx() - w / 2);
-            center_point.setY(center_point.ry() - config_->intervalSize());
+            center_point.setX(center_point.rx() + box.Width() / 2 - w / 2);
             center_point.setY(center_point.ry() - box.Height() / 2);
+            center_point.setY(center_point.ry() - config_->intervalSize());
             center_point.setY(center_point.ry() - h / 2);
         } break;
         case UtilBoxType::kShop: {
             auto [w, h] = config_->shopSize();
-            center_point.setX(center_point.rx() - w / 2);
-            center_point.setY(center_point.ry() - config_->intervalSize());
+            center_point.setX(center_point.rx() + box.Width() / 2 - w / 2);
             center_point.setY(center_point.ry() - box.Height() / 2);
+            center_point.setY(center_point.ry() - config_->intervalSize());
             center_point.setY(center_point.ry() - h / 2);
         } break;
         case UtilBoxType::kDefaltBuilding: {
             auto [w, h] = config_->defaltBuildingSize();
-            center_point.setX(center_point.rx() - w / 2);
-            center_point.setY(center_point.ry() - config_->intervalSize());
+            center_point.setX(center_point.rx() + box.Width() / 2 - w / 2);
             center_point.setY(center_point.ry() - box.Height() / 2);
+            center_point.setY(center_point.ry() - config_->intervalSize());
             center_point.setY(center_point.ry() - h / 2);
         } break;
 
@@ -142,33 +140,32 @@ Point BoxCreator::calcuNextBoxCenter(UtilOrient orient, UtilBoxType box_type, Bo
         }
         break;
     case UtilOrient::kToUp:
-        center_point.setY(center_point.ry() - box.Height() / 2);
         switch (box_type) {
         case UtilBoxType::kPace: {
             auto [w, h] = config_->paceSize();
-            center_point.setY(center_point.ry() - h / 2);
+            center_point.setY(center_point.ry() - h);
         } break;
         case UtilBoxType::kMall: {
             auto [w, h] = config_->mallSize();
+            center_point.setX(center_point.rx() - box.Width() / 2 - w / 2);
+            center_point.setX(center_point.rx() - config_->intervalSize());
+            center_point.setY(center_point.ry() + box.Height() / 2);
             center_point.setY(center_point.ry() - h / 2);
-            center_point.setX(center_point.rx() + box.Width() / 2);
-            center_point.setY(center_point.rx() + config_->intervalSize());
-            center_point.setY(center_point.rx() + w / 2);
 
         } break;
         case UtilBoxType::kShop: {
             auto [w, h] = config_->shopSize();
+            center_point.setX(center_point.rx() - box.Width() / 2 - w / 2);
+            center_point.setX(center_point.rx() - config_->intervalSize());
+            center_point.setY(center_point.ry() + box.Height() / 2);
             center_point.setY(center_point.ry() - h / 2);
-            center_point.setX(center_point.rx() + box.Width() / 2);
-            center_point.setY(center_point.rx() + config_->intervalSize());
-            center_point.setY(center_point.rx() + w / 2);
         } break;
         case UtilBoxType::kDefaltBuilding: {
             auto [w, h] = config_->defaltBuildingSize();
+            center_point.setX(center_point.rx() - box.Width() / 2 - w / 2);
+            center_point.setX(center_point.rx() - config_->intervalSize());
+            center_point.setY(center_point.ry() + box.Height() / 2);
             center_point.setY(center_point.ry() - h / 2);
-            center_point.setX(center_point.rx() + box.Width() / 2);
-            center_point.setY(center_point.rx() + config_->intervalSize());
-            center_point.setY(center_point.rx() + w / 2);
         } break;
 
         default:

@@ -136,6 +136,11 @@ bool Config::loadDesign(char* path) {
                     for (int i = 0; i < building_nodes.size(); i++) {
                         auto building = building_nodes.at(i).toElement().text();
                         if (building == "defalt") {
+                            // Box  pace_box(anchor_point, pace_size_w_, pace_size_h_);
+                            // auto point    = creator.calcuNextBoxCenter(orient, UtilBoxType::kDefaltBuilding, pace_box);
+                            // auto defalt_box = Box(point, defalt_building_size_w_, defalt_building_size_h_);
+                            // defalt_box      = transform_map.translateToSceneBox(defalt_box);
+                            // pace_box_list_.push_back(defalt_box);
 
                         } else if (building == "mall") {
                             // Box  pace_box(anchor_point, pace_size_w_, pace_size_h_);
@@ -144,18 +149,12 @@ bool Config::loadDesign(char* path) {
                             // mall_box = transform_map.translateToSceneBox(mall_box);
                             // pace_box_list_.push_back(mall_box);
 
-                            Box pace_box(anchor_point, pace_size_w_, pace_size_h_);
-                            pace_box      = transform_map.translateToSceneBox(pace_box);
-                            auto pace_lux = pace_box.LUX();
-                            auto pace_luy = pace_box.LUY();
-
-                            Box mall_box(Point(360, 270), mall_size_w_, mall_size_h_);
-                            mall_box      = transform_map.translateToSceneBox(mall_box);
-                            auto mall_lux = mall_box.LUX();
-                            auto mall_luy = mall_box.LUY();
-
-                            pace_box_list_.push_back(mall_box);
                         } else if (building == "shop") {
+                            Box  pace_box(anchor_point, pace_size_w_, pace_size_h_);
+                            auto point    = creator.calcuNextBoxCenter(orient, UtilBoxType::kShop, pace_box);
+                            auto shop_box = Box(point, shop_size_w_, shop_size_h_);
+                            shop_box      = transform_map.translateToSceneBox(shop_box);
+                            pace_box_list_.push_back(shop_box);
                         }
                     }
 

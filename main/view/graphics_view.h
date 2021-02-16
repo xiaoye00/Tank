@@ -16,6 +16,12 @@ class GraphicsView : public QGraphicsView {
         return inst_;
     }
 
+  signals:
+    void sendPos(int x, int y);
+
+  protected:
+    virtual void mouseMoveEvent(QMouseEvent* event) override;
+
   private:
     //scene of this view
     GraphicsScene* scene_;

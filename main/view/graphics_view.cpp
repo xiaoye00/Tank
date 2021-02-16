@@ -1,7 +1,10 @@
 #include "graphics_view.h"
 
+#include <QMouseEvent>
+
 GraphicsView::GraphicsView(QWidget* parent) : QGraphicsView(parent) {
-    scene_ = new GraphicsScene;
+    setMouseTracking(true);
+    scene_  = new GraphicsScene;
     layout_ = new Layout;
     layout_->addScene(scene_);
     layout_->initiation();
@@ -10,5 +13,10 @@ GraphicsView::GraphicsView(QWidget* parent) : QGraphicsView(parent) {
     show();
 }
 
+void GraphicsView::mouseMoveEvent(QMouseEvent* event) {
+    auto point = mapToScene(event->pos());
+    emit sendPos(point.rx(), point.ry());
+    QGraphicsView::mouseMoveEvent(event);
+}
 
 GraphicsView* GraphicsView::inst_ = nullptr;

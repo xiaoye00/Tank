@@ -20,7 +20,7 @@ class Config {
     auto intervalSize() { return interval_size_; };
     auto getPaceBoxes() { return pace_box_list_; };
     auto mallSize() { return std::tuple(mall_size_w_, mall_size_h_); };
-    auto shopSize() { return std::tuple(mall_size_w_, mall_size_h_); };
+    auto shopSize() { return std::tuple(shop_size_w_, shop_size_h_); };
     auto defaltBuildingSize() { return std::tuple(defalt_building_size_w_, defalt_building_size_h_); };
 
   private:
