@@ -140,21 +140,21 @@ bool Config::loadDesign(char* path) {
                             auto point      = creator.deduceBoxCenterPoint(orient, UtilBoxType::kDefaltBuilding, building_anchor);
                             auto defalt_box = Box(point, defalt_building_size_w_, defalt_building_size_h_);
                             defalt_box      = transform_map.translateToSceneBox(defalt_box);
-                            pace_box_list_.push_back(defalt_box);
+                            building_box_list_.push_back(defalt_box);
                             building_anchor = creator.deduceNextAnchorPoint(orient, UtilBoxType::kDefaltBuilding, building_anchor);
 
                         } else if (building == "mall") {
                             auto point    = creator.deduceBoxCenterPoint(orient, UtilBoxType::kMall, building_anchor);
                             auto mall_box = Box(point, mall_size_w_, mall_size_h_);
                             mall_box      = transform_map.translateToSceneBox(mall_box);
-                            pace_box_list_.push_back(mall_box);
+                            building_box_list_.push_back(mall_box);
                             building_anchor = creator.deduceNextAnchorPoint(orient, UtilBoxType::kMall, building_anchor);
 
                         } else if (building == "shop") {
                             auto point    = creator.deduceBoxCenterPoint(orient, UtilBoxType::kShop, building_anchor);
                             auto shop_box = Box(point, shop_size_w_, shop_size_h_);
                             shop_box      = transform_map.translateToSceneBox(shop_box);
-                            pace_box_list_.push_back(shop_box);
+                            building_box_list_.push_back(shop_box);
                             building_anchor = creator.deduceNextAnchorPoint(orient, UtilBoxType::kShop, building_anchor);
                         } else if (building == "null") {
                             auto point    = creator.deduceBoxCenterPoint(orient, UtilBoxType::kNull, building_anchor);

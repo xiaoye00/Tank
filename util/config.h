@@ -19,6 +19,7 @@ class Config {
     auto paceSize() { return std::tuple(pace_size_w_, pace_size_h_); };
     auto intervalSize() { return interval_size_; };
     auto getPaceBoxes() { return pace_box_list_; };
+    auto getBuildingBoxes() { return building_box_list_; };
     auto mallSize() { return std::tuple(mall_size_w_, mall_size_h_); };
     auto shopSize() { return std::tuple(shop_size_w_, shop_size_h_); };
     auto defaltBuildingSize() { return std::tuple(defalt_building_size_w_, defalt_building_size_h_); };
@@ -38,4 +39,5 @@ class Config {
     int            defalt_building_size_w_;
     int            defalt_building_size_h_;
     std::list<Box> pace_box_list_;
+    std::list<Box> building_box_list_;
 };

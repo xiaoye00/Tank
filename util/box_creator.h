@@ -1,7 +1,7 @@
 #pragma once
 
+#include <list>
 #include <tuple>
-
 #include "util_def.h"
 
 class Box;
@@ -78,15 +78,17 @@ class Box {
     void setLUY(int luy) { luy_ = ruy_ = luy; };
     void setRLX(int rlx) { rlx_ = rux_ = rlx; };
     void setRLY(int rly) { rly_ = lly_ = rly; };
+    void setAssociateBox(int index) { associate_boxes_.push_back(index); };
 
   private:
-    int llx_{0};
-    int lly_{0};
-    int lux_{0};
-    int luy_{0};
-    int rlx_{0};
-    int rly_{0};
-    int rux_{0};
-    int ruy_{0};
-    int index_{0};
+    int            llx_{0};
+    int            lly_{0};
+    int            lux_{0};
+    int            luy_{0};
+    int            rlx_{0};
+    int            rly_{0};
+    int            rux_{0};
+    int            ruy_{0};
+    int            index_{0};
+    std::list<int> associate_boxes_;
 };
