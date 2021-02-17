@@ -15,15 +15,13 @@ void ItemPace::preDraw() {
     painter.setPen(pen);
     painter.drawRect(0, 0, box_.Width() - 1, box_.Height() - 1);
 
-    auto boxes = box_.getAssociateBoxes();
-    
-    QString name;
+    // auto boxes = box_.getAssociateBoxes();
 
-    for(auto box : boxes){
-        name = QString::number(box);
-    }
+    QString name = QString::number(box_.Index());
 
-
+    // for(auto box : boxes){
+    //     name = QString::number(box);
+    // }
 
     painter.drawText(QRectF(
                        (0),

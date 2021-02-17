@@ -317,10 +317,36 @@ void BoxCreator::associateBuildingBox(UtilOrient orient, Box box) {
     auto [pace_w, pace_h] = config_->paceSize();
     switch (orient) {
     case UtilOrient::kToRight: {
-        auto start_x    = point.rx() - box.Width() / 2;
-        auto end_x      = point.rx() + box.Width() / 2;
-        auto anchor_y   = point.ry() + box.Height() / 2 + config_->intervalSize();
-        auto pace_boxes = config_->getPaceBoxes();
+        auto                              start_x    = point.rx() - box.Width() / 2;
+        auto                              end_x      = point.rx() + box.Width() / 2;
+        auto                              anchor_y   = point.ry() + box.Height() / 2 + config_->intervalSize() + pace_h / 2;
+        decltype(config_->getPaceBoxes()) pace_boxes = config_->getPaceBoxes();
+        for (auto& pace_box : pace_boxes) {
+            auto pace_point = pace_box.getCenterPoint();
+            if (pace_point.rx() >= start_x && pace_point.rx() <= end_x && pace_point.ry() == anchor_y) {
+                pace_box.setAssociateBox(box.Index());
+            }
+        }
+
+    } break;
+    case UtilOrient::kToDown: {
+        auto  anchor_x   = point.rx() - box.Width() / 2 - config_->intervalSize() - pace_w / 2;
+        auto  start_y    = point.ry() - box.Height() / 2;
+        auto  end_y      = point.ry() + box.Height() / 2;
+        auto& pace_boxes = config_->getPaceBoxes();
+
+        for (auto& pace_box : pace_boxes) {
+            auto point = pace_box.getCenterPoint();
+            if (point.ry() >= start_y && point.ry() <= end_y && point.rx() == anchor_x) {
+                pace_box.setAssociateBox(box.Index());
+            }
+        }
+    } break;
+    case UtilOrient::kToLeft: {
+        auto                              start_x    = point.rx() - box.Width() / 2;
+        auto                              end_x      = point.rx() + box.Width() / 2;
+        auto                              anchor_y   = point.ry() + box.Height() / 2 + config_->intervalSize() + pace_h / 2;
+        decltype(config_->getPaceBoxes()) pace_boxes = config_->getPaceBoxes();
         for (auto& pace_box : pace_boxes) {
             auto pace_point = pace_box.getCenterPoint();
             if (pace_point.rx() >= start_x && pace_point.rx() <= end_x && pace_point.ry() == anchor_y) {
@@ -328,40 +354,15 @@ void BoxCreator::associateBuildingBox(UtilOrient orient, Box box) {
             }
         }
     } break;
-    case UtilOrient::kToDown: {
-        auto anchor_x = point.rx() - box.Width() / 2 - config_->intervalSize();
-        auto start_y  = point.ry() - box.Height() / 2;
-        auto end_y    = point.ry() + box.Height() / 2;
-
-        auto pace_boxes = config_->getPaceBoxes();
-        for (auto& pace_box : pace_boxes) {
-            auto point = pace_box.getCenterPoint();
-            if (point.ry() >= start_y && point.ry() <= end_y && point.ry() == anchor_x) {
-                pace_box.setAssociateBox(box.Index());
-            }
-        }
-    } break;
-    case UtilOrient::kToLeft: {
-        auto start_x    = point.rx() - box.Width() / 2;
-        auto end_x      = point.rx() + box.Width() / 2;
-        auto anchor_y   = point.ry() + box.Height() / 2 + config_->intervalSize();
-        auto pace_boxes = config_->getPaceBoxes();
-        for (auto& pace_box : pace_boxes) {
-            auto point = pace_box.getCenterPoint();
-            if (point.rx() >= start_x && point.rx() <= end_x && point.ry() == anchor_y) {
-                pace_box.setAssociateBox(box.Index());
-            }
-        }
-    } break;
     case UtilOrient::kToUp: {
-        auto anchor_x = point.rx() + box.Width() / 2 + config_->intervalSize();
+        auto anchor_x = point.rx() + box.Width() / 2 + config_->intervalSize() + pace_w / 2;
         auto start_y  = point.ry() - box.Height() / 2;
         auto end_y    = point.ry() + box.Height() / 2;
 
-        auto pace_boxes = config_->getPaceBoxes();
+        auto& pace_boxes = config_->getPaceBoxes();
         for (auto& pace_box : pace_boxes) {
             auto point = pace_box.getCenterPoint();
-            if (point.ry() >= start_y && point.ry() <= end_y && point.ry() == anchor_x) {
+            if (point.ry() >= start_y && point.ry() <= end_y && point.rx() == anchor_x) {
                 pace_box.setAssociateBox(box.Index());
             }
         }

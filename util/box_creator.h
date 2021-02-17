@@ -75,14 +75,14 @@ class Box {
         return Point(center_x, center_y);
     };
 
-    void           setLUX(int lux) { lux_ = llx_ = lux; };
-    void           setLUY(int luy) { luy_ = ruy_ = luy; };
-    void           setRLX(int rlx) { rlx_ = rux_ = rlx; };
-    void           setRLY(int rly) { rly_ = lly_ = rly; };
-    void           setAssociateBox(int index) { associate_boxes_.push_back(index); };
-    std::list<int> getAssociateBoxes() { return associate_boxes_; };
-    void           setType(UtilBoxType type) { type_ = type; };
-    auto           Type() { return type_; };
+    void  setLUX(int lux) { lux_ = llx_ = lux; };
+    void  setLUY(int luy) { luy_ = ruy_ = luy; };
+    void  setRLX(int rlx) { rlx_ = rux_ = rlx; };
+    void  setRLY(int rly) { rly_ = lly_ = rly; };
+    void  setAssociateBox(int index) { test_list.push_back(index); };
+    auto& getAssociateBoxes() { return test_list; };
+    void  setType(UtilBoxType type) { type_ = type; };
+    auto  Type() { return type_; };
 
   private:
     int            llx_{0};
@@ -94,6 +94,7 @@ class Box {
     int            rux_{0};
     int            ruy_{0};
     int            index_{0};
-    std::list<int> associate_boxes_;
+    int            associateID_{0};
     UtilBoxType    type_;
+    std::list<int> test_list;
 };

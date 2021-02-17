@@ -17,7 +17,7 @@ void Layout::initiation() {
     config.loadDesign("D:/GitHub/tank/Tank/config/map_demo.xml");
     auto [scene_w, scene_h] = config.mapSize();
     scene_->setSize(scene_w, scene_h);
-    auto boxes = config.getPaceBoxes();
+    auto& boxes = config.getPaceBoxes();
     for (auto& box : boxes) {
         auto item = item_manager->createItem(LayoutItemType::kPace,
                                              box);
