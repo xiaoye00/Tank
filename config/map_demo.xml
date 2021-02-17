@@ -1,11 +1,11 @@
 <setting>
     <item category="map size">
-        <sizew>1000</sizew>
-        <sizeh>1000</sizeh>
+        <sizew>2000</sizew>
+        <sizeh>2000</sizeh>
     </item>
     <item category="pace size">
-        <sizew>30</sizew>
-        <sizeh>30</sizeh>
+        <sizew>50</sizew>
+        <sizeh>50</sizeh>
     </item>
     <item category="interval size">
         <sizew>10</sizew>
@@ -43,6 +43,10 @@
                 <type>defalt</type>
                 <type>mall</type>
                 <type>shop</type>
+                <type>defalt</type>
+                <type>mall</type>
+                <type>null</type>
+                <type>mall</type>
                 <type>defalt</type>
             </building> 
         </item>
