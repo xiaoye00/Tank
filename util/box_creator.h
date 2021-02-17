@@ -19,6 +19,7 @@ class BoxCreator {
 
     Point deduceBoxCenterPoint(UtilOrient orient, UtilBoxType box_type, Point anchor_point);
     Point deduceNextAnchorPoint(UtilOrient orient, UtilBoxType box_type, Point anchor_point);
+    void  associateBuildingBox(UtilOrient orient, Box box);
 
   private:
     Config*    config_{nullptr};
@@ -64,8 +65,8 @@ class Box {
     int  LUY() { return luy_; };
     int  RLX() { return rlx_; };
     int  RLY() { return rly_; };
-    int  Width() { return -lux_ + rlx_; };
-    int  Height() { return -luy_ + rly_; };
+    int  Width() const { return -lux_ + rlx_; };
+    int  Height() const { return -luy_ + rly_; };
     void setIndex(int index) { index_ = index; };
     int  Index() { return index_; };
     auto getCenterPoint() {
@@ -74,11 +75,14 @@ class Box {
         return Point(center_x, center_y);
     };
 
-    void setLUX(int lux) { lux_ = llx_ = lux; };
-    void setLUY(int luy) { luy_ = ruy_ = luy; };
-    void setRLX(int rlx) { rlx_ = rux_ = rlx; };
-    void setRLY(int rly) { rly_ = lly_ = rly; };
-    void setAssociateBox(int index) { associate_boxes_.push_back(index); };
+    void           setLUX(int lux) { lux_ = llx_ = lux; };
+    void           setLUY(int luy) { luy_ = ruy_ = luy; };
+    void           setRLX(int rlx) { rlx_ = rux_ = rlx; };
+    void           setRLY(int rly) { rly_ = lly_ = rly; };
+    void           setAssociateBox(int index) { associate_boxes_.push_back(index); };
+    std::list<int> getAssociateBoxes() { return associate_boxes_; };
+    void           setType(UtilBoxType type) { type_ = type; };
+    auto           Type() { return type_; };
 
   private:
     int            llx_{0};
@@ -91,4 +95,5 @@ class Box {
     int            ruy_{0};
     int            index_{0};
     std::list<int> associate_boxes_;
+    UtilBoxType    type_;
 };

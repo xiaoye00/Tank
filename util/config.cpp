@@ -89,10 +89,7 @@ bool Config::loadDesign(char* path) {
                 creator.setConfig(this);
 
                 Transform transform_map(map_size_w_, map_size_h_);
-                // Box       pace_box = creator.createBox(UtilBoxType::kPace, origin_point_x_, origin_point_y_);
-                // auto      box = transform_map.translateToSceneBox(pace_box);
-                // pace_box_list_.push_back(box);
-                auto anchor_point = Point(origin_point_x_, origin_point_y_);
+                auto      anchor_point = Point(origin_point_x_, origin_point_y_);
                 //paces
                 auto list_nodes = node.childNodes();
                 for (auto i = 0; i < list_nodes.size(); i++) {
@@ -137,27 +134,33 @@ bool Config::loadDesign(char* path) {
                     for (int i = 0; i < building_nodes.size(); i++) {
                         auto building = building_nodes.at(i).toElement().text();
                         if (building == "defalt") {
-                            auto point      = creator.deduceBoxCenterPoint(orient, UtilBoxType::kDefaltBuilding, building_anchor);
-                            auto defalt_box = Box(point, defalt_building_size_w_, defalt_building_size_h_);
-                            defalt_box      = transform_map.translateToSceneBox(defalt_box);
-                            building_box_list_.push_back(defalt_box);
+                            auto point = creator.deduceBoxCenterPoint(orient, UtilBoxType::kDefaltBuilding, building_anchor);
+                            auto box   = creator.createBox(UtilBoxType::kDefaltBuilding, point.rx(), point.ry());
+
+                            box = transform_map.translateToSceneBox(box);
+                            creator.associateBuildingBox(orient, box);
+                            building_box_list_.push_back(box);
                             building_anchor = creator.deduceNextAnchorPoint(orient, UtilBoxType::kDefaltBuilding, building_anchor);
 
                         } else if (building == "mall") {
-                            auto point    = creator.deduceBoxCenterPoint(orient, UtilBoxType::kMall, building_anchor);
-                            auto mall_box = Box(point, mall_size_w_, mall_size_h_);
-                            mall_box      = transform_map.translateToSceneBox(mall_box);
-                            building_box_list_.push_back(mall_box);
+                            auto point = creator.deduceBoxCenterPoint(orient, UtilBoxType::kMall, building_anchor);
+                            auto box   = creator.createBox(UtilBoxType::kMall, point.rx(), point.ry());
+
+                            box = transform_map.translateToSceneBox(box);
+                            creator.associateBuildingBox(orient, box);
+                            building_box_list_.push_back(box);
                             building_anchor = creator.deduceNextAnchorPoint(orient, UtilBoxType::kMall, building_anchor);
 
                         } else if (building == "shop") {
-                            auto point    = creator.deduceBoxCenterPoint(orient, UtilBoxType::kShop, building_anchor);
-                            auto shop_box = Box(point, shop_size_w_, shop_size_h_);
-                            shop_box      = transform_map.translateToSceneBox(shop_box);
-                            building_box_list_.push_back(shop_box);
+                            auto point = creator.deduceBoxCenterPoint(orient, UtilBoxType::kShop, building_anchor);
+                            auto box   = creator.createBox(UtilBoxType::kShop, point.rx(), point.ry());
+
+                            box = transform_map.translateToSceneBox(box);
+                            creator.associateBuildingBox(orient, box);
+                            building_box_list_.push_back(box);
                             building_anchor = creator.deduceNextAnchorPoint(orient, UtilBoxType::kShop, building_anchor);
                         } else if (building == "null") {
-                            auto point    = creator.deduceBoxCenterPoint(orient, UtilBoxType::kNull, building_anchor);
+                            auto point      = creator.deduceBoxCenterPoint(orient, UtilBoxType::kNull, building_anchor);
                             building_anchor = creator.deduceNextAnchorPoint(orient, UtilBoxType::kNull, building_anchor);
                         }
                     }

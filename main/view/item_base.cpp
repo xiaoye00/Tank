@@ -5,13 +5,17 @@ ItemBase::ItemBase(QGraphicsItem* parent) : QGraphicsItem(parent) {
     setVisible(true);
 }
 
-void ItemBase::setItemSize(int w, int h) {
-    w_ = w;
-    h_ = h;
+void ItemBase::setItemSize(Box box) {
+    box_         = box;
+    auto       w = box_.Width();
+    auto       h = box_.Height();
     QTransform matrix;
     matrix.translate(-(w >> 1), -(h >> 1));
     setTransform(matrix);
-    resizeMap(w, h);
+    resizeMap_(w, h);
+    auto center_point = box_.getCenterPoint();
+    setPos(center_point.rx(), center_point.ry());
+
 }
 
 QPixmap* ItemBase::fillMapToTransparency() {
@@ -23,7 +27,8 @@ QPixmap* ItemBase::fillMapToTransparency() {
 }
 
 QRectF ItemBase::boundingRect() const {
-    return QRectF(0, 0, w_, h_);
+
+    return QRectF(0, 0, box_.Width(), box_.Height());
 }
 
 void ItemBase::paint(QPainter*                       painter,
@@ -32,7 +37,7 @@ void ItemBase::paint(QPainter*                       painter,
     draw(painter);
 }
 
-QPixmap* ItemBase::resizeMap(int w, int h) {
+QPixmap* ItemBase::resizeMap_(int w, int h) {
     if (img_) {
         if (w != img_->width() || h != img_->height()) {
             delete img_;

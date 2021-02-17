@@ -2,6 +2,8 @@
 
 #include <QGraphicsItem>
 #include <QPixmap>
+#include <list>
+#include "../../util/box_creator.h"
 #include "layout_def.h"
 
 class ItemBase : public QGraphicsItem {
@@ -9,23 +11,23 @@ class ItemBase : public QGraphicsItem {
     ItemBase(QGraphicsItem* parent = nullptr);
     ~ItemBase(){};
 
-    void         setItemSize(int w, int h);
+    void         setItemSize(Box box);
     void         setImg(QPixmap* img) { img_ = img; };
     QPixmap*     fillMapToTransparency();
-    QPixmap*     resizeMap(int w, int h);
     void         setType(LayoutItemType type) { type_ = type; };
     virtual void preDraw(){};
     virtual void draw(QPainter* painter);
+    auto         getBox() { return box_; };
 
   protected:
-    QPixmap*       img_{nullptr};
-    virtual QRectF boundingRect() const;
+    QPixmap*         img_{nullptr};
+    virtual QRectF   boundingRect() const;
+    virtual QPixmap* resizeMap_(int w, int h);
+    virtual void     paint(QPainter*                       painter,
+                           const QStyleOptionGraphicsItem* option,
+                           QWidget*                        widget = nullptr) override;
 
-    virtual void paint(QPainter*                       painter,
-                       const QStyleOptionGraphicsItem* option,
-                       QWidget*                        widget = nullptr) override;
-
-    int            w_{0};
-    int            h_{0};
     LayoutItemType type_;
+    std::list<int> associate_item_;
+    Box            box_;
 };

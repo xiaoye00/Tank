@@ -11,9 +11,6 @@ Layout::Layout() {
 Layout::~Layout() {
 }
 
-void Layout::createPace(int x, int y) {
-    item_manager->createItem(LayoutItemType::kPace, x, y, pace_size_, pace_size_);
-}
 
 void Layout::initiation() {
     Config config;

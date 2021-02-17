@@ -13,5 +13,23 @@ void ItemPace::preDraw() {
     QPainter painter(img_);
     QPen     pen("green");
     painter.setPen(pen);
-    painter.drawRect(0, 0, w_ - 1, h_ - 1);
+    painter.drawRect(0, 0, box_.Width() - 1, box_.Height() - 1);
+
+    auto boxes = box_.getAssociateBoxes();
+    
+    QString name;
+
+    for(auto box : boxes){
+        name = QString::number(box);
+    }
+
+
+
+    painter.drawText(QRectF(
+                       (0),
+                       (0),
+                       box_.Width() - 1,
+                       box_.Height() - 1),
+                     0,
+                     name);
 }

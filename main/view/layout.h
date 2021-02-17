@@ -13,7 +13,6 @@ class Layout {
     ~Layout();
 
     void addScene(GraphicsScene* scene) { scene_ = scene; };
-    void createPace(int x, int y);
     void setPaceSize(int size) { pace_size_ = size; };
     void initiation();
 
