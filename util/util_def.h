@@ -4,7 +4,8 @@ enum class UtilBoxType {
     kPace,
     kMall,
     kShop,
-    kDefaltBuilding
+    kDefaltBuilding,
+    kNull
 };
 
 enum class UtilOrient {

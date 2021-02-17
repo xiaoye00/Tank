@@ -17,7 +17,8 @@ class BoxCreator {
 
     Box createBox(UtilBoxType type, int x, int y);
 
-    Point calcuNextBoxCenter(UtilOrient orient, UtilBoxType box_type, Box box);
+    Point deduceBoxCenterPoint(UtilOrient orient, UtilBoxType box_type, Point anchor_point);
+    Point deduceNextAnchorPoint(UtilOrient orient, UtilBoxType box_type, Point anchor_point);
 
   private:
     Config*    config_{nullptr};
