@@ -2,6 +2,9 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     main \
-    util
+    util \
+    db
 
 main.depends=util
+main.depends=db
+db.depends=util

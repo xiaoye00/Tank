@@ -3,7 +3,7 @@
 #include <QGraphicsItem>
 #include <QPixmap>
 #include <list>
-#include "../../util/box_creator.h"
+#include "box_creator.h"
 #include "layout_def.h"
 
 class ItemBase : public QGraphicsItem {

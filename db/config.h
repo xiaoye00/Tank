@@ -6,7 +6,7 @@
 #include <tuple>
 
 #include "box_creator.h"
-#include "util_def.h"
+#include "db_def.h"
 
 class Config {
   public:

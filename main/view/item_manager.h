@@ -1,7 +1,7 @@
 #pragma once
 #include "item_base.h"
 #include "layout_def.h"
-#include "../../util/box_creator.h"
+#include "box_creator.h"
 
 class ItemManager {
   public:

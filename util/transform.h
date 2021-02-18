@@ -1,7 +1,6 @@
 #pragma once
 
-#include "box_creator.h"
-#include "util_def.h"
+
 
 class Transform {
   public:
@@ -10,15 +9,19 @@ class Transform {
     ~Transform();
 
     template <typename T>
-    auto translateToSceneBox(T&& box) {
+    auto translateToSceneBox(T box) {
 
         auto lux = -scene_w_ / 2 + box.LUX();
         auto luy = -scene_h_ / 2 + box.LUY();
         auto rlx = -scene_w_ / 2 + box.RLX();
         auto rly = -scene_h_ / 2 + box.RLY();
-        Box ret(lux, luy, rlx, rly);
-        ret.setIndex(box.Index());
-        return ret;
+
+        box.setLUX(lux);
+        box.setLUY(luy);
+        box.setRLX(rlx);
+        box.setRLY(rly);
+
+        return box;
     };
 
     void setSceneW(int w) { scene_w_ = w; };

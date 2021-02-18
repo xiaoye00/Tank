@@ -28,14 +28,22 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 #else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../util/debug/ -llibutil
 #else:unix: LIBS += -L$$OUT_PWD/../util/ -llibutil
 
-#use dynamic lib
+#use dynamic lib for util
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../main/release/ -lutil
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../main/debug/ -lutil
 else:unix: LIBS += -L$$OUT_PWD/../main/ -lutil
 
-
 INCLUDEPATH += $$PWD/../util
 DEPENDPATH += $$PWD/../util
+
+#use dynamic lib for db
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../main/release/ -ldb
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../main/debug/ -ldb
+else:unix: LIBS += -L$$OUT_PWD/../main/ -ldb
+
+INCLUDEPATH += $$PWD/../db
+DEPENDPATH += $$PWD/../db
+
 
 filelist = $$PWD/../config/map_demo.xml
 copy_files.files = $$filelist

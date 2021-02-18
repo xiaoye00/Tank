@@ -2,5 +2,6 @@
 
 #include <string>
 
-std::string InstallPath();
-void setInstallPath(std::string path);
+std::string  InstallPath();
+void         setInstallPath(std::string path);
+unsigned int getRondomNumber();

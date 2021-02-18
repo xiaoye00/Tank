@@ -1,9 +1,9 @@
 #include "layout.h"
-#include "../../util/box_creator.h"
-#include "../../util/config.h"
-#include "../../util/transform.h"
+#include "box_creator.h"
+#include "config.h"
+#include "transform.h"
 #include "item_pace.h"
-#include "../../util/util.h"
+#include "util.h"
 
 Layout::Layout() {
     item_manager = new ItemManager;
