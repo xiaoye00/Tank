@@ -3,6 +3,7 @@
 #include "../../util/config.h"
 #include "../../util/transform.h"
 #include "item_pace.h"
+#include "../../util/util.h"
 
 Layout::Layout() {
     item_manager = new ItemManager;
@@ -13,8 +14,11 @@ Layout::~Layout() {
 
 
 void Layout::initiation() {
+    auto xml_path = InstallPath();
+    xml_path += "map_demo.xml";
     Config config;
-    config.loadDesign("D:/GitHub/tank/Tank/config/map_demo.xml");
+    auto path = xml_path.c_str();
+    config.loadDesign(path);
     auto [scene_w, scene_h] = config.mapSize();
     scene_->setSize(scene_w, scene_h);
     auto& boxes = config.getPaceBoxes();

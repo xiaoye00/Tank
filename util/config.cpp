@@ -12,7 +12,7 @@ Config::Config() {
 Config::~Config() {
 }
 
-bool Config::loadDesign(char* path) {
+bool Config::loadDesign(const char* path) {
     XmlParse xml;
     if (!xml.initialFile(path)) {
         return false;

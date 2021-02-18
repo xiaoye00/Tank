@@ -7,5 +7,5 @@ class XmlParse : public QDomDocument {
     XmlParse();
     ~XmlParse();
 
-    bool initialFile(char* path);
+    bool initialFile(const char* path);
 };

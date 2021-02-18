@@ -9,7 +9,7 @@ XmlParse::XmlParse() : QDomDocument() {
 XmlParse::~XmlParse() {
 }
 
-bool XmlParse::initialFile(char* path) {
+bool XmlParse::initialFile(const char* path) {
     QFile file(path);
     if (!file.open(QFile::ReadOnly)) return false;
 

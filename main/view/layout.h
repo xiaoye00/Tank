@@ -20,4 +20,5 @@ class Layout {
     GraphicsScene* scene_{nullptr};
     ItemManager*   item_manager{nullptr};
     int            pace_size_{0};
+
 };

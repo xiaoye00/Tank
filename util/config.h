@@ -12,7 +12,7 @@ class Config {
   public:
     Config();
     ~Config();
-    bool  loadDesign(char* path);
+    bool  loadDesign(const char* path);
     auto  test() { return 1; };
     auto  mapSize() { return std::tuple(map_size_w_, map_size_h_); };
     auto  originPoint() { return std::tuple(origin_point_x_, origin_point_y_); };

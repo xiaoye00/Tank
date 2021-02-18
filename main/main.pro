@@ -37,4 +37,12 @@ else:unix: LIBS += -L$$OUT_PWD/../main/ -lutil
 INCLUDEPATH += $$PWD/../util
 DEPENDPATH += $$PWD/../util
 
+filelist = $$PWD/../config/map_demo.xml
+copy_files.files = $$filelist
+
+CONFIG(release, debug|release): copy_files.path = $$OUT_PWD/../main/release/ 
+else:CONFIG(debug, debug|release): copy_files.path = $$OUT_PWD/../main/debug/ 
+
+COPIES += copy_files
+
 
