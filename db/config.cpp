@@ -2,8 +2,8 @@
 
 #include <QDebug>
 
-#include "transform.h"
 #include "db_def.h"
+#include "transform.h"
 #include "xml_parse.h"
 
 Config::Config() {
@@ -18,6 +18,8 @@ bool Config::loadDesign(const char* path) {
         return false;
     }
 
+    auto db = DB::getInstance();
+
     //to root
     QDomElement root = xml.documentElement();
     qDebug() << root.nodeName();
@@ -31,65 +33,76 @@ bool Config::loadDesign(const char* path) {
                     auto child_list = e.childNodes();
                     auto child_e    = child_list.at(0).toElement();
                     auto str        = child_e.text();
-                    map_size_w_     = str.toUInt();
+                    auto map_size_w = str.toUInt();
                     child_e         = child_list.at(1).toElement();
                     str             = child_e.text();
-                    map_size_h_     = str.toUInt();
+                    auto map_size_h = str.toUInt();
+                    db->setMapSize(map_size_w, map_size_h);
                 } else if (e.attribute("category") == "pace size") {
-                    auto child_list = e.childNodes();
-                    auto child_e    = child_list.at(0).toElement();
-                    auto str        = child_e.text();
-                    pace_size_w_    = str.toUInt();
-                    child_e         = child_list.at(1).toElement();
-                    str             = child_e.text();
-                    pace_size_h_    = str.toUInt();
+                    auto child_list  = e.childNodes();
+                    auto child_e     = child_list.at(0).toElement();
+                    auto str         = child_e.text();
+                    auto pace_size_w = str.toUInt();
+                    child_e          = child_list.at(1).toElement();
+                    str              = child_e.text();
+                    auto pace_size_h = str.toUInt();
+                    db->setPaceSize(pace_size_w, pace_size_h);
                 } else if (e.attribute("category") == "interval size") {
-                    auto child_list = e.childNodes();
-                    auto child_e    = child_list.at(0).toElement();
-                    auto str        = child_e.text();
-                    interval_size_  = str.toUInt();
-                    child_e         = child_list.at(1).toElement();
-                    str             = child_e.text();
-                    interval_size_  = str.toUInt();
+                    auto child_list    = e.childNodes();
+                    auto child_e       = child_list.at(0).toElement();
+                    auto str           = child_e.text();
+                    auto interval_size = str.toUInt();
+                    child_e            = child_list.at(1).toElement();
+                    str                = child_e.text();
+                    // interval_size_  = str.toUInt();
+                    db->setIntervalSize(interval_size);
                 } else if (e.attribute("category") == "mall size") {
-                    auto child_list = e.childNodes();
-                    auto child_e    = child_list.at(0).toElement();
-                    auto str        = child_e.text();
-                    mall_size_w_    = str.toUInt() * pace_size_w_;
-                    child_e         = child_list.at(1).toElement();
-                    str             = child_e.text();
-                    mall_size_h_    = str.toUInt() * pace_size_h_;
+                    auto [pace_size_w, pace_size_h] = db->PaceSize();
+                    auto child_list                 = e.childNodes();
+                    auto child_e                    = child_list.at(0).toElement();
+                    auto str                        = child_e.text();
+                    auto mall_size_w                = str.toUInt() * pace_size_w;
+                    child_e                         = child_list.at(1).toElement();
+                    str                             = child_e.text();
+                    auto mall_size_h                = str.toUInt() * pace_size_h;
+                    db->setMallSize(mall_size_w, mall_size_h);
                 } else if (e.attribute("category") == "shop size") {
-                    auto child_list = e.childNodes();
-                    auto child_e    = child_list.at(0).toElement();
-                    auto str        = child_e.text();
-                    shop_size_w_    = str.toUInt() * pace_size_w_;
-                    child_e         = child_list.at(1).toElement();
-                    str             = child_e.text();
-                    shop_size_h_    = str.toUInt() * pace_size_h_;
+                    auto [pace_size_w, pace_size_h] = db->PaceSize();
+                    auto child_list                 = e.childNodes();
+                    auto child_e                    = child_list.at(0).toElement();
+                    auto str                        = child_e.text();
+                    auto shop_size_w                = str.toUInt() * pace_size_w;
+                    child_e                         = child_list.at(1).toElement();
+                    str                             = child_e.text();
+                    auto shop_size_h                = str.toUInt() * pace_size_h;
+                    db->setShopSize(shop_size_w, shop_size_h);
                 } else if (e.attribute("category") == "defalt size") {
-                    auto child_list         = e.childNodes();
-                    auto child_e            = child_list.at(0).toElement();
-                    auto str                = child_e.text();
-                    defalt_building_size_w_ = str.toUInt() * pace_size_w_;
-                    child_e                 = child_list.at(1).toElement();
-                    str                     = child_e.text();
-                    defalt_building_size_h_ = str.toUInt() * pace_size_h_;
+                    auto [pace_size_w, pace_size_h] = db->PaceSize();
+                    auto child_list                 = e.childNodes();
+                    auto child_e                    = child_list.at(0).toElement();
+                    auto str                        = child_e.text();
+                    auto defalt_building_size_w     = str.toUInt() * pace_size_w;
+                    child_e                         = child_list.at(1).toElement();
+                    str                             = child_e.text();
+                    auto defalt_building_size_h     = str.toUInt() * pace_size_h;
+                    db->setDefaltBuildingSize(defalt_building_size_w, defalt_building_size_h);
                 } else if (e.attribute("category") == "start pos") {
-                    auto child_list = e.childNodes();
-                    auto child_e    = child_list.at(0).toElement();
-                    auto str        = child_e.text();
-                    origin_point_x_ = str.toUInt();
-                    child_e         = child_list.at(1).toElement();
-                    str             = child_e.text();
-                    origin_point_y_ = str.toUInt();
+                    auto child_list     = e.childNodes();
+                    auto child_e        = child_list.at(0).toElement();
+                    auto str            = child_e.text();
+                    auto origin_point_x = str.toUInt();
+                    child_e             = child_list.at(1).toElement();
+                    str                 = child_e.text();
+                    auto origin_point_y = str.toUInt();
+                    db->setOriginPoint(origin_point_x, origin_point_y);
                 }
             } else if (node.nodeName() == "placement") {
                 BoxCreator creator;
                 creator.setConfig(this);
-
-                Transform transform_map(map_size_w_, map_size_h_);
-                auto      anchor_point = Point(origin_point_x_, origin_point_y_);
+                auto [map_size_w, map_size_h] = db->MapSize();
+                Transform transform_map(map_size_w, map_size_h);
+                auto [origin_point_x, origin_point_y] = db->OriginPoint();
+                auto anchor_point                     = Point(origin_point_x, origin_point_y);
                 //paces
                 auto list_nodes = node.childNodes();
                 for (auto i = 0; i < list_nodes.size(); i++) {
@@ -118,12 +131,12 @@ bool Config::loadDesign(const char* path) {
                         if (i == 0) {
                             pace_box = creator.createBox(UtilBoxType::kPace, anchor_point.rx(), anchor_point.ry());
                             auto box = transform_map.translateToSceneBox(pace_box);
-                            pace_box_list_.push_back(box);
+                            db->appendPaceBox(box);
                         } else {
                             auto point = creator.deduceBoxCenterPoint(orient, UtilBoxType::kPace, pace_box.getCenterPoint());
                             pace_box   = creator.createBox(UtilBoxType::kPace, point.rx(), point.ry());
                             auto box   = transform_map.translateToSceneBox(pace_box);
-                            pace_box_list_.push_back(box);
+                            db->appendPaceBox(box);
                         }
                     }
 
@@ -139,7 +152,7 @@ bool Config::loadDesign(const char* path) {
 
                             box = transform_map.translateToSceneBox(box);
                             creator.associateBuildingBox(orient, box);
-                            building_box_list_.push_back(box);
+                            db->appendBuildingBox(box);
                             building_anchor = creator.deduceNextAnchorPoint(orient, UtilBoxType::kDefaltBuilding, building_anchor);
 
                         } else if (building == "mall") {
@@ -148,7 +161,7 @@ bool Config::loadDesign(const char* path) {
 
                             box = transform_map.translateToSceneBox(box);
                             creator.associateBuildingBox(orient, box);
-                            building_box_list_.push_back(box);
+                            db->appendBuildingBox(box);
                             building_anchor = creator.deduceNextAnchorPoint(orient, UtilBoxType::kMall, building_anchor);
 
                         } else if (building == "shop") {
@@ -157,7 +170,7 @@ bool Config::loadDesign(const char* path) {
 
                             box = transform_map.translateToSceneBox(box);
                             creator.associateBuildingBox(orient, box);
-                            building_box_list_.push_back(box);
+                            db->appendBuildingBox(box);
                             building_anchor = creator.deduceNextAnchorPoint(orient, UtilBoxType::kShop, building_anchor);
                         } else if (building == "null") {
                             auto point      = creator.deduceBoxCenterPoint(orient, UtilBoxType::kNull, building_anchor);
@@ -165,14 +178,16 @@ bool Config::loadDesign(const char* path) {
                         }
                     }
 
+                    auto [pace_size_w, pace_size_h] = db->PaceSize();
+
                     if (str == "tr") {
-                        anchor_point.setX(anchor_point.rx() + pace_size_w_ * (num));
+                        anchor_point.setX(anchor_point.rx() + pace_size_w * (num));
                     } else if (str == "td") {
-                        anchor_point.setY(anchor_point.ry() + pace_size_h_ * (num));
+                        anchor_point.setY(anchor_point.ry() + pace_size_h * (num));
                     } else if (str == "tl") {
-                        anchor_point.setX(anchor_point.rx() - pace_size_w_ * (num));
+                        anchor_point.setX(anchor_point.rx() - pace_size_w * (num));
                     } else if (str == "tu") {
-                        anchor_point.setX(anchor_point.ry() - pace_size_h_ * (num));
+                        anchor_point.setX(anchor_point.ry() - pace_size_h * (num));
                     }
                 }
             }

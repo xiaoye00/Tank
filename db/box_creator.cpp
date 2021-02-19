@@ -19,28 +19,28 @@ BoxCreator::~BoxCreator() {
 Box BoxCreator::createBox(UtilBoxType type, int x, int y) {
     switch (type) {
     case UtilBoxType::kPace: {
-        auto [w, h] = config_->paceSize();
+        auto [w, h] = DB::getInstance()->PaceSize();
         Box box(Point(x, y), w, h);
         box.setIndex(global_index_++);
         box.setType(type);
         return box;
     }
     case UtilBoxType::kMall: {
-        auto [w, h] = config_->mallSize();
+        auto [w, h] = DB::getInstance()->MallSize();
         Box box(Point(x, y), w, h);
         box.setIndex(global_index_++);
         box.setType(type);
         return box;
     } break;
     case UtilBoxType::kShop: {
-        auto [w, h] = config_->shopSize();
+        auto [w, h] = DB::getInstance()->ShopSize();
         Box box(Point(x, y), w, h);
         box.setIndex(global_index_++);
         box.setType(type);
         return box;
     } break;
     case UtilBoxType::kDefaltBuilding: {
-        auto [w, h] = config_->defaltBuildingSize();
+        auto [w, h] = DB::getInstance()->DefaltBuildingSize();
         Box box(Point(x, y), w, h);
         box.setIndex(global_index_++);
         box.setType(type);
@@ -54,33 +54,33 @@ Box BoxCreator::createBox(UtilBoxType type, int x, int y) {
 
 Point BoxCreator::deduceBoxCenterPoint(UtilOrient orient, UtilBoxType box_type, Point anchor_point) {
     auto center_point     = anchor_point;
-    auto [pace_w, pace_h] = config_->paceSize();
+    auto [pace_w, pace_h] = DB::getInstance()->PaceSize();
     switch (orient) {
     case UtilOrient::kToRight: {
         switch (box_type) {
         case UtilBoxType::kPace: {
-            auto [w, h] = config_->paceSize();
+            auto [w, h] = DB::getInstance()->PaceSize();
             center_point.setX(center_point.rx() + w);
         } break;
         case UtilBoxType::kMall: {
-            auto [w, h] = config_->mallSize();
+            auto [w, h] = DB::getInstance()->MallSize();
             center_point.setX(center_point.rx() - pace_w / 2 + w / 2);
             center_point.setY(center_point.ry() - pace_h / 2);
-            center_point.setY(center_point.ry() - config_->intervalSize());
+            center_point.setY(center_point.ry() - DB::getInstance()->IntervalSize());
             center_point.setY(center_point.ry() - h / 2);
         } break;
         case UtilBoxType::kShop: {
-            auto [w, h] = config_->shopSize();
+            auto [w, h] = DB::getInstance()->ShopSize();
             center_point.setX(center_point.rx() - pace_w / 2 + w / 2);
             center_point.setY(center_point.ry() - pace_h / 2);
-            center_point.setY(center_point.ry() - config_->intervalSize());
+            center_point.setY(center_point.ry() - DB::getInstance()->IntervalSize());
             center_point.setY(center_point.ry() - h / 2);
         } break;
         case UtilBoxType::kDefaltBuilding: {
-            auto [w, h] = config_->defaltBuildingSize();
+            auto [w, h] = DB::getInstance()->DefaltBuildingSize();
             center_point.setX(center_point.rx() - pace_w / 2 + w / 2);
             center_point.setY(center_point.ry() - pace_h / 2);
-            center_point.setY(center_point.ry() - config_->intervalSize());
+            center_point.setY(center_point.ry() - DB::getInstance()->IntervalSize());
             center_point.setY(center_point.ry() - h / 2);
         } break;
 
@@ -91,27 +91,27 @@ Point BoxCreator::deduceBoxCenterPoint(UtilOrient orient, UtilBoxType box_type, 
     case UtilOrient::kToDown:
         switch (box_type) {
         case UtilBoxType::kPace: {
-            auto [w, h] = config_->paceSize();
+            auto [w, h] = DB::getInstance()->PaceSize();
             center_point.setY(center_point.ry() + h);
         } break;
         case UtilBoxType::kMall: {
-            auto [w, h] = config_->mallSize();
+            auto [w, h] = DB::getInstance()->MallSize();
             center_point.setX(center_point.rx() + pace_w / 2 + w / 2);
-            center_point.setX(center_point.rx() + config_->intervalSize());
+            center_point.setX(center_point.rx() + DB::getInstance()->IntervalSize());
             center_point.setY(center_point.ry() - pace_h / 2);
             center_point.setY(center_point.ry() + h / 2);
         } break;
         case UtilBoxType::kShop: {
-            auto [w, h] = config_->shopSize();
+            auto [w, h] = DB::getInstance()->ShopSize();
             center_point.setX(center_point.rx() + pace_w / 2 + w / 2);
-            center_point.setX(center_point.rx() + config_->intervalSize());
+            center_point.setX(center_point.rx() + DB::getInstance()->IntervalSize());
             center_point.setY(center_point.ry() - pace_h / 2);
             center_point.setY(center_point.ry() + h / 2);
         } break;
         case UtilBoxType::kDefaltBuilding: {
-            auto [w, h] = config_->defaltBuildingSize();
+            auto [w, h] = DB::getInstance()->DefaltBuildingSize();
             center_point.setX(center_point.rx() + pace_w / 2 + w / 2);
-            center_point.setX(center_point.rx() + config_->intervalSize());
+            center_point.setX(center_point.rx() + DB::getInstance()->IntervalSize());
             center_point.setY(center_point.ry() - pace_h / 2);
             center_point.setY(center_point.ry() + h / 2);
         } break;
@@ -123,28 +123,28 @@ Point BoxCreator::deduceBoxCenterPoint(UtilOrient orient, UtilBoxType box_type, 
     case UtilOrient::kToLeft:
         switch (box_type) {
         case UtilBoxType::kPace: {
-            auto [w, h] = config_->paceSize();
+            auto [w, h] = DB::getInstance()->PaceSize();
             center_point.setX(center_point.rx() - w);
         } break;
         case UtilBoxType::kMall: {
-            auto [w, h] = config_->mallSize();
+            auto [w, h] = DB::getInstance()->MallSize();
             center_point.setX(center_point.rx() + pace_w / 2 - w / 2);
             center_point.setY(center_point.ry() - pace_h / 2);
-            center_point.setY(center_point.ry() - config_->intervalSize());
+            center_point.setY(center_point.ry() - DB::getInstance()->IntervalSize());
             center_point.setY(center_point.ry() - h / 2);
         } break;
         case UtilBoxType::kShop: {
-            auto [w, h] = config_->shopSize();
+            auto [w, h] = DB::getInstance()->ShopSize();
             center_point.setX(center_point.rx() + pace_w / 2 - w / 2);
             center_point.setY(center_point.ry() - pace_h / 2);
-            center_point.setY(center_point.ry() - config_->intervalSize());
+            center_point.setY(center_point.ry() - DB::getInstance()->IntervalSize());
             center_point.setY(center_point.ry() - h / 2);
         } break;
         case UtilBoxType::kDefaltBuilding: {
-            auto [w, h] = config_->defaltBuildingSize();
+            auto [w, h] = DB::getInstance()->DefaltBuildingSize();
             center_point.setX(center_point.rx() + pace_w / 2 - w / 2);
             center_point.setY(center_point.ry() - pace_h / 2);
-            center_point.setY(center_point.ry() - config_->intervalSize());
+            center_point.setY(center_point.ry() - DB::getInstance()->IntervalSize());
             center_point.setY(center_point.ry() - h / 2);
         } break;
 
@@ -155,28 +155,28 @@ Point BoxCreator::deduceBoxCenterPoint(UtilOrient orient, UtilBoxType box_type, 
     case UtilOrient::kToUp:
         switch (box_type) {
         case UtilBoxType::kPace: {
-            auto [w, h] = config_->paceSize();
+            auto [w, h] = DB::getInstance()->PaceSize();
             center_point.setY(center_point.ry() - h);
         } break;
         case UtilBoxType::kMall: {
-            auto [w, h] = config_->mallSize();
+            auto [w, h] = DB::getInstance()->MallSize();
             center_point.setX(center_point.rx() - pace_w / 2 - w / 2);
-            center_point.setX(center_point.rx() - config_->intervalSize());
+            center_point.setX(center_point.rx() - DB::getInstance()->IntervalSize());
             center_point.setY(center_point.ry() + pace_h / 2);
             center_point.setY(center_point.ry() - h / 2);
 
         } break;
         case UtilBoxType::kShop: {
-            auto [w, h] = config_->shopSize();
+            auto [w, h] = DB::getInstance()->ShopSize();
             center_point.setX(center_point.rx() - pace_w / 2 - w / 2);
-            center_point.setX(center_point.rx() - config_->intervalSize());
+            center_point.setX(center_point.rx() - DB::getInstance()->IntervalSize());
             center_point.setY(center_point.ry() + pace_h / 2);
             center_point.setY(center_point.ry() - h / 2);
         } break;
         case UtilBoxType::kDefaltBuilding: {
-            auto [w, h] = config_->defaltBuildingSize();
+            auto [w, h] = DB::getInstance()->DefaltBuildingSize();
             center_point.setX(center_point.rx() - pace_w / 2 - w / 2);
-            center_point.setX(center_point.rx() - config_->intervalSize());
+            center_point.setX(center_point.rx() - DB::getInstance()->IntervalSize());
             center_point.setY(center_point.ry() + pace_h / 2);
             center_point.setY(center_point.ry() - h / 2);
         } break;
@@ -199,23 +199,23 @@ Point BoxCreator::deduceNextAnchorPoint(UtilOrient orient, UtilBoxType box_type,
     case UtilOrient::kToRight: {
         switch (box_type) {
         case UtilBoxType::kPace: {
-            auto [w, h] = config_->paceSize();
+            auto [w, h] = DB::getInstance()->PaceSize();
             center_point.setX(center_point.rx() + w);
         } break;
         case UtilBoxType::kMall: {
-            auto [w, h] = config_->mallSize();
+            auto [w, h] = DB::getInstance()->MallSize();
             center_point.setX(center_point.rx() + w);
         } break;
         case UtilBoxType::kShop: {
-            auto [w, h] = config_->shopSize();
+            auto [w, h] = DB::getInstance()->ShopSize();
             center_point.setX(center_point.rx() + w);
         } break;
         case UtilBoxType::kDefaltBuilding: {
-            auto [w, h] = config_->defaltBuildingSize();
+            auto [w, h] = DB::getInstance()->DefaltBuildingSize();
             center_point.setX(center_point.rx() + w);
         } break;
         case UtilBoxType::kNull: {
-            auto [w, h] = config_->paceSize();
+            auto [w, h] = DB::getInstance()->PaceSize();
             center_point.setX(center_point.rx() + w);
         } break;
 
@@ -226,23 +226,23 @@ Point BoxCreator::deduceNextAnchorPoint(UtilOrient orient, UtilBoxType box_type,
     case UtilOrient::kToDown:
         switch (box_type) {
         case UtilBoxType::kPace: {
-            auto [w, h] = config_->paceSize();
+            auto [w, h] = DB::getInstance()->PaceSize();
             center_point.setY(center_point.ry() + h);
         } break;
         case UtilBoxType::kMall: {
-            auto [w, h] = config_->mallSize();
+            auto [w, h] = DB::getInstance()->MallSize();
             center_point.setY(center_point.ry() + h);
         } break;
         case UtilBoxType::kShop: {
-            auto [w, h] = config_->shopSize();
+            auto [w, h] = DB::getInstance()->ShopSize();
             center_point.setY(center_point.ry() + h);
         } break;
         case UtilBoxType::kDefaltBuilding: {
-            auto [w, h] = config_->defaltBuildingSize();
+            auto [w, h] = DB::getInstance()->DefaltBuildingSize();
             center_point.setY(center_point.ry() + h);
         } break;
         case UtilBoxType::kNull: {
-            auto [w, h] = config_->paceSize();
+            auto [w, h] = DB::getInstance()->PaceSize();
             center_point.setY(center_point.ry() + h);
         } break;
 
@@ -253,23 +253,23 @@ Point BoxCreator::deduceNextAnchorPoint(UtilOrient orient, UtilBoxType box_type,
     case UtilOrient::kToLeft:
         switch (box_type) {
         case UtilBoxType::kPace: {
-            auto [w, h] = config_->paceSize();
+            auto [w, h] = DB::getInstance()->PaceSize();
             center_point.setX(center_point.rx() - w);
         } break;
         case UtilBoxType::kMall: {
-            auto [w, h] = config_->mallSize();
+            auto [w, h] = DB::getInstance()->MallSize();
             center_point.setX(center_point.rx() - w);
         } break;
         case UtilBoxType::kShop: {
-            auto [w, h] = config_->shopSize();
+            auto [w, h] = DB::getInstance()->ShopSize();
             center_point.setX(center_point.rx() - w);
         } break;
         case UtilBoxType::kDefaltBuilding: {
-            auto [w, h] = config_->defaltBuildingSize();
+            auto [w, h] = DB::getInstance()->DefaltBuildingSize();
             center_point.setX(center_point.rx() - w);
         } break;
         case UtilBoxType::kNull: {
-            auto [w, h] = config_->paceSize();
+            auto [w, h] = DB::getInstance()->PaceSize();
             center_point.setX(center_point.rx() - w);
         } break;
 
@@ -280,24 +280,24 @@ Point BoxCreator::deduceNextAnchorPoint(UtilOrient orient, UtilBoxType box_type,
     case UtilOrient::kToUp:
         switch (box_type) {
         case UtilBoxType::kPace: {
-            auto [w, h] = config_->paceSize();
+            auto [w, h] = DB::getInstance()->PaceSize();
             center_point.setY(center_point.ry() - h);
         } break;
         case UtilBoxType::kMall: {
-            auto [w, h] = config_->mallSize();
+            auto [w, h] = DB::getInstance()->MallSize();
             center_point.setY(center_point.ry() - h);
 
         } break;
         case UtilBoxType::kShop: {
-            auto [w, h] = config_->shopSize();
+            auto [w, h] = DB::getInstance()->ShopSize();
             center_point.setY(center_point.ry() - h);
         } break;
         case UtilBoxType::kDefaltBuilding: {
-            auto [w, h] = config_->defaltBuildingSize();
+            auto [w, h] = DB::getInstance()->DefaltBuildingSize();
             center_point.setY(center_point.ry() - h);
         } break;
         case UtilBoxType::kNull: {
-            auto [w, h] = config_->paceSize();
+            auto [w, h] = DB::getInstance()->PaceSize();
             center_point.setY(center_point.ry() - h);
         } break;
 
@@ -314,13 +314,13 @@ Point BoxCreator::deduceNextAnchorPoint(UtilOrient orient, UtilBoxType box_type,
 
 void BoxCreator::associateBuildingBox(UtilOrient orient, Box box) {
     auto point            = box.getCenterPoint();
-    auto [pace_w, pace_h] = config_->paceSize();
+    auto [pace_w, pace_h] = DB::getInstance()->PaceSize();
     switch (orient) {
     case UtilOrient::kToRight: {
         auto                              start_x    = point.rx() - box.Width() / 2;
         auto                              end_x      = point.rx() + box.Width() / 2;
-        auto                              anchor_y   = point.ry() + box.Height() / 2 + config_->intervalSize() + pace_h / 2;
-        decltype(config_->getPaceBoxes()) pace_boxes = config_->getPaceBoxes();
+        auto                              anchor_y   = point.ry() + box.Height() / 2 + DB::getInstance()->IntervalSize() + pace_h / 2;
+        decltype(DB::getInstance()->getPaceBoxes()) pace_boxes = DB::getInstance()->getPaceBoxes();
         for (auto& pace_box : pace_boxes) {
             auto pace_point = pace_box.getCenterPoint();
             if (pace_point.rx() >= start_x && pace_point.rx() <= end_x && pace_point.ry() == anchor_y) {
@@ -330,10 +330,10 @@ void BoxCreator::associateBuildingBox(UtilOrient orient, Box box) {
 
     } break;
     case UtilOrient::kToDown: {
-        auto  anchor_x   = point.rx() - box.Width() / 2 - config_->intervalSize() - pace_w / 2;
+        auto  anchor_x   = point.rx() - box.Width() / 2 - DB::getInstance()->IntervalSize() - pace_w / 2;
         auto  start_y    = point.ry() - box.Height() / 2;
         auto  end_y      = point.ry() + box.Height() / 2;
-        auto& pace_boxes = config_->getPaceBoxes();
+        auto& pace_boxes = DB::getInstance()->getPaceBoxes();
 
         for (auto& pace_box : pace_boxes) {
             auto point = pace_box.getCenterPoint();
@@ -345,8 +345,8 @@ void BoxCreator::associateBuildingBox(UtilOrient orient, Box box) {
     case UtilOrient::kToLeft: {
         auto                              start_x    = point.rx() - box.Width() / 2;
         auto                              end_x      = point.rx() + box.Width() / 2;
-        auto                              anchor_y   = point.ry() + box.Height() / 2 + config_->intervalSize() + pace_h / 2;
-        decltype(config_->getPaceBoxes()) pace_boxes = config_->getPaceBoxes();
+        auto                              anchor_y   = point.ry() + box.Height() / 2 + DB::getInstance()->IntervalSize() + pace_h / 2;
+        decltype(DB::getInstance()->getPaceBoxes()) pace_boxes = DB::getInstance()->getPaceBoxes();
         for (auto& pace_box : pace_boxes) {
             auto pace_point = pace_box.getCenterPoint();
             if (pace_point.rx() >= start_x && pace_point.rx() <= end_x && pace_point.ry() == anchor_y) {
@@ -355,11 +355,11 @@ void BoxCreator::associateBuildingBox(UtilOrient orient, Box box) {
         }
     } break;
     case UtilOrient::kToUp: {
-        auto anchor_x = point.rx() + box.Width() / 2 + config_->intervalSize() + pace_w / 2;
+        auto anchor_x = point.rx() + box.Width() / 2 + DB::getInstance()->IntervalSize() + pace_w / 2;
         auto start_y  = point.ry() - box.Height() / 2;
         auto end_y    = point.ry() + box.Height() / 2;
 
-        auto& pace_boxes = config_->getPaceBoxes();
+        auto& pace_boxes = DB::getInstance()->getPaceBoxes();
         for (auto& pace_box : pace_boxes) {
             auto point = pace_box.getCenterPoint();
             if (point.ry() >= start_y && point.ry() <= end_y && point.rx() == anchor_x) {

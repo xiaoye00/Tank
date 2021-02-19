@@ -4,6 +4,7 @@
 #include "transform.h"
 #include "item_pace.h"
 #include "util.h"
+#include "db.h"
 
 Layout::Layout() {
     item_manager = new ItemManager;
@@ -19,16 +20,17 @@ void Layout::initiation() {
     Config config;
     auto path = xml_path.c_str();
     config.loadDesign(path);
-    auto [scene_w, scene_h] = config.mapSize();
+    auto db = DB::getInstance();
+    auto [scene_w, scene_h] = db->MapSize();
     scene_->setSize(scene_w, scene_h);
-    auto& boxes = config.getPaceBoxes();
+    auto& boxes = db->getPaceBoxes();
     for (auto& box : boxes) {
         auto item = item_manager->createItem(LayoutItemType::kPace,
                                              box);
         scene_->addItem(item);
     }
 
-    boxes = config.getBuildingBoxes();
+    boxes = db->getBuildingBoxes();
     for (auto& box : boxes) {
         auto item = item_manager->createItem(LayoutItemType::kBuilding,
                                              box);
