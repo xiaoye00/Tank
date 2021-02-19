@@ -3,6 +3,7 @@
 #include <QDebug>
 
 #include "db_def.h"
+#include "player_creator.h"
 #include "transform.h"
 #include "xml_parse.h"
 
@@ -189,6 +190,24 @@ bool Config::loadDesign(const char* path) {
                     } else if (str == "tu") {
                         anchor_point.setX(anchor_point.ry() - pace_size_h * (num));
                     }
+                }
+            } else if (node.nodeName() == "players") {
+                auto list_nodes = node.childNodes();
+                for (auto i = 0; i < list_nodes.size(); i++) {
+                    auto node = list_nodes.at(i);
+                    if (node.nodeName() == "player") {
+                        auto          attr_name = node.toElement().attribute("name");
+                        auto          name      = attr_name.toLocal8Bit();
+                        auto          c_name    = name.constData();
+                        auto          node_list = node.childNodes();
+                        auto          e         = node_list.at(0).toElement();
+                        auto          str       = e.text();
+                        auto          pos       = str.toInt();
+                        PlayerCreator creator;
+                        auto          player = creator.createPlayer(c_name, pos);
+                        db->appendPlayer(player);
+                    }
+                    // auto c_node_name =
                 }
             }
         }
