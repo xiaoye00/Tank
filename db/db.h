@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include <tuple>
+#include <vector>
 
 #include "box_creator.h"
 #include "db_def.h"
@@ -44,22 +45,22 @@ class DB {
     auto& getPlayers() { return player_list_; };
 
   private:
-    int               map_size_w_{0};
-    int               map_size_h_{0};
-    int               origin_point_x_{0};
-    int               origin_point_y_{0};
-    int               pace_size_w_{0};
-    int               pace_size_h_{0};
-    int               interval_size_{0};
-    int               mall_size_w_{0};
-    int               mall_size_h_{0};
-    int               shop_size_w_{0};
-    int               shop_size_h_{0};
-    int               defalt_building_size_w_;
-    int               defalt_building_size_h_;
-    std::list<Box*>    pace_box_list_;
-    std::list<Box*>    building_box_list_;
-    std::list<Player*> player_list_;
+    int                  map_size_w_{0};
+    int                  map_size_h_{0};
+    int                  origin_point_x_{0};
+    int                  origin_point_y_{0};
+    int                  pace_size_w_{0};
+    int                  pace_size_h_{0};
+    int                  interval_size_{0};
+    int                  mall_size_w_{0};
+    int                  mall_size_h_{0};
+    int                  shop_size_w_{0};
+    int                  shop_size_h_{0};
+    int                  defalt_building_size_w_;
+    int                  defalt_building_size_h_;
+    std::vector<Box*>    pace_box_list_;
+    std::vector<Box*>    building_box_list_;
+    std::vector<Player*> player_list_;
 
     static DB* inst_;
     DB(/* args */){};

@@ -3,5 +3,6 @@
 
 enum class LayoutItemType{
     kPace,
-    kBuilding
+    kBuilding,
+    kPlayer
 };

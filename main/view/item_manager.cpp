@@ -1,6 +1,7 @@
 #include "item_manager.h"
 #include "item_building.h"
 #include "item_pace.h"
+#include "item_player.h"
 
 ItemManager::ItemManager(/* args */) {
 }
@@ -38,6 +39,9 @@ ItemBase* ItemManager::createItem(LayoutItemType type, Box* box) {
     } break;
     case LayoutItemType::kBuilding: {
         item = new ItemBuilding;
+    } break;
+    case LayoutItemType::kPlayer: {
+        item = new ItemPlayer;
     } break;
     default:
         break;

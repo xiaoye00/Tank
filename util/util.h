@@ -4,4 +4,4 @@
 
 std::string  InstallPath();
 void         setInstallPath(std::string path);
-unsigned int getRondomNumber();
+unsigned int getRondomNumber(int x);

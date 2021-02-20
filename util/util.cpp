@@ -12,11 +12,11 @@ void setInstallPath(std::string path) {
     install_path = path.erase(pos);
 }
 
-unsigned int getRondomNumber() {
+unsigned int getRondomNumber(int x) {
 
     std::default_random_engine random;
 
-    auto num = random() % 6 + 1;
+    auto num = random() % x;
 
     return num;
 }
