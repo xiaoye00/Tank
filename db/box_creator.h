@@ -15,11 +15,11 @@ class BoxCreator {
 
     void setConfig(Config* config) { config_ = config; };
 
-    Box createBox(UtilBoxType type, int x, int y);
+    Box* createBox(UtilBoxType type, int x, int y);
 
     Point deduceBoxCenterPoint(UtilOrient orient, UtilBoxType box_type, Point anchor_point);
     Point deduceNextAnchorPoint(UtilOrient orient, UtilBoxType box_type, Point anchor_point);
-    void  associateBuildingBox(UtilOrient orient, Box box);
+    void  associateBuildingBox(UtilOrient orient, Box* box);
 
   private:
     Config*    config_{nullptr};

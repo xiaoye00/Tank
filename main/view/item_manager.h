@@ -9,7 +9,7 @@ class ItemManager {
     ~ItemManager();
 
     // ItemBase* createItem(LayoutItemType type, int pos_x, int pos_y, int w, int h);
-    ItemBase* createItem(LayoutItemType type, Box box);
+    ItemBase* createItem(LayoutItemType type, Box* box);
 
   private:
 

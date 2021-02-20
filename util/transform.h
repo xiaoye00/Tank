@@ -11,15 +11,15 @@ class Transform {
     template <typename T>
     auto translateToSceneBox(T box) {
 
-        auto lux = -scene_w_ / 2 + box.LUX();
-        auto luy = -scene_h_ / 2 + box.LUY();
-        auto rlx = -scene_w_ / 2 + box.RLX();
-        auto rly = -scene_h_ / 2 + box.RLY();
+        auto lux = -scene_w_ / 2 + box->LUX();
+        auto luy = -scene_h_ / 2 + box->LUY();
+        auto rlx = -scene_w_ / 2 + box->RLX();
+        auto rly = -scene_h_ / 2 + box->RLY();
 
-        box.setLUX(lux);
-        box.setLUY(luy);
-        box.setRLX(rlx);
-        box.setRLY(rly);
+        box->setLUX(lux);
+        box->setLUY(luy);
+        box->setRLX(rlx);
+        box->setRLY(rly);
 
         return box;
     };

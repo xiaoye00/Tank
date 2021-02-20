@@ -11,7 +11,7 @@ class ItemBase : public QGraphicsItem {
     ItemBase(QGraphicsItem* parent = nullptr);
     ~ItemBase(){};
 
-    void         setItemSize(Box box);
+    void         setItemSize(Box* box);
     void         setImg(QPixmap* img) { img_ = img; };
     QPixmap*     fillMapToTransparency();
     void         setType(LayoutItemType type) { type_ = type; };
@@ -29,5 +29,5 @@ class ItemBase : public QGraphicsItem {
 
     LayoutItemType type_;
     std::list<int> associate_item_;
-    Box            box_;
+    Box*            box_;
 };

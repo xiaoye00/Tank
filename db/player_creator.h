@@ -26,9 +26,9 @@ class PlayerCreator {
     ~PlayerCreator(){};
 
     auto createPlayer(const char* name, int pos = 0) {
-        Player player;
-        player.setName(name);
-        player.setPos(pos);
+        auto player = new Player ;
+        player->setName(name);
+        player->setPos(pos);
         return player;
     }
 };

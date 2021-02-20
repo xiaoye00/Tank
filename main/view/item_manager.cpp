@@ -28,8 +28,8 @@ ItemManager::~ItemManager() {
 //     return item;
 // }
 
-ItemBase* ItemManager::createItem(LayoutItemType type, Box box) {
-    auto center_point = box.getCenterPoint();
+ItemBase* ItemManager::createItem(LayoutItemType type, Box* box) {
+    auto center_point = box->getCenterPoint();
     // auto item         = createItem(type, center_point.rx(), center_point.ry(), box.Width(), box.Height());
     ItemBase* item;
     switch (type) {

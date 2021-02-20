@@ -16,34 +16,34 @@ BoxCreator::~BoxCreator() {
  * @param  {int} y            :  center y
  * @return {Box}              : 
  */
-Box BoxCreator::createBox(UtilBoxType type, int x, int y) {
+Box* BoxCreator::createBox(UtilBoxType type, int x, int y) {
     switch (type) {
     case UtilBoxType::kPace: {
         auto [w, h] = DB::getInstance()->PaceSize();
-        Box box(Point(x, y), w, h);
-        box.setIndex(global_index_++);
-        box.setType(type);
+        auto box = new Box(Point(x, y), w, h);
+        box->setIndex(global_index_++);
+        box->setType(type);
         return box;
     }
     case UtilBoxType::kMall: {
         auto [w, h] = DB::getInstance()->MallSize();
-        Box box(Point(x, y), w, h);
-        box.setIndex(global_index_++);
-        box.setType(type);
+        auto box = new Box(Point(x, y), w, h);
+        box->setIndex(global_index_++);
+        box->setType(type);
         return box;
     } break;
     case UtilBoxType::kShop: {
         auto [w, h] = DB::getInstance()->ShopSize();
-        Box box(Point(x, y), w, h);
-        box.setIndex(global_index_++);
-        box.setType(type);
+        auto box = new Box(Point(x, y), w, h);
+        box->setIndex(global_index_++);
+        box->setType(type);
         return box;
     } break;
     case UtilBoxType::kDefaltBuilding: {
         auto [w, h] = DB::getInstance()->DefaltBuildingSize();
-        Box box(Point(x, y), w, h);
-        box.setIndex(global_index_++);
-        box.setType(type);
+        auto box = new Box(Point(x, y), w, h);
+        box->setIndex(global_index_++);
+        box->setType(type);
         return box;
     } break;
 
@@ -312,58 +312,58 @@ Point BoxCreator::deduceNextAnchorPoint(UtilOrient orient, UtilBoxType box_type,
     return center_point;
 }
 
-void BoxCreator::associateBuildingBox(UtilOrient orient, Box box) {
-    auto point            = box.getCenterPoint();
+void BoxCreator::associateBuildingBox(UtilOrient orient, Box* box) {
+    auto point            = box->getCenterPoint();
     auto [pace_w, pace_h] = DB::getInstance()->PaceSize();
     switch (orient) {
     case UtilOrient::kToRight: {
-        auto                              start_x    = point.rx() - box.Width() / 2;
-        auto                              end_x      = point.rx() + box.Width() / 2;
-        auto                              anchor_y   = point.ry() + box.Height() / 2 + DB::getInstance()->IntervalSize() + pace_h / 2;
+        auto                              start_x    = point.rx() - box->Width() / 2;
+        auto                              end_x      = point.rx() + box->Width() / 2;
+        auto                              anchor_y   = point.ry() + box->Height() / 2 + DB::getInstance()->IntervalSize() + pace_h / 2;
         decltype(DB::getInstance()->getPaceBoxes()) pace_boxes = DB::getInstance()->getPaceBoxes();
         for (auto& pace_box : pace_boxes) {
-            auto pace_point = pace_box.getCenterPoint();
+            auto pace_point = pace_box->getCenterPoint();
             if (pace_point.rx() >= start_x && pace_point.rx() <= end_x && pace_point.ry() == anchor_y) {
-                pace_box.setAssociateBox(box.Index());
+                pace_box->setAssociateBox(box->Index());
             }
         }
 
     } break;
     case UtilOrient::kToDown: {
-        auto  anchor_x   = point.rx() - box.Width() / 2 - DB::getInstance()->IntervalSize() - pace_w / 2;
-        auto  start_y    = point.ry() - box.Height() / 2;
-        auto  end_y      = point.ry() + box.Height() / 2;
+        auto  anchor_x   = point.rx() - box->Width() / 2 - DB::getInstance()->IntervalSize() - pace_w / 2;
+        auto  start_y    = point.ry() - box->Height() / 2;
+        auto  end_y      = point.ry() + box->Height() / 2;
         auto& pace_boxes = DB::getInstance()->getPaceBoxes();
 
         for (auto& pace_box : pace_boxes) {
-            auto point = pace_box.getCenterPoint();
+            auto point = pace_box->getCenterPoint();
             if (point.ry() >= start_y && point.ry() <= end_y && point.rx() == anchor_x) {
-                pace_box.setAssociateBox(box.Index());
+                pace_box->setAssociateBox(box->Index());
             }
         }
     } break;
     case UtilOrient::kToLeft: {
-        auto                              start_x    = point.rx() - box.Width() / 2;
-        auto                              end_x      = point.rx() + box.Width() / 2;
-        auto                              anchor_y   = point.ry() + box.Height() / 2 + DB::getInstance()->IntervalSize() + pace_h / 2;
+        auto                              start_x    = point.rx() - box->Width() / 2;
+        auto                              end_x      = point.rx() + box->Width() / 2;
+        auto                              anchor_y   = point.ry() + box->Height() / 2 + DB::getInstance()->IntervalSize() + pace_h / 2;
         decltype(DB::getInstance()->getPaceBoxes()) pace_boxes = DB::getInstance()->getPaceBoxes();
         for (auto& pace_box : pace_boxes) {
-            auto pace_point = pace_box.getCenterPoint();
+            auto pace_point = pace_box->getCenterPoint();
             if (pace_point.rx() >= start_x && pace_point.rx() <= end_x && pace_point.ry() == anchor_y) {
-                pace_box.setAssociateBox(box.Index());
+                pace_box->setAssociateBox(box->Index());
             }
         }
     } break;
     case UtilOrient::kToUp: {
-        auto anchor_x = point.rx() + box.Width() / 2 + DB::getInstance()->IntervalSize() + pace_w / 2;
-        auto start_y  = point.ry() - box.Height() / 2;
-        auto end_y    = point.ry() + box.Height() / 2;
+        auto anchor_x = point.rx() + box->Width() / 2 + DB::getInstance()->IntervalSize() + pace_w / 2;
+        auto start_y  = point.ry() - box->Height() / 2;
+        auto end_y    = point.ry() + box->Height() / 2;
 
         auto& pace_boxes = DB::getInstance()->getPaceBoxes();
         for (auto& pace_box : pace_boxes) {
-            auto point = pace_box.getCenterPoint();
+            auto point = pace_box->getCenterPoint();
             if (point.ry() >= start_y && point.ry() <= end_y && point.rx() == anchor_x) {
-                pace_box.setAssociateBox(box.Index());
+                pace_box->setAssociateBox(box->Index());
             }
         }
     } break;

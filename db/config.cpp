@@ -127,15 +127,18 @@ bool Config::loadDesign(const char* path) {
                     } else if (str == "tu") {
                         orient = UtilOrient::kToUp;
                     }
-                    Box pace_box;
+                    Box* pace_box;
+                    Point last_center_point;
                     for (int i = 0; i < num; i++) {
                         if (i == 0) {
                             pace_box = creator.createBox(UtilBoxType::kPace, anchor_point.rx(), anchor_point.ry());
+                            last_center_point = pace_box->getCenterPoint();
                             auto box = transform_map.translateToSceneBox(pace_box);
                             db->appendPaceBox(box);
                         } else {
-                            auto point = creator.deduceBoxCenterPoint(orient, UtilBoxType::kPace, pace_box.getCenterPoint());
+                            auto point = creator.deduceBoxCenterPoint(orient, UtilBoxType::kPace, last_center_point);
                             pace_box   = creator.createBox(UtilBoxType::kPace, point.rx(), point.ry());
+                            last_center_point = pace_box->getCenterPoint();
                             auto box   = transform_map.translateToSceneBox(pace_box);
                             db->appendPaceBox(box);
                         }
