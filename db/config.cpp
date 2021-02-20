@@ -199,6 +199,7 @@ bool Config::loadDesign(const char* path) {
                 for (auto i = 0; i < list_nodes.size(); i++) {
                     auto node = list_nodes.at(i);
                     if (node.nodeName() == "player") {
+                        
                         auto          attr_name = node.toElement().attribute("name");
                         auto          name      = attr_name.toLocal8Bit();
                         auto          c_name    = name.constData();
@@ -207,7 +208,7 @@ bool Config::loadDesign(const char* path) {
                         auto          str       = e.text();
                         auto          pos       = str.toInt();
                         PlayerCreator creator;
-                        auto          player = creator.createPlayer(c_name, pos);
+                        auto          player = creator.createPlayer(c_name);
                         db->appendPlayer(player);
                     }
                     // auto c_node_name =

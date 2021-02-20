@@ -15,21 +15,25 @@ void ItemPlayer::preDraw() {
     painter.setPen(pen);
     painter.drawEllipse(0, 0, box_->Width() - 1, box_->Height() - 1);
 
-    // QString name;
+    QString name;
 
-    // auto boxes = box_->getAssociateBoxes();
+    name = player_->Name();
 
-    // // name = QString::number(box_->Index());
+    auto x = 0;
+    auto y = box_->Height() / 4;
 
-    // for(auto box : boxes){
-    //     name = QString::number(box);
-    // }
+    // painter.drawText(0, 0, name);
 
-    // painter.drawText(QRectF(
-    //                    (0),
-    //                    (0),
-    //                    box_->Width() - 1,
-    //                    box_->Height() - 1),
-    //                  0,
-    //                  name);
+    painter.drawText(QRectF(
+                       (x),
+                       (y),
+                       box_->Width() - 1,
+                       box_->Height()/2),
+                     0,
+                     name);
+}
+
+void ItemPlayer::setPlayer(Player* player) {
+    player_ = player;
+    setItemSize(player_->getBox());
 }

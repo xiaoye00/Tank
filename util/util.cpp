@@ -1,5 +1,6 @@
 #include "util.h"
 #include <random>
+#include <time.h>
 
 static std::string install_path;
 
@@ -14,9 +15,13 @@ void setInstallPath(std::string path) {
 
 unsigned int getRondomNumber(int x) {
 
-    std::default_random_engine random;
+    // static std::random_device rd;
 
-    auto num = random() % x;
+    static std::default_random_engine random(time(NULL));
+
+    std::uniform_int_distribution<int> dis(0, x);
+
+    auto num = dis(random);
 
     return num;
 }

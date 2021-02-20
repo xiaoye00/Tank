@@ -2,6 +2,8 @@
 
 #include <string>
 
+#include "box_creator.h"
+
 class Player {
   public:
     Player(){};
@@ -9,14 +11,14 @@ class Player {
 
     auto setName(const char* name) { name_ = name; };
     auto Name() { return name_.c_str(); };
-    auto setPos(int pos) { pos_ = pos; };
-    auto Pos() { return pos_; };
+    auto setBox(Box* box) { box_ = box; };
+    auto getBox() { return box_; };
 
   private:
     //player name
     std::string name_{"no name"};
     //associate to a pace box
-    int pos_{0};
+    Box* box_{nullptr};
 };
 
 class PlayerCreator {
@@ -25,10 +27,10 @@ class PlayerCreator {
     PlayerCreator(/* args */){};
     ~PlayerCreator(){};
 
-    auto createPlayer(const char* name, int pos = 0) {
-        auto player = new Player ;
+    auto createPlayer(const char* name, Box* box = nullptr) {
+        auto player = new Player;
         player->setName(name);
-        player->setPos(pos);
+        player->setBox(box);
         return player;
     }
 };

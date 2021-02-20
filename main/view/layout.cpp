@@ -3,11 +3,13 @@
 #include "config.h"
 #include "db.h"
 #include "item_pace.h"
+#include "player_creator.h"
 #include "transform.h"
 #include "util.h"
 
 Layout::Layout() {
     item_manager = new ItemManager;
+    getRondomNumber(10);
 }
 
 Layout::~Layout() {
@@ -22,29 +24,26 @@ void Layout::initiation() {
     auto db                 = DB::getInstance();
     auto [scene_w, scene_h] = db->MapSize();
     scene_->setSize(scene_w, scene_h);
-    auto& boxes = db->getPaceBoxes();
-    for (auto& box : boxes) {
-        auto item = item_manager->createItem(LayoutItemType::kPace,
-                                             box);
+    auto& pace_boxes = db->getPaceBoxes();
+    for (auto& box : pace_boxes) {
+        auto item = item_manager->createItemPace(box);
         scene_->addItem(item);
     }
 
-    boxes = db->getBuildingBoxes();
-    for (auto& box : boxes) {
-        auto item = item_manager->createItem(LayoutItemType::kBuilding,
-                                             box);
+    auto building_boxes = db->getBuildingBoxes();
+    for (auto& box : building_boxes) {
+        auto item = item_manager->createItemBuilding(box);
         scene_->addItem(item);
     }
 
     auto players = db->getPlayers();
     for (auto& player : players) {
-        auto& boxes = db->getPaceBoxes();
-        auto size = boxes.size();
-        auto pos = getRondomNumber(size);
-        player->setPos(pos);
-        
-        auto item = item_manager->createItem(LayoutItemType::kPlayer,
-                                             boxes[pos]);
+        auto size = pace_boxes.size();
+        auto pos  = getRondomNumber(size - 1);
+        auto box  = pace_boxes[pos];
+        player->setBox(box);
+
+        auto item = item_manager->createItemPlayer(player);
         scene_->addItem(item);
     }
 }
