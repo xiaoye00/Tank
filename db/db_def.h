@@ -2,7 +2,7 @@
 
 namespace Tank {
 
-enum class UtilBoxType {
+enum class BoxType {
     kPace,
     kMall,
     kShop,
@@ -10,11 +10,16 @@ enum class UtilBoxType {
     kNull
 };
 
-enum class UtilOrient {
+enum class PlacementOrient {
     kToRight,
     kToDown,
     kToLeft,
     kToUp
+};
+
+enum class GoOrient{
+    kGoAhead,
+    kGoBack
 };
 
 } // namespace Tank

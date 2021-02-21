@@ -15,11 +15,11 @@ class BoxCreator {
 
     void setConfig(Config* config) { config_ = config; };
 
-    Box* createBox(UtilBoxType type, int x, int y);
+    Box* createBox(BoxType type, int x, int y);
 
-    Point deduceBoxCenterPoint(UtilOrient orient, UtilBoxType box_type, Point anchor_point);
-    Point deduceNextAnchorPoint(UtilOrient orient, UtilBoxType box_type, Point anchor_point);
-    void  associateBuildingBox(UtilOrient orient, Box* box);
+    Point deduceBoxCenterPoint(PlacementOrient orient, BoxType box_type, Point anchor_point);
+    Point deduceNextAnchorPoint(PlacementOrient orient, BoxType box_type, Point anchor_point);
+    void  associateBuildingBox(PlacementOrient orient, Box* box);
 
   private:
     Config*    config_{nullptr};
@@ -81,7 +81,7 @@ class Box {
     void  setRLY(int rly) { rly_ = lly_ = rly; };
     void  setAssociateBox(int index) { test_list.push_back(index); };
     auto& getAssociateBoxes() { return test_list; };
-    void  setType(UtilBoxType type) { type_ = type; };
+    void  setType(BoxType type) { type_ = type; };
     auto  Type() { return type_; };
 
   private:
@@ -95,7 +95,7 @@ class Box {
     int            ruy_{0};
     int            index_{0};
     int            associateID_{0};
-    UtilBoxType    type_;
+    BoxType    type_;
     std::list<int> test_list;
 };
 } // namespace Tank

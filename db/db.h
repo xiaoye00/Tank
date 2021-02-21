@@ -43,6 +43,8 @@ class DB {
     auto getBuildingBoxes() { return &building_box_list_; };
     auto appendPlayer(Player* player) { player_list_.push_back(player); };
     auto getPlayers() { return &player_list_; };
+    
+    Player* getPlayerByID(int ID);
 
   private:
     int                  map_size_w_{0};

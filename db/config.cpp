@@ -118,27 +118,27 @@ bool Config::loadDesign(const char* path) {
 
                     e   = node_list.at(0).toElement();
                     str = e.text();
-                    UtilOrient orient;
+                    PlacementOrient orient;
                     if (str == "tr") {
-                        orient = UtilOrient::kToRight;
+                        orient = PlacementOrient::kToRight;
                     } else if (str == "td") {
-                        orient = UtilOrient::kToDown;
+                        orient = PlacementOrient::kToDown;
                     } else if (str == "tl") {
-                        orient = UtilOrient::kToLeft;
+                        orient = PlacementOrient::kToLeft;
                     } else if (str == "tu") {
-                        orient = UtilOrient::kToUp;
+                        orient = PlacementOrient::kToUp;
                     }
                     Box*  pace_box;
                     Point last_center_point;
                     for (int i = 0; i < num; i++) {
                         if (i == 0) {
-                            pace_box          = creator.createBox(UtilBoxType::kPace, anchor_point.rx(), anchor_point.ry());
+                            pace_box          = creator.createBox(BoxType::kPace, anchor_point.rx(), anchor_point.ry());
                             last_center_point = pace_box->getCenterPoint();
                             auto box          = transform_map.translateToSceneBox(pace_box);
                             db->appendPaceBox(box);
                         } else {
-                            auto point        = creator.deduceBoxCenterPoint(orient, UtilBoxType::kPace, last_center_point);
-                            pace_box          = creator.createBox(UtilBoxType::kPace, point.rx(), point.ry());
+                            auto point        = creator.deduceBoxCenterPoint(orient, BoxType::kPace, last_center_point);
+                            pace_box          = creator.createBox(BoxType::kPace, point.rx(), point.ry());
                             last_center_point = pace_box->getCenterPoint();
                             auto box          = transform_map.translateToSceneBox(pace_box);
                             db->appendPaceBox(box);
@@ -152,34 +152,34 @@ bool Config::loadDesign(const char* path) {
                     for (int i = 0; i < building_nodes.size(); i++) {
                         auto building = building_nodes.at(i).toElement().text();
                         if (building == "defalt") {
-                            auto point = creator.deduceBoxCenterPoint(orient, UtilBoxType::kDefaltBuilding, building_anchor);
-                            auto box   = creator.createBox(UtilBoxType::kDefaltBuilding, point.rx(), point.ry());
+                            auto point = creator.deduceBoxCenterPoint(orient, BoxType::kDefaltBuilding, building_anchor);
+                            auto box   = creator.createBox(BoxType::kDefaltBuilding, point.rx(), point.ry());
 
                             box = transform_map.translateToSceneBox(box);
                             creator.associateBuildingBox(orient, box);
                             db->appendBuildingBox(box);
-                            building_anchor = creator.deduceNextAnchorPoint(orient, UtilBoxType::kDefaltBuilding, building_anchor);
+                            building_anchor = creator.deduceNextAnchorPoint(orient, BoxType::kDefaltBuilding, building_anchor);
 
                         } else if (building == "mall") {
-                            auto point = creator.deduceBoxCenterPoint(orient, UtilBoxType::kMall, building_anchor);
-                            auto box   = creator.createBox(UtilBoxType::kMall, point.rx(), point.ry());
+                            auto point = creator.deduceBoxCenterPoint(orient, BoxType::kMall, building_anchor);
+                            auto box   = creator.createBox(BoxType::kMall, point.rx(), point.ry());
 
                             box = transform_map.translateToSceneBox(box);
                             creator.associateBuildingBox(orient, box);
                             db->appendBuildingBox(box);
-                            building_anchor = creator.deduceNextAnchorPoint(orient, UtilBoxType::kMall, building_anchor);
+                            building_anchor = creator.deduceNextAnchorPoint(orient, BoxType::kMall, building_anchor);
 
                         } else if (building == "shop") {
-                            auto point = creator.deduceBoxCenterPoint(orient, UtilBoxType::kShop, building_anchor);
-                            auto box   = creator.createBox(UtilBoxType::kShop, point.rx(), point.ry());
+                            auto point = creator.deduceBoxCenterPoint(orient, BoxType::kShop, building_anchor);
+                            auto box   = creator.createBox(BoxType::kShop, point.rx(), point.ry());
 
                             box = transform_map.translateToSceneBox(box);
                             creator.associateBuildingBox(orient, box);
                             db->appendBuildingBox(box);
-                            building_anchor = creator.deduceNextAnchorPoint(orient, UtilBoxType::kShop, building_anchor);
+                            building_anchor = creator.deduceNextAnchorPoint(orient, BoxType::kShop, building_anchor);
                         } else if (building == "null") {
-                            auto point      = creator.deduceBoxCenterPoint(orient, UtilBoxType::kNull, building_anchor);
-                            building_anchor = creator.deduceNextAnchorPoint(orient, UtilBoxType::kNull, building_anchor);
+                            auto point      = creator.deduceBoxCenterPoint(orient, BoxType::kNull, building_anchor);
+                            building_anchor = creator.deduceNextAnchorPoint(orient, BoxType::kNull, building_anchor);
                         }
                     }
 
@@ -210,6 +210,7 @@ bool Config::loadDesign(const char* path) {
                         auto          pos       = str.toInt();
                         PlayerCreator creator;
                         auto          player = creator.createPlayer(c_name);
+                        player->setID(i);
                         db->appendPlayer(player);
                     }
                     // auto c_node_name =
