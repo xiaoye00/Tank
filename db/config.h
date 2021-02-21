@@ -1,11 +1,11 @@
 #pragma once
 
 #include "db.h"
-
+namespace Tank {
 class Config {
   public:
     Config();
     ~Config();
-    bool  loadDesign(const char* path);
-
+    bool loadDesign(const char* path);
 };
+} // namespace Tank

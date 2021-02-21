@@ -5,7 +5,7 @@
 #include "graphics_scene.h"
 #include "item_manager.h"
 #include "layout_def.h"
-
+namespace Tank {
 class Layout {
 
   public:
@@ -22,3 +22,4 @@ class Layout {
     int            pace_size_{0};
 
 };
+}

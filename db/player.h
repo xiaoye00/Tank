@@ -2,8 +2,8 @@
 
 #include <string>
 
-#include "box_creator.h"
-
+#include "box.h"
+namespace Tank {
 class Player {
   public:
     Player(){};
@@ -34,3 +34,4 @@ class PlayerCreator {
         return player;
     }
 };
+}

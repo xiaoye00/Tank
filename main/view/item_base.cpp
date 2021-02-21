@@ -1,6 +1,9 @@
 #include "item_base.h"
 
 #include <QPainter>
+
+namespace Tank {
+
 ItemBase::ItemBase(QGraphicsItem* parent) : QGraphicsItem(parent) {
     setVisible(true);
 }
@@ -15,7 +18,6 @@ void ItemBase::setItemSize(Box* box) {
     resizeMap_(w, h);
     auto center_point = box_->getCenterPoint();
     setPos(center_point.rx(), center_point.ry());
-
 }
 
 QPixmap* ItemBase::fillMapToTransparency() {
@@ -55,3 +57,4 @@ void ItemBase::draw(QPainter* painter) {
         painter->drawPixmap(0, 0, *img_);
     }
 }
+} // namespace Tank

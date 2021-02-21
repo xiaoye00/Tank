@@ -1,8 +1,8 @@
-#include "box_creator.h"
+#include "box.h"
 
 #include "config.h"
 #include "transform.h"
-
+namespace Tank {
 BoxCreator::BoxCreator(/* args */) {
 }
 
@@ -20,28 +20,28 @@ Box* BoxCreator::createBox(UtilBoxType type, int x, int y) {
     switch (type) {
     case UtilBoxType::kPace: {
         auto [w, h] = DB::getInstance()->PaceSize();
-        auto box = new Box(Point(x, y), w, h);
+        auto box    = new Box(Point(x, y), w, h);
         box->setIndex(global_index_++);
         box->setType(type);
         return box;
     }
     case UtilBoxType::kMall: {
         auto [w, h] = DB::getInstance()->MallSize();
-        auto box = new Box(Point(x, y), w, h);
+        auto box    = new Box(Point(x, y), w, h);
         box->setIndex(global_index_++);
         box->setType(type);
         return box;
     } break;
     case UtilBoxType::kShop: {
         auto [w, h] = DB::getInstance()->ShopSize();
-        auto box = new Box(Point(x, y), w, h);
+        auto box    = new Box(Point(x, y), w, h);
         box->setIndex(global_index_++);
         box->setType(type);
         return box;
     } break;
     case UtilBoxType::kDefaltBuilding: {
         auto [w, h] = DB::getInstance()->DefaltBuildingSize();
-        auto box = new Box(Point(x, y), w, h);
+        auto box    = new Box(Point(x, y), w, h);
         box->setIndex(global_index_++);
         box->setType(type);
         return box;
@@ -317,11 +317,11 @@ void BoxCreator::associateBuildingBox(UtilOrient orient, Box* box) {
     auto [pace_w, pace_h] = DB::getInstance()->PaceSize();
     switch (orient) {
     case UtilOrient::kToRight: {
-        auto                              start_x    = point.rx() - box->Width() / 2;
-        auto                              end_x      = point.rx() + box->Width() / 2;
-        auto                              anchor_y   = point.ry() + box->Height() / 2 + DB::getInstance()->IntervalSize() + pace_h / 2;
-        decltype(DB::getInstance()->getPaceBoxes()) pace_boxes = DB::getInstance()->getPaceBoxes();
-        for (auto& pace_box : pace_boxes) {
+        auto start_x    = point.rx() - box->Width() / 2;
+        auto end_x      = point.rx() + box->Width() / 2;
+        auto anchor_y   = point.ry() + box->Height() / 2 + DB::getInstance()->IntervalSize() + pace_h / 2;
+        auto pace_boxes = DB::getInstance()->getPaceBoxes();
+        for (auto& pace_box : *pace_boxes) {
             auto pace_point = pace_box->getCenterPoint();
             if (pace_point.rx() >= start_x && pace_point.rx() <= end_x && pace_point.ry() == anchor_y) {
                 pace_box->setAssociateBox(box->Index());
@@ -330,12 +330,12 @@ void BoxCreator::associateBuildingBox(UtilOrient orient, Box* box) {
 
     } break;
     case UtilOrient::kToDown: {
-        auto  anchor_x   = point.rx() - box->Width() / 2 - DB::getInstance()->IntervalSize() - pace_w / 2;
-        auto  start_y    = point.ry() - box->Height() / 2;
-        auto  end_y      = point.ry() + box->Height() / 2;
-        auto& pace_boxes = DB::getInstance()->getPaceBoxes();
+        auto anchor_x   = point.rx() - box->Width() / 2 - DB::getInstance()->IntervalSize() - pace_w / 2;
+        auto start_y    = point.ry() - box->Height() / 2;
+        auto end_y      = point.ry() + box->Height() / 2;
+        auto pace_boxes = DB::getInstance()->getPaceBoxes();
 
-        for (auto& pace_box : pace_boxes) {
+        for (auto& pace_box : *pace_boxes) {
             auto point = pace_box->getCenterPoint();
             if (point.ry() >= start_y && point.ry() <= end_y && point.rx() == anchor_x) {
                 pace_box->setAssociateBox(box->Index());
@@ -343,11 +343,11 @@ void BoxCreator::associateBuildingBox(UtilOrient orient, Box* box) {
         }
     } break;
     case UtilOrient::kToLeft: {
-        auto                              start_x    = point.rx() - box->Width() / 2;
-        auto                              end_x      = point.rx() + box->Width() / 2;
-        auto                              anchor_y   = point.ry() + box->Height() / 2 + DB::getInstance()->IntervalSize() + pace_h / 2;
-        decltype(DB::getInstance()->getPaceBoxes()) pace_boxes = DB::getInstance()->getPaceBoxes();
-        for (auto& pace_box : pace_boxes) {
+        auto start_x    = point.rx() - box->Width() / 2;
+        auto end_x      = point.rx() + box->Width() / 2;
+        auto anchor_y   = point.ry() + box->Height() / 2 + DB::getInstance()->IntervalSize() + pace_h / 2;
+        auto pace_boxes = DB::getInstance()->getPaceBoxes();
+        for (auto& pace_box : *pace_boxes) {
             auto pace_point = pace_box->getCenterPoint();
             if (pace_point.rx() >= start_x && pace_point.rx() <= end_x && pace_point.ry() == anchor_y) {
                 pace_box->setAssociateBox(box->Index());
@@ -359,8 +359,8 @@ void BoxCreator::associateBuildingBox(UtilOrient orient, Box* box) {
         auto start_y  = point.ry() - box->Height() / 2;
         auto end_y    = point.ry() + box->Height() / 2;
 
-        auto& pace_boxes = DB::getInstance()->getPaceBoxes();
-        for (auto& pace_box : pace_boxes) {
+        auto pace_boxes = DB::getInstance()->getPaceBoxes();
+        for (auto& pace_box : *pace_boxes) {
             auto point = pace_box->getCenterPoint();
             if (point.ry() >= start_y && point.ry() <= end_y && point.rx() == anchor_x) {
                 pace_box->setAssociateBox(box->Index());
@@ -371,3 +371,4 @@ void BoxCreator::associateBuildingBox(UtilOrient orient, Box* box) {
 }
 
 int BoxCreator::global_index_ = 0;
+} // namespace Tank

@@ -3,9 +3,9 @@
 #include <QGraphicsItem>
 #include <QPixmap>
 #include <list>
-#include "box_creator.h"
+#include "box.h"
 #include "layout_def.h"
-
+namespace Tank {
 class ItemBase : public QGraphicsItem {
   public:
     ItemBase(QGraphicsItem* parent = nullptr);
@@ -29,5 +29,6 @@ class ItemBase : public QGraphicsItem {
 
     LayoutItemType type_;
     std::list<int> associate_item_;
-    Box*            box_;
+    Box*           box_;
 };
+} // namespace Tank

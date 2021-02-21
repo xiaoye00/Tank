@@ -3,7 +3,7 @@
 #include <list>
 #include <tuple>
 #include "db_def.h"
-
+namespace Tank {
 class Box;
 class Point;
 class Config;
@@ -98,3 +98,4 @@ class Box {
     UtilBoxType    type_;
     std::list<int> test_list;
 };
+} // namespace Tank

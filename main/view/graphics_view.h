@@ -3,7 +3,7 @@
 #include "layout.h"
 
 #include <QGraphicsView>
-
+namespace Tank {
 class GraphicsView : public QGraphicsView {
     Q_OBJECT
   public:
@@ -32,3 +32,4 @@ class GraphicsView : public QGraphicsView {
 
     GraphicsView(QWidget* parent = nullptr);
 };
+}

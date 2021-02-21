@@ -1,7 +1,7 @@
 #pragma once
 #include <QLineEdit>
 #include <QStatusBar>
-
+namespace Tank {
 class StatusBar : public QStatusBar {
     Q_OBJECT
   public:
@@ -13,3 +13,4 @@ class StatusBar : public QStatusBar {
 
     void slotPos(int x, int y);
 };
+}

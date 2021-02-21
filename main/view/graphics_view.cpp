@@ -1,7 +1,7 @@
 #include "graphics_view.h"
 
 #include <QMouseEvent>
-
+namespace Tank {
 GraphicsView::GraphicsView(QWidget* parent) : QGraphicsView(parent) {
     setMouseTracking(true);
     scene_  = new GraphicsScene;
@@ -20,3 +20,4 @@ void GraphicsView::mouseMoveEvent(QMouseEvent* event) {
 }
 
 GraphicsView* GraphicsView::inst_ = nullptr;
+}

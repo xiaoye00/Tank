@@ -1,5 +1,7 @@
 #pragma once
 
+namespace Tank {
+
 enum class UtilBoxType {
     kPace,
     kMall,
@@ -15,3 +17,4 @@ enum class UtilOrient {
     kToUp
 };
 
+} // namespace Tank

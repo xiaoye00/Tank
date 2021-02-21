@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include "status_bar.h"
 #include "view/graphics_view.h"
-
+namespace Tank {
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
@@ -19,4 +19,5 @@ class MainWindow : public QMainWindow {
   private:
     // QString install_path_;
 };
+}
 #endif // MAINWINDOW_H

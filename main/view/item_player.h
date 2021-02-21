@@ -1,8 +1,8 @@
 #pragma once
 
 #include "item_base.h"
-#include "player_creator.h"
-
+#include "player.h"
+namespace Tank {
 class ItemPlayer : public ItemBase {
   public:
     ItemPlayer(QGraphicsItem* parent = nullptr);
@@ -14,3 +14,4 @@ class ItemPlayer : public ItemBase {
   private:
     Player* player_{nullptr};
 };
+}

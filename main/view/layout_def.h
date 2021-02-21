@@ -1,8 +1,9 @@
 #pragma once
 
-
-enum class LayoutItemType{
+namespace Tank {
+enum class LayoutItemType {
     kPace,
     kBuilding,
     kPlayer
 };
+}

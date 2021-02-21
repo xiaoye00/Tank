@@ -3,10 +3,11 @@
 #include <QDebug>
 
 #include "db_def.h"
-#include "player_creator.h"
+#include "player.h"
 #include "transform.h"
 #include "xml_parse.h"
 
+namespace Tank {
 Config::Config() {
 }
 
@@ -199,7 +200,7 @@ bool Config::loadDesign(const char* path) {
                 for (auto i = 0; i < list_nodes.size(); i++) {
                     auto node = list_nodes.at(i);
                     if (node.nodeName() == "player") {
-                        
+
                         auto          attr_name = node.toElement().attribute("name");
                         auto          name      = attr_name.toLocal8Bit();
                         auto          c_name    = name.constData();
@@ -217,3 +218,4 @@ bool Config::loadDesign(const char* path) {
         }
     }
 }
+} // namespace Tank

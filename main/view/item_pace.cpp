@@ -2,6 +2,7 @@
 #include "item_pace.h"
 #include <QPainter>
 #include <QPen>
+namespace Tank {
 ItemPace::ItemPace(QGraphicsItem* parent) : ItemBase(parent) {
 }
 
@@ -32,4 +33,5 @@ void ItemPace::preDraw() {
                        box_->Height() - 1),
                      0,
                      name);
+}
 }

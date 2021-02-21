@@ -1,12 +1,12 @@
 #pragma once
-#include "box_creator.h"
+#include "box.h"
 #include "item_base.h"
 #include "item_building.h"
 #include "item_pace.h"
 #include "item_player.h"
 #include "layout_def.h"
-#include "player_creator.h"
-
+#include "player.h"
+namespace Tank {
 class ItemManager {
   public:
     ItemManager(/* args */);
@@ -44,3 +44,4 @@ class ItemManager {
 
   private:
 };
+}

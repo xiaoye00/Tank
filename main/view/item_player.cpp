@@ -2,6 +2,7 @@
 #include "item_player.h"
 #include <QPainter>
 #include <QPen>
+namespace Tank {
 ItemPlayer::ItemPlayer(QGraphicsItem* parent) : ItemBase(parent) {
 }
 
@@ -28,7 +29,7 @@ void ItemPlayer::preDraw() {
                        (x),
                        (y),
                        box_->Width() - 1,
-                       box_->Height()/2),
+                       box_->Height() / 2),
                      0,
                      name);
 }
@@ -37,3 +38,4 @@ void ItemPlayer::setPlayer(Player* player) {
     player_ = player;
     setItemSize(player_->getBox());
 }
+} // namespace Tank

@@ -2,6 +2,7 @@
 #include "item_building.h"
 #include <QPainter>
 #include <QPen>
+namespace Tank {
 ItemBuilding::ItemBuilding(QGraphicsItem* parent) : ItemBase(parent) {
 }
 
@@ -25,4 +26,5 @@ void ItemBuilding::preDraw() {
                        box_->Height() - 1),
                      0,
                      name);
+}
 }

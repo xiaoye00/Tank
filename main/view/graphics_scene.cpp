@@ -1,5 +1,6 @@
 
 #include "graphics_scene.h"
+namespace Tank {
 GraphicsScene::GraphicsScene(QObject* parent) : QGraphicsScene(parent) {
 }
 
@@ -12,4 +13,5 @@ void GraphicsScene::setSize(int w, int h) {
 }
 
 void GraphicsScene::drawBackground(QPainter* painter, const QRectF& rect) {
+}
 }

@@ -6,10 +6,10 @@
 #include <tuple>
 #include <vector>
 
-#include "box_creator.h"
+#include "box.h"
 #include "db_def.h"
-#include "player_creator.h"
-
+#include "player.h"
+namespace Tank {
 class DB {
   public:
     ~DB();
@@ -37,12 +37,12 @@ class DB {
     auto setDefaltBuildingSize(int w, int h) { defalt_building_size_w_ = w, defalt_building_size_h_ = h; };
     auto DefaltBuildingSize() { return std::tuple(defalt_building_size_w_, defalt_building_size_h_); };
 
-    auto  appendPaceBox(Box* box) { pace_box_list_.push_back(box); };
-    auto& getPaceBoxes() { return pace_box_list_; };
-    auto  appendBuildingBox(Box* box) { building_box_list_.push_back(box); };
-    auto& getBuildingBoxes() { return building_box_list_; };
-    auto  appendPlayer(Player* player) { player_list_.push_back(player); };
-    auto& getPlayers() { return player_list_; };
+    auto appendPaceBox(Box* box) { pace_box_list_.push_back(box); };
+    auto getPaceBoxes() { return &pace_box_list_; };
+    auto appendBuildingBox(Box* box) { building_box_list_.push_back(box); };
+    auto getBuildingBoxes() { return &building_box_list_; };
+    auto appendPlayer(Player* player) { player_list_.push_back(player); };
+    auto getPlayers() { return &player_list_; };
 
   private:
     int                  map_size_w_{0};
@@ -65,3 +65,4 @@ class DB {
     static DB* inst_;
     DB(/* args */){};
 };
+} // namespace Tank
