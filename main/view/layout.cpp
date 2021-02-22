@@ -1,4 +1,5 @@
 #include "layout.h"
+#include "../widget/dice.h"
 #include "box.h"
 #include "config.h"
 #include "db.h"
@@ -42,16 +43,18 @@ void Layout::initiation() {
         auto pos  = getRondomNumber(size - 1);
         auto box  = (*pace_boxes)[pos];
         player->setBox(box);
-        auto orient  = getRondomNumber(1);
+        auto orient = getRondomNumber(1);
         player->setOrient(orient);
         auto item = item_manager->createItemPlayer(player);
         scene_->addItem(item);
     }
 
+    Dice* dice = new Dice;
+    dice->exec();
+    auto num = dice->Num();
     //who first
-    auto who = getRondomNumber(1);
+    auto who    = getRondomNumber(1);
     auto player = db->getPlayerByID(who);
-
-    qDebug()<<player->Name();
+    // dice->exec();
 }
 } // namespace Tank
