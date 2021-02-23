@@ -17,7 +17,7 @@ class Layout : public QObject {
     void  addScene(GraphicsScene* scene) { scene_ = scene; };
     void  setPaceSize(int size) { pace_size_ = size; };
     void  initiation();
-    Dice* dice{nullptr};
+    // Dice* dice{nullptr};
 
   signals:
     void signalShowDice();

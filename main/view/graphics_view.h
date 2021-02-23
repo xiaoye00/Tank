@@ -3,6 +3,8 @@
 #include "layout.h"
 
 #include <QGraphicsView>
+#include <QTimer>
+
 namespace Tank {
 class GraphicsView : public QGraphicsView {
     Q_OBJECT
@@ -18,16 +20,18 @@ class GraphicsView : public QGraphicsView {
 
     Layout* getLayout() { return layout_; };
 
-  void initiation();
+    void initiation();
 
   public slots:
-    void updateItems();
+    void slotShowDice();
+    void slotOnTimer();
 
   signals:
     void sendPos(int x, int y);
 
   protected:
     virtual void mouseMoveEvent(QMouseEvent* event) override;
+    virtual void mouseDoubleClickEvent(QMouseEvent* event) override;
 
   private:
     //scene of this view
@@ -38,5 +42,9 @@ class GraphicsView : public QGraphicsView {
     Layout* layout_{nullptr};
 
     GraphicsView(QWidget* parent = nullptr);
+
+    Dice* dice_{nullptr};
+
+    QTimer* timer{nullptr};
 };
 } // namespace Tank

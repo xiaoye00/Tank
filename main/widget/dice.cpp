@@ -15,6 +15,7 @@ Dice::Dice(QWidget* parent) : QDialog(parent) {
     layout->addWidget(btn);
     setLayout(layout);
     setVisible(true);
+    // setWindowFlags(Qt::Window);
 
     connect(btn, &QPushButton::clicked, this, &Dice::slotButtonClicked);
 
@@ -46,6 +47,6 @@ void Dice::slotButtonClicked(bool) {
 
     emit signalPostDice();
 
-    // hide();
+    hide();
 }
 } // namespace Tank

@@ -12,7 +12,7 @@ namespace Tank {
 Layout::Layout() {
     item_manager = new ItemManager;
     getRondomNumber(10);
-    dice = new Dice;
+    // dice = new Dice;
 }
 
 Layout::~Layout() {
@@ -50,7 +50,7 @@ void Layout::initiation() {
         player->setOrient(orient);
         auto item = item_manager->createItemPlayer(player);
         scene_->addItem(item);
-        dice->addPlayer(player);
+        // dice->addPlayer(player);
     }
 
     //who first
@@ -58,8 +58,8 @@ void Layout::initiation() {
     auto player = db->getPlayerByID(who);
     setCurrentPlayerID(who);
 
-    connect(dice, &Dice::signalPostDice, this, &Layout::slotRunTasks);
-    connect(this, &Layout::signalShowDice, this, &Layout::slotShowDice);
+    // connect(dice, &Dice::signalPostDice, this, &Layout::slotRunTasks);
+    // connect(this, &Layout::signalShowDice, this, &Layout::slotShowDice);
 
 }
 
@@ -85,7 +85,7 @@ void Layout::slotRunTasks() {
 
 void Layout::slotShowDice() 
 {
-    dice->resetData();
+    // dice->resetData();
     
 
     emit signalUpdateItems();
