@@ -15,7 +15,8 @@ class Dice : public QDialog {
     ~Dice();
 
     QPushButton* btn{nullptr};
-    QLabel*      label{nullptr};
+    QLabel*      label_num{nullptr};
+    QLabel*      label_name{nullptr};
     int          Num() { return num_; };
     void         addPlayer(Player* player) { player_list_.push_back(player); };
     void         resetData();

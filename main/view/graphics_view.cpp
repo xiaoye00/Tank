@@ -6,10 +6,11 @@ namespace Tank {
 
 GraphicsView::GraphicsView(QWidget* parent) : QGraphicsView(parent) {
     setMouseTracking(true);
-    layout_ = new Layout();
-    scene_  = new GraphicsScene;
-    dice_   = new Dice;
-    timer   = new QTimer(this);
+    layout_          = new Layout();
+    scene_           = new GraphicsScene;
+    dice_            = new Dice;
+    dice_timer_show_ = new QTimer(this);
+    dice_timer_hide_ = new QTimer(this);
 
     initiation();
 }
@@ -22,10 +23,11 @@ void GraphicsView::initiation() {
     viewport()->update();
     show();
 
-    connect(layout_, &Layout::signalUpdateItems, this, slotShowDice);
+    // connect(layout_, &Layout::signalUpdateItems, this, slotShowDice);
     connect(dice_, &Dice::signalPostDice, layout_, &Layout::slotRunTasks);
     connect(layout_, &Layout::signalShowDice, this, &GraphicsView::slotShowDice);
-    connect(timer, &QTimer::timeout,this,&GraphicsView::slotOnTimer);
+    connect(dice_timer_hide_, &QTimer::timeout, this, &GraphicsView::slotDiceHide);
+    connect(dice_timer_show_, &QTimer::timeout, this, &GraphicsView::slotDiceShow);
 }
 
 void GraphicsView::mouseMoveEvent(QMouseEvent* event) {
@@ -36,14 +38,23 @@ void GraphicsView::mouseMoveEvent(QMouseEvent* event) {
 
 void GraphicsView::slotShowDice() {
 
-    timer->start(1000);
+    dice_timer_hide_->start(500);
 }
 
-void GraphicsView::slotOnTimer() 
-{
+void GraphicsView::slotDiceHide() {
+
+    // dice_->resetData();
+    // dice_->show();
+
+    dice_->hide();
+    dice_timer_hide_->stop();
+    dice_timer_show_->start(500);
+}
+
+void GraphicsView::slotDiceShow() {
     dice_->resetData();
     dice_->show();
-    timer->stop();
+    dice_timer_show_->stop();
 }
 
 void GraphicsView::mouseDoubleClickEvent(QMouseEvent* event) {

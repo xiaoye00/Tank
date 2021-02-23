@@ -7,19 +7,19 @@
 
 namespace Tank {
 Dice::Dice(QWidget* parent) : QDialog(parent) {
-    btn = new QPushButton(this);
-    label = new QLabel(this);
+    btn        = new QPushButton(this);
+    label_num      = new QLabel(this);
+    label_name = new QLabel(this);
     resetData();
     auto layout = new QVBoxLayout;
-    layout->addWidget(label);
+    layout->addWidget(label_name);
+    layout->addWidget(label_num);
     layout->addWidget(btn);
     setLayout(layout);
     setVisible(true);
     // setWindowFlags(Qt::Window);
 
     connect(btn, &QPushButton::clicked, this, &Dice::slotButtonClicked);
-
-    
 }
 
 Dice::~Dice() {
@@ -27,15 +27,24 @@ Dice::~Dice() {
 
 void Dice::resetData() {
     btn->setText("Go!");
-    label->setText("0");
+    label_num->setText("0");
     num_ = 0;
+
+    auto db = DB::getInstance();
+
+    auto player = db->getCurrentPlayer();
+
+    if(player)
+    {
+        label_name->setText(player->Name());
+    }
 }
 
 void Dice::slotButtonClicked(bool) {
 
     auto num = getRondomNumber(5) + 1;
 
-    label->setText(QString::number(num));
+    label_num->setText(QString::number(num));
 
     num_ = num;
 
@@ -47,6 +56,6 @@ void Dice::slotButtonClicked(bool) {
 
     emit signalPostDice();
 
-    hide();
+    //
 }
 } // namespace Tank

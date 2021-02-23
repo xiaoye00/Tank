@@ -24,7 +24,8 @@ class GraphicsView : public QGraphicsView {
 
   public slots:
     void slotShowDice();
-    void slotOnTimer();
+    void slotDiceHide();
+    void slotDiceShow();
 
   signals:
     void sendPos(int x, int y);
@@ -45,6 +46,7 @@ class GraphicsView : public QGraphicsView {
 
     Dice* dice_{nullptr};
 
-    QTimer* timer{nullptr};
+    QTimer* dice_timer_hide_{nullptr};
+    QTimer* dice_timer_show_{nullptr};
 };
 } // namespace Tank
