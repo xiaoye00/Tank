@@ -1,5 +1,6 @@
 #pragma once
 
+#include "building.h"
 #include "item_base.h"
 namespace Tank {
 class ItemBuilding : public ItemBase {
@@ -7,5 +8,9 @@ class ItemBuilding : public ItemBase {
     ItemBuilding(QGraphicsItem* parent = nullptr);
     ~ItemBuilding();
     virtual void preDraw() override;
+    void         setBuilding(Building* building);
+
+  private:
+    Building* building_{nullptr};
 };
-}
+} // namespace Tank

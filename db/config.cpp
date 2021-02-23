@@ -135,13 +135,17 @@ bool Config::loadDesign(const char* path) {
                             pace_box          = creator.createBox(BoxType::kPace, anchor_point.rx(), anchor_point.ry());
                             last_center_point = pace_box->getCenterPoint();
                             auto box          = transform_map.translateToSceneBox(pace_box);
-                            db->appendPaceBox(box);
+                            auto pace         = new Pace;
+                            pace->setBox(box);
+                            db->appendPaceBox(pace);
                         } else {
                             auto point        = creator.deduceBoxCenterPoint(orient, BoxType::kPace, last_center_point);
                             pace_box          = creator.createBox(BoxType::kPace, point.rx(), point.ry());
                             last_center_point = pace_box->getCenterPoint();
                             auto box          = transform_map.translateToSceneBox(pace_box);
-                            db->appendPaceBox(box);
+                            auto pace         = new Pace;
+                            pace->setBox(box);
+                            db->appendPaceBox(pace);
                         }
                     }
 
@@ -154,10 +158,13 @@ bool Config::loadDesign(const char* path) {
                         if (building == "defalt") {
                             auto point = creator.deduceBoxCenterPoint(orient, BoxType::kDefaltBuilding, building_anchor);
                             auto box   = creator.createBox(BoxType::kDefaltBuilding, point.rx(), point.ry());
+                            box        = transform_map.translateToSceneBox(box);
 
-                            box = transform_map.translateToSceneBox(box);
-                            creator.associateBuildingBox(orient, box);
-                            db->appendBuildingBox(box);
+                            auto building = new Building;
+                            building->setBox(box);
+                            db->appendBuildingBox(building);
+                            creator.associateBuildingBox(orient, building);
+
                             building_anchor = creator.deduceNextAnchorPoint(orient, BoxType::kDefaltBuilding, building_anchor);
 
                         } else if (building == "mall") {
@@ -165,8 +172,12 @@ bool Config::loadDesign(const char* path) {
                             auto box   = creator.createBox(BoxType::kMall, point.rx(), point.ry());
 
                             box = transform_map.translateToSceneBox(box);
-                            creator.associateBuildingBox(orient, box);
-                            db->appendBuildingBox(box);
+
+                            auto building = new Building;
+                            building->setBox(box);
+                            db->appendBuildingBox(building);
+                            creator.associateBuildingBox(orient, building);
+
                             building_anchor = creator.deduceNextAnchorPoint(orient, BoxType::kMall, building_anchor);
 
                         } else if (building == "shop") {
@@ -174,8 +185,12 @@ bool Config::loadDesign(const char* path) {
                             auto box   = creator.createBox(BoxType::kShop, point.rx(), point.ry());
 
                             box = transform_map.translateToSceneBox(box);
-                            creator.associateBuildingBox(orient, box);
-                            db->appendBuildingBox(box);
+
+                            auto building = new Building;
+                            building->setBox(box);
+                            db->appendBuildingBox(building);
+                            creator.associateBuildingBox(orient, building);
+
                             building_anchor = creator.deduceNextAnchorPoint(orient, BoxType::kShop, building_anchor);
                         } else if (building == "null") {
                             auto point      = creator.deduceBoxCenterPoint(orient, BoxType::kNull, building_anchor);
@@ -211,6 +226,13 @@ bool Config::loadDesign(const char* path) {
                         PlayerCreator creator;
                         auto          player = creator.createPlayer(c_name);
                         player->setID(i);
+
+                        e          = node_list.at(1).toElement();
+                        str        = e.text();
+                        auto local = str.toLocal8Bit();
+                        auto color = local.data();
+                        player->setColor(color);
+
                         db->appendPlayer(player);
                     }
                     // auto c_node_name =

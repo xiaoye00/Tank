@@ -7,7 +7,9 @@
 #include <vector>
 
 #include "box.h"
+#include "building.h"
 #include "db_def.h"
+#include "pace.h"
 #include "player.h"
 namespace Tank {
 class DB {
@@ -37,11 +39,11 @@ class DB {
     auto setDefaltBuildingSize(int w, int h) { defalt_building_size_w_ = w, defalt_building_size_h_ = h; };
     auto DefaltBuildingSize() { return std::tuple(defalt_building_size_w_, defalt_building_size_h_); };
 
-    auto    appendPaceBox(Box* box) { pace_box_list_.push_back(box); };
-    auto    getPaceBoxes() { return &pace_box_list_; };
-    int     getNumPaces() { return pace_box_list_.size(); };
-    auto    appendBuildingBox(Box* box) { building_box_list_.push_back(box); };
-    auto    getBuildingBoxes() { return &building_box_list_; };
+    auto    appendPaceBox(Pace* box) { pace_list_.push_back(box); };
+    auto    getPaces() { return &pace_list_; };
+    int     getNumPaces() { return pace_list_.size(); };
+    auto    appendBuildingBox(Building* box) { building_list_.push_back(box); };
+    auto    getBuildings() { return &building_list_; };
     auto    appendPlayer(Player* player) { player_list_.push_back(player); };
     auto    getPlayers() { return &player_list_; };
     Player* getPlayerByID(int ID);
@@ -49,22 +51,22 @@ class DB {
     auto    getNumPlayers() { return player_list_.size(); };
 
   private:
-    int                  map_size_w_{0};
-    int                  map_size_h_{0};
-    int                  origin_point_x_{0};
-    int                  origin_point_y_{0};
-    int                  pace_size_w_{0};
-    int                  pace_size_h_{0};
-    int                  interval_size_{0};
-    int                  mall_size_w_{0};
-    int                  mall_size_h_{0};
-    int                  shop_size_w_{0};
-    int                  shop_size_h_{0};
-    int                  defalt_building_size_w_;
-    int                  defalt_building_size_h_;
-    std::vector<Box*>    pace_box_list_;
-    std::vector<Box*>    building_box_list_;
-    std::vector<Player*> player_list_;
+    int                    map_size_w_{0};
+    int                    map_size_h_{0};
+    int                    origin_point_x_{0};
+    int                    origin_point_y_{0};
+    int                    pace_size_w_{0};
+    int                    pace_size_h_{0};
+    int                    interval_size_{0};
+    int                    mall_size_w_{0};
+    int                    mall_size_h_{0};
+    int                    shop_size_w_{0};
+    int                    shop_size_h_{0};
+    int                    defalt_building_size_w_;
+    int                    defalt_building_size_h_;
+    std::vector<Pace*>     pace_list_;
+    std::vector<Building*> building_list_;
+    std::vector<Player*>   player_list_;
 
     static DB* inst_;
     DB(/* args */){};

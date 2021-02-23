@@ -90,9 +90,11 @@
     <players>
         <player name="Miss Liu">
             <pos>0</pos>
+            <color>red</color>
         </player>
         <player name="Mr Li">
             <pos>0</pos>
+            <color>blue</color>
         </player> 
     </players>  
 

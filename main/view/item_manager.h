@@ -10,6 +10,8 @@
 #include "item_player.h"
 #include "layout_def.h"
 #include "player.h"
+#include "pace.h"
+#include "building.h"
 
 namespace Tank {
 
@@ -22,9 +24,9 @@ class ItemManager {
     ItemManager(/* args */);
     ~ItemManager();
 
-    ItemPace* createItemPace(Box* inst);
+    ItemPace* createItemPace(Pace* inst);
 
-    ItemBuilding* createItemBuilding(Box* inst);
+    ItemBuilding* createItemBuilding(Building* inst);
 
     ItemPlayer* createItemPlayer(Player* inst);
 

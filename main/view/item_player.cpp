@@ -12,7 +12,8 @@ ItemPlayer::~ItemPlayer() {
 void ItemPlayer::preDraw() {
     fillMapToTransparency();
     QPainter painter(img_);
-    QPen     pen("blue");
+
+    QPen pen(player_->Color().c_str());
     painter.setPen(pen);
     painter.drawEllipse(0, 0, box_->Width() - 1, box_->Height() - 1);
 

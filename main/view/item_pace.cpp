@@ -1,7 +1,11 @@
 
 #include "item_pace.h"
+
 #include <QPainter>
 #include <QPen>
+
+#include "building.h"
+
 namespace Tank {
 ItemPace::ItemPace(QGraphicsItem* parent) : ItemBase(parent) {
 }
@@ -18,12 +22,12 @@ void ItemPace::preDraw() {
 
     QString name;
 
-    auto boxes = box_->getAssociateBoxes();
+    auto building = pace_->getAssociateBuilding();
 
-    // name = QString::number(box_->Index());
+    if (building) {
+        auto id = building->getBox()->Index();
 
-    for(auto box : boxes){
-        name = QString::number(box);
+        name = QString::number(id);
     }
 
     painter.drawText(QRectF(
@@ -34,4 +38,9 @@ void ItemPace::preDraw() {
                      0,
                      name);
 }
+
+void ItemPace::setPace(Pace* pace) {
+    pace_ = pace;
+    setItemSize(pace_->getBox());
 }
+} // namespace Tank

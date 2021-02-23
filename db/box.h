@@ -3,10 +3,12 @@
 #include <list>
 #include <tuple>
 #include "db_def.h"
+
 namespace Tank {
 class Box;
 class Point;
 class Config;
+class Building;
 
 class BoxCreator {
   public:
@@ -19,7 +21,7 @@ class BoxCreator {
 
     Point deduceBoxCenterPoint(PlacementOrient orient, BoxType box_type, Point anchor_point);
     Point deduceNextAnchorPoint(PlacementOrient orient, BoxType box_type, Point anchor_point);
-    void  associateBuildingBox(PlacementOrient orient, Box* box);
+    void  associateBuildingBox(PlacementOrient orient, Building* box);
 
   private:
     Config*    config_{nullptr};
@@ -79,8 +81,6 @@ class Box {
     void  setLUY(int luy) { luy_ = ruy_ = luy; };
     void  setRLX(int rlx) { rlx_ = rux_ = rlx; };
     void  setRLY(int rly) { rly_ = lly_ = rly; };
-    void  setAssociateBox(int index) { test_list.push_back(index); };
-    auto& getAssociateBoxes() { return test_list; };
     void  setType(BoxType type) { type_ = type; };
     auto  Type() { return type_; };
 
@@ -96,6 +96,5 @@ class Box {
     int            index_{0};
     int            associateID_{0};
     BoxType    type_;
-    std::list<int> test_list;
 };
 } // namespace Tank

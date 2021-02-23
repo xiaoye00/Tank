@@ -27,30 +27,29 @@ void Layout::initiation() {
     auto db                 = DB::getInstance();
     auto [scene_w, scene_h] = db->MapSize();
     scene_->setSize(scene_w, scene_h);
-    auto pace_boxes = db->getPaceBoxes();
-    for (auto& box : *pace_boxes) {
-        auto item = item_manager->createItemPace(box);
+    auto paces = db->getPaces();
+    for (auto& pace : *paces) {
+        auto item = item_manager->createItemPace(pace);
         scene_->addItem(item);
     }
 
-    auto building_boxes = db->getBuildingBoxes();
-    for (auto& box : *building_boxes) {
-        auto item = item_manager->createItemBuilding(box);
+    auto buildings = db->getBuildings();
+    for (auto& building : *buildings) {
+        auto item = item_manager->createItemBuilding(building);
         scene_->addItem(item);
     }
-    
+
     auto players = db->getPlayers();
     for (auto& player : *players) {
-        auto size = pace_boxes->size();
+        auto size = paces->size();
         auto pos  = getRondomNumber(size - 1);
-        auto box  = (*pace_boxes)[pos];
+        auto box  = (*paces)[pos]->getBox();
         player->setPosition(pos);
         player->setBox(box);
         auto orient = getRondomNumber(1);
         player->setOrient(orient);
         auto item = item_manager->createItemPlayer(player);
         scene_->addItem(item);
-        // dice->addPlayer(player);
     }
 
     //who first
@@ -60,7 +59,6 @@ void Layout::initiation() {
 
     // connect(dice, &Dice::signalPostDice, this, &Layout::slotRunTasks);
     // connect(this, &Layout::signalShowDice, this, &Layout::slotShowDice);
-
 }
 
 void Layout::slotRunTasks() {
@@ -68,27 +66,45 @@ void Layout::slotRunTasks() {
     auto player      = item_player->getPlayer();
     auto run_steps   = player->RunSteps();
     auto db          = DB::getInstance();
-    auto pace_boxes  = db->getPaceBoxes();
+    auto paces       = db->getPaces();
     while (*run_steps) {
         (*run_steps)--;
         player->setPosition((player->Position() + 1) % db->getNumPaces());
-        auto box = (*pace_boxes)[player->Position()];
+        auto box = (*paces)[player->Position()]->getBox();
         player->setBox(box);
         item_player->refreshItem();
     }
 
+    auto pos = player->Position();
+
+    auto itme_buildings = item_manager->getItemBuildings();
+
+    auto pace = (*paces)[pos];
+
+    auto building = pace->getAssociateBuilding();
+
+    if (building) {
+        if (!building->getOwner()) {
+            building->setOwner(player);
+        }
+
+        auto item_building = itme_buildings[building->getBox()->Index()];
+
+        item_building->preDraw();
+
+        item_building->update();
+    }
+
+    // auto item_pace =  (*paces)[pos];
+
     setCurrentPlayerID(getNextPlayerID());
 
     emit signalShowDice();
-    
 }
 
-void Layout::slotShowDice() 
-{
+void Layout::slotShowDice() {
     // dice->resetData();
-    
 
     emit signalUpdateItems();
-    
 }
 } // namespace Tank

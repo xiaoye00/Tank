@@ -27,6 +27,8 @@ class Player {
     auto RunSteps() { return &run_steps_; };
     auto setPosition(int pos) { position_ = pos; };
     auto Position() { return position_; };
+    auto setColor(std::string color) { color_ = color; };
+    auto Color() { return color_; };
 
   private:
     //player name
@@ -41,6 +43,8 @@ class Player {
     int run_steps_{0};
     // position
     int position_{0};
+    // color
+    std::string color_;
 };
 
 class PlayerCreator {

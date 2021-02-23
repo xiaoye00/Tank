@@ -7,21 +7,21 @@ ItemManager::ItemManager(/* args */) {
 ItemManager::~ItemManager() {
 }
 
-ItemPace* ItemManager::createItemPace(Box* inst) {
+ItemPace* ItemManager::createItemPace(Pace* inst) {
     auto item = new ItemPace;
-    auto box  = static_cast<Box*>(inst);
-    item->setItemSize(box);
+    auto pace  = static_cast<Pace*>(inst);
+    item->setPace(pace);
     item->setType(LayoutItemType::kPace);
     item->preDraw();
     item_paces_[item->getBox()->Index()] = item;
     return item;
 }
 
-ItemBuilding* ItemManager::createItemBuilding(Box* inst) {
+ItemBuilding* ItemManager::createItemBuilding(Building* inst) {
 
     auto item = new ItemBuilding;
-    auto box  = static_cast<Box*>(inst);
-    item->setItemSize(box);
+    auto building  = static_cast<Building*>(inst);
+    item->setBuilding(building);
     item->setType(LayoutItemType::kBuilding);
     item->preDraw();
     item_buildings_[item->getBox()->Index()] = item;
