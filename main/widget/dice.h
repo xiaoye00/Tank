@@ -4,6 +4,8 @@
 #include <QLabel>
 #include <QPushButton>
 
+#include "player.h"
+
 namespace Tank {
 
 class Dice : public QDialog {
@@ -14,13 +16,19 @@ class Dice : public QDialog {
 
     QPushButton* btn{nullptr};
     QLabel*      label{nullptr};
-    int          Num(){return num_;};
+    int          Num() { return num_; };
+    void         addPlayer(Player* player) { player_list_.push_back(player); };
+    void         resetData();
+
+  signals:
+    void signalPostDice();
 
   public slots:
     void slotButtonClicked(bool);
 
   private:
-    int num_{0};
+    int            num_{0};
+    QList<Player*> player_list_;
 };
 
 } // namespace Tank

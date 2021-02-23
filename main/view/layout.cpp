@@ -4,6 +4,7 @@
 #include "config.h"
 #include "db.h"
 #include "item_pace.h"
+#include "item_player.h"
 #include "player.h"
 #include "transform.h"
 #include "util.h"
@@ -11,6 +12,7 @@ namespace Tank {
 Layout::Layout() {
     item_manager = new ItemManager;
     getRondomNumber(10);
+    dice = new Dice;
 }
 
 Layout::~Layout() {
@@ -36,25 +38,57 @@ void Layout::initiation() {
         auto item = item_manager->createItemBuilding(box);
         scene_->addItem(item);
     }
-
+    
     auto players = db->getPlayers();
     for (auto& player : *players) {
         auto size = pace_boxes->size();
         auto pos  = getRondomNumber(size - 1);
         auto box  = (*pace_boxes)[pos];
+        player->setPosition(pos);
         player->setBox(box);
         auto orient = getRondomNumber(1);
         player->setOrient(orient);
         auto item = item_manager->createItemPlayer(player);
         scene_->addItem(item);
+        dice->addPlayer(player);
     }
 
-    Dice* dice = new Dice;
-    dice->exec();
-    auto num = dice->Num();
     //who first
     auto who    = getRondomNumber(1);
     auto player = db->getPlayerByID(who);
-    // dice->exec();
+    setCurrentPlayerID(who);
+
+    connect(dice, &Dice::signalPostDice, this, &Layout::slotRunTasks);
+    connect(this, &Layout::signalShowDice, this, &Layout::slotShowDice);
+
+}
+
+void Layout::slotRunTasks() {
+    auto item_player = item_manager->getCurrentItemPlayer();
+    auto player      = item_player->getPlayer();
+    auto run_steps   = player->RunSteps();
+    auto db          = DB::getInstance();
+    auto pace_boxes  = db->getPaceBoxes();
+    while (*run_steps) {
+        (*run_steps)--;
+        player->setPosition((player->Position() + 1) % db->getNumPaces());
+        auto box = (*pace_boxes)[player->Position()];
+        player->setBox(box);
+        item_player->refreshItem();
+    }
+
+    setCurrentPlayerID(getNextPlayerID());
+
+    emit signalShowDice();
+    
+}
+
+void Layout::slotShowDice() 
+{
+    dice->resetData();
+    
+
+    emit signalUpdateItems();
+    
 }
 } // namespace Tank

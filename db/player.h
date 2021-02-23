@@ -4,6 +4,11 @@
 
 #include "box.h"
 namespace Tank {
+
+void setCurrentPlayerID(int id);
+int  getCurrentPlayerID();
+int  getNextPlayerID();
+
 class Player {
   public:
     Player(){};
@@ -18,6 +23,10 @@ class Player {
     auto Orient() { return orient_; };
     auto setID(int id) { id_ = id; };
     auto ID() { return id_; };
+    auto setRunSteps(int steps) { run_steps_ = steps; };
+    auto RunSteps() { return &run_steps_; };
+    auto setPosition(int pos) { position_ = pos; };
+    auto Position() { return position_; };
 
   private:
     //player name
@@ -28,6 +37,10 @@ class Player {
     GoOrient orient_;
     //player ID
     int id_{0};
+    // run steps
+    int run_steps_{0};
+    // position
+    int position_{0};
 };
 
 class PlayerCreator {

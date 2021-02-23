@@ -2,11 +2,13 @@
 
 #include <QGraphicsItem>
 #include <QPixmap>
+#include <QObject>
 #include <list>
 #include "box.h"
 #include "layout_def.h"
 namespace Tank {
-class ItemBase : public QGraphicsItem {
+class ItemBase : public QObject, public QGraphicsItem  {
+    Q_OBJECT
   public:
     ItemBase(QGraphicsItem* parent = nullptr);
     ~ItemBase(){};

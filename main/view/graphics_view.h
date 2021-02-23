@@ -16,6 +16,13 @@ class GraphicsView : public QGraphicsView {
         return inst_;
     }
 
+    Layout* getLayout() { return layout_; };
+
+  void initiation();
+
+  public slots:
+    void updateItems();
+
   signals:
     void sendPos(int x, int y);
 
@@ -28,8 +35,8 @@ class GraphicsView : public QGraphicsView {
     //for singleton pattern
     static GraphicsView* inst_;
 
-    Layout* layout_;
+    Layout* layout_{nullptr};
 
     GraphicsView(QWidget* parent = nullptr);
 };
-}
+} // namespace Tank

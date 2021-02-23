@@ -2,15 +2,24 @@
 
 #include <QMouseEvent>
 namespace Tank {
+
 GraphicsView::GraphicsView(QWidget* parent) : QGraphicsView(parent) {
     setMouseTracking(true);
+    layout_ = new Layout();
     scene_  = new GraphicsScene;
-    layout_ = new Layout;
+
+    initiation();
+}
+
+void GraphicsView::initiation() {
+    
     layout_->addScene(scene_);
     layout_->initiation();
     setScene(scene_);
     viewport()->update();
     show();
+
+    connect(layout_, &Layout::signalUpdateItems, this, updateItems);
 }
 
 void GraphicsView::mouseMoveEvent(QMouseEvent* event) {
@@ -19,5 +28,10 @@ void GraphicsView::mouseMoveEvent(QMouseEvent* event) {
     QGraphicsView::mouseMoveEvent(event);
 }
 
-GraphicsView* GraphicsView::inst_ = nullptr;
+void GraphicsView::updateItems() {
+
+    viewport()->update();
 }
+
+GraphicsView* GraphicsView::inst_ = nullptr;
+} // namespace Tank

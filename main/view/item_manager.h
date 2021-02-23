@@ -1,4 +1,8 @@
 #pragma once
+
+#include <QList>
+#include <QMap>
+
 #include "box.h"
 #include "item_base.h"
 #include "item_building.h"
@@ -6,42 +10,33 @@
 #include "item_player.h"
 #include "layout_def.h"
 #include "player.h"
+
 namespace Tank {
+
+class ItemPace;
+class ItemBuilding;
+class ItemPlayer;
+
 class ItemManager {
   public:
     ItemManager(/* args */);
     ~ItemManager();
 
-    ItemPace* createItemPace(Box* inst) {
-        auto item = new ItemPace;
-        auto box  = static_cast<Box*>(inst);
-        item->setItemSize(box);
-        item->setType(LayoutItemType::kPace);
-        item->preDraw();
-        return item;
-    }
+    ItemPace* createItemPace(Box* inst);
 
-    ItemBuilding* createItemBuilding(Box* inst) {
+    ItemBuilding* createItemBuilding(Box* inst);
 
-        auto item = new ItemBuilding;
-        auto box  = static_cast<Box*>(inst);
-        item->setItemSize(box);
-        item->setType(LayoutItemType::kBuilding);
-        item->preDraw();
-        return item;
-    }
+    ItemPlayer* createItemPlayer(Player* inst);
 
-    ItemPlayer* createItemPlayer(Player* inst) {
-        auto player = static_cast<Player*>(inst);
-        auto box    = player->getBox();
-        auto item   = new ItemPlayer;
-        auto id = box->Index();
-        item->setPlayer(player);
-        item->setType(LayoutItemType::kPlayer);
-        item->preDraw();
-        return item;
-    }
+    auto getItemPaces() { return item_paces_; };
+    auto getItemBuildings() { return item_buildings_; };
+    auto getItemPlayers() { return item_players_; };
+
+    ItemPlayer* getCurrentItemPlayer();
 
   private:
+    QMap<int, ItemPace*>     item_paces_;
+    QMap<int, ItemBuilding*> item_buildings_;
+    QMap<int, ItemPlayer*>   item_players_;
 };
-}
+} // namespace Tank

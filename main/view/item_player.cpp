@@ -38,4 +38,14 @@ void ItemPlayer::setPlayer(Player* player) {
     player_ = player;
     setItemSize(player_->getBox());
 }
+
+void ItemPlayer::refreshItem() {
+    setItemSize(player_->getBox());
+    update();
+}
+
+void ItemPlayer::slotRefreshPos() {
+    if (getCurrentPlayerID() == player_->ID()) {
+    }
+}
 } // namespace Tank
