@@ -43,9 +43,9 @@ void Layout::initiation() {
     for (auto& player : *players) {
         auto size = paces->size();
         auto pos  = getRondomNumber(size - 1);
-        auto box  = (*paces)[pos]->getBox();
+        auto pace  = (*paces)[pos];
         player->setPosition(pos);
-        player->setBox(box);
+        player->setPace(pace);
         auto orient = getRondomNumber(1);
         player->setOrient(orient);
         auto item = item_manager->createItemPlayer(player);
@@ -70,16 +70,12 @@ void Layout::slotRunTasks() {
     while (*run_steps) {
         (*run_steps)--;
         player->setPosition((player->Position() + 1) % db->getNumPaces());
-        auto box = (*paces)[player->Position()]->getBox();
-        player->setBox(box);
+        auto pace = (*paces)[player->Position()];
+        player->setPace(pace);
         item_player->refreshItem();
     }
 
-    auto pos = player->Position();
-
-    auto itme_buildings = item_manager->getItemBuildings();
-
-    auto pace = (*paces)[pos];
+    auto pace = player->getPace();
 
     auto building = pace->getAssociateBuilding();
 
@@ -88,14 +84,12 @@ void Layout::slotRunTasks() {
             building->setOwner(player);
         }
 
-        auto item_building = itme_buildings[building->getBox()->Index()];
+        auto item_building = item_manager->getItemBuildingByBuilding(building);
 
         item_building->preDraw();
 
         item_building->update();
     }
-
-    // auto item_pace =  (*paces)[pos];
 
     setCurrentPlayerID(getNextPlayerID());
 

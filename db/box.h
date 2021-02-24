@@ -69,8 +69,8 @@ class Box {
     int  RLY() { return rly_; };
     int  Width() const { return -lux_ + rlx_; };
     int  Height() const { return -luy_ + rly_; };
-    void setIndex(int index) { index_ = index; };
-    int  Index() { return index_; };
+    void setID(int index) { id_ = index; };
+    int  ID() { return id_; };
     auto getCenterPoint() {
         auto center_x = (llx_ + rlx_) / 2;
         auto center_y = (luy_ + lly_) / 2;
@@ -93,7 +93,7 @@ class Box {
     int            rly_{0};
     int            rux_{0};
     int            ruy_{0};
-    int            index_{0};
+    int            id_{0};
     int            associateID_{0};
     BoxType    type_;
 };

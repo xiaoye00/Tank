@@ -22,28 +22,28 @@ Box* BoxCreator::createBox(BoxType type, int x, int y) {
     case BoxType::kPace: {
         auto [w, h] = DB::getInstance()->PaceSize();
         auto box    = new Box(Point(x, y), w, h);
-        box->setIndex(global_index_++);
+        box->setID(global_index_++);
         box->setType(type);
         return box;
     }
     case BoxType::kMall: {
         auto [w, h] = DB::getInstance()->MallSize();
         auto box    = new Box(Point(x, y), w, h);
-        box->setIndex(global_index_++);
+        box->setID(global_index_++);
         box->setType(type);
         return box;
     } break;
     case BoxType::kShop: {
         auto [w, h] = DB::getInstance()->ShopSize();
         auto box    = new Box(Point(x, y), w, h);
-        box->setIndex(global_index_++);
+        box->setID(global_index_++);
         box->setType(type);
         return box;
     } break;
     case BoxType::kDefaltBuilding: {
         auto [w, h] = DB::getInstance()->DefaltBuildingSize();
         auto box    = new Box(Point(x, y), w, h);
-        box->setIndex(global_index_++);
+        box->setID(global_index_++);
         box->setType(type);
         return box;
     } break;

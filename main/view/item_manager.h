@@ -4,14 +4,14 @@
 #include <QMap>
 
 #include "box.h"
+#include "building.h"
 #include "item_base.h"
 #include "item_building.h"
 #include "item_pace.h"
 #include "item_player.h"
 #include "layout_def.h"
-#include "player.h"
 #include "pace.h"
-#include "building.h"
+#include "player.h"
 
 namespace Tank {
 
@@ -30,9 +30,13 @@ class ItemManager {
 
     ItemPlayer* createItemPlayer(Player* inst);
 
-    auto getItemPaces() { return item_paces_; };
-    auto getItemBuildings() { return item_buildings_; };
-    auto getItemPlayers() { return item_players_; };
+    auto          getItemPaces() { return item_paces_; };
+    ItemPace*     getItemPaceByID(int id);
+    auto          getItemBuildings() { return item_buildings_; };
+    ItemBuilding* getItemBuildingByID(int id);
+    ItemBuilding* getItemBuildingByBuilding(Building* building);
+    auto          getItemPlayers() { return item_players_; };
+    ItemPlayer*   getItemPlayerByID(int id);
 
     ItemPlayer* getCurrentItemPlayer();
 

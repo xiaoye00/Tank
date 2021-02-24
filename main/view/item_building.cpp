@@ -21,7 +21,7 @@ void ItemBuilding::preDraw() {
     painter.setPen(pen);
     painter.drawRect(0, 0, box_->Width() - 1, box_->Height() - 1);
 
-    QString name = QString::number(box_->Index());
+    QString name = QString::number(box_->ID());
 
     painter.drawText(QRectF(
                        (0),

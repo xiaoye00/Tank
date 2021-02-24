@@ -25,7 +25,7 @@ void ItemPace::preDraw() {
     auto building = pace_->getAssociateBuilding();
 
     if (building) {
-        auto id = building->getBox()->Index();
+        auto id = building->getBox()->ID();
 
         name = QString::number(id);
     }

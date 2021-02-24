@@ -3,6 +3,7 @@
 #include <string>
 
 #include "box.h"
+#include "pace.h"
 namespace Tank {
 
 void setCurrentPlayerID(int id);
@@ -16,7 +17,6 @@ class Player {
 
     auto setName(const char* name) { name_ = name; };
     auto Name() { return name_.c_str(); };
-    auto setBox(Box* box) { box_ = box; };
     auto getBox() { return box_; };
     template <typename T>
     auto setOrient(T orient) { orient_ = (GoOrient)orient; };
@@ -29,6 +29,11 @@ class Player {
     auto Position() { return position_; };
     auto setColor(std::string color) { color_ = color; };
     auto Color() { return color_; };
+    auto setPace(Pace* pace) {
+        pace_ = pace;
+        box_  = pace_->getBox();
+    };
+    auto getPace() { return pace_; };
 
   private:
     //player name
@@ -45,6 +50,8 @@ class Player {
     int position_{0};
     // color
     std::string color_;
+    //Pace
+    Pace* pace_;
 };
 
 class PlayerCreator {
@@ -53,10 +60,9 @@ class PlayerCreator {
     PlayerCreator(/* args */){};
     ~PlayerCreator(){};
 
-    auto createPlayer(const char* name, Box* box = nullptr) {
+    auto createPlayer(const char* name) {
         auto player = new Player;
         player->setName(name);
-        player->setBox(box);
         return player;
     }
 };
