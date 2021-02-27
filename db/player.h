@@ -4,7 +4,7 @@
 
 #include "box.h"
 #include "pace.h"
-namespace Tank {
+namespace tank {
 
 void setCurrentPlayerID(int id);
 int  getCurrentPlayerID();
@@ -34,6 +34,8 @@ class Player {
         box_  = pace_->getBox();
     };
     auto getPace() { return pace_; };
+    auto setMoney(int money) { money_ = money; };
+    auto Money() { return money_; };
 
   private:
     //player name
@@ -52,6 +54,8 @@ class Player {
     std::string color_;
     //Pace
     Pace* pace_;
+    //money
+    int money_{0};
 };
 
 class PlayerCreator {
@@ -66,4 +70,4 @@ class PlayerCreator {
         return player;
     }
 };
-} // namespace Tank
+} // namespace tank

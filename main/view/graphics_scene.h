@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QGraphicsScene>
-namespace Tank {
+namespace tank {
 class GraphicsScene : public QGraphicsScene {
     Q_OBJECT
   public:

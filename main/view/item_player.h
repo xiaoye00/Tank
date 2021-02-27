@@ -2,7 +2,7 @@
 
 #include "item_base.h"
 #include "player.h"
-namespace Tank {
+namespace tank {
 class ItemPlayer : public ItemBase {
   Q_OBJECT
   public:

@@ -1,7 +1,7 @@
 #pragma once
 #include "box.h"
 
-namespace Tank {
+namespace tank {
 class Building;
 class Pace {
   public:

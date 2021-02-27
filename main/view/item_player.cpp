@@ -2,7 +2,7 @@
 #include "item_player.h"
 #include <QPainter>
 #include <QPen>
-namespace Tank {
+namespace tank {
 ItemPlayer::ItemPlayer(QGraphicsItem* parent) : ItemBase(parent) {
 }
 

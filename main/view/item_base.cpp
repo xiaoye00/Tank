@@ -2,7 +2,7 @@
 
 #include <QPainter>
 
-namespace Tank {
+namespace tank {
 
 ItemBase::ItemBase(QGraphicsItem* parent) : QGraphicsItem(parent) {
     setVisible(true);

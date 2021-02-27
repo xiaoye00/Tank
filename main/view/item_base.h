@@ -6,7 +6,7 @@
 #include <list>
 #include "box.h"
 #include "layout_def.h"
-namespace Tank {
+namespace tank {
 class ItemBase : public QObject, public QGraphicsItem  {
     Q_OBJECT
   public:

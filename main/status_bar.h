@@ -1,7 +1,7 @@
 #pragma once
 #include <QLineEdit>
 #include <QStatusBar>
-namespace Tank {
+namespace tank {
 class StatusBar : public QStatusBar {
     Q_OBJECT
   public:

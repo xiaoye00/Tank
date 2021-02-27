@@ -4,7 +4,7 @@
 #include <tuple>
 #include "db_def.h"
 
-namespace Tank {
+namespace tank {
 class Box;
 class Point;
 class Config;

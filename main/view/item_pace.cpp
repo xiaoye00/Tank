@@ -6,7 +6,7 @@
 
 #include "building.h"
 
-namespace Tank {
+namespace tank {
 ItemPace::ItemPace(QGraphicsItem* parent) : ItemBase(parent) {
 }
 

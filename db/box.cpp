@@ -3,7 +3,7 @@
 #include "config.h"
 #include "transform.h"
 #include "building.h"
-namespace Tank {
+namespace tank {
 BoxCreator::BoxCreator(/* args */) {
 }
 

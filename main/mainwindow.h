@@ -4,7 +4,7 @@
 #include <QMainWindow>
 #include "status_bar.h"
 #include "view/graphics_view.h"
-namespace Tank {
+namespace tank {
 class MainWindow : public QMainWindow {
     Q_OBJECT
 

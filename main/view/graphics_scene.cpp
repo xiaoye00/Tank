@@ -1,6 +1,6 @@
 
 #include "graphics_scene.h"
-namespace Tank {
+namespace tank {
 GraphicsScene::GraphicsScene(QObject* parent) : QGraphicsScene(parent) {
 }
 

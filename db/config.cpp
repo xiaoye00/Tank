@@ -7,7 +7,7 @@
 #include "transform.h"
 #include "xml_parse.h"
 
-namespace Tank {
+namespace tank {
 Config::Config() {
 }
 
@@ -233,6 +233,11 @@ bool Config::loadDesign(const char* path) {
                         auto color = local.data();
                         player->setColor(color);
 
+                        e          = node_list.at(2).toElement();
+                        str        = e.text();
+                        auto money = str.toInt();
+                        player->setMoney(money);
+
                         db->appendPlayer(player);
                     }
                     // auto c_node_name =
@@ -241,4 +246,4 @@ bool Config::loadDesign(const char* path) {
         }
     }
 }
-} // namespace Tank
+} // namespace tank

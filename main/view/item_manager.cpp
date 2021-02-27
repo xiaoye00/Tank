@@ -1,6 +1,6 @@
 #include "item_manager.h"
 
-namespace Tank {
+namespace tank {
 ItemManager::ItemManager(/* args */) {
 }
 

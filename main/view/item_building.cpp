@@ -3,7 +3,7 @@
 #include <QPainter>
 #include <QPen>
 #include "player.h"
-namespace Tank {
+namespace tank {
 ItemBuilding::ItemBuilding(QGraphicsItem* parent) : ItemBase(parent) {
 }
 

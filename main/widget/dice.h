@@ -6,7 +6,7 @@
 
 #include "player.h"
 
-namespace Tank {
+namespace tank {
 
 class Dice : public QDialog {
     Q_OBJECT

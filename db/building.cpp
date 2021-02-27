@@ -2,7 +2,7 @@
 
 #include "player.h"
 
-namespace Tank {
+namespace tank {
 Building::Building() {
 }
 

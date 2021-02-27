@@ -9,7 +9,7 @@ std::string InstallPath() {
 }
 
 void setInstallPath(std::string path) {
-    auto pos     = path.rfind("Tank");
+    auto pos     = path.rfind("tank");
     install_path = path.erase(pos);
 }
 

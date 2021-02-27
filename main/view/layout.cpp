@@ -1,6 +1,6 @@
 #include "layout.h"
 #include "../widget/dice.h"
-#include "box.h"
+
 #include "config.h"
 #include "db.h"
 #include "item_pace.h"
@@ -8,7 +8,7 @@
 #include "player.h"
 #include "transform.h"
 #include "util.h"
-namespace Tank {
+namespace tank {
 Layout::Layout() {
     item_manager = new ItemManager;
     getRondomNumber(10);
@@ -43,7 +43,7 @@ void Layout::initiation() {
     for (auto& player : *players) {
         auto size = paces->size();
         auto pos  = getRondomNumber(size - 1);
-        auto pace  = (*paces)[pos];
+        auto pace = (*paces)[pos];
         player->setPosition(pos);
         player->setPace(pace);
         auto orient = getRondomNumber(1);
@@ -61,18 +61,68 @@ void Layout::initiation() {
     // connect(this, &Layout::signalShowDice, this, &Layout::slotShowDice);
 }
 
+void Layout::adjustPlayerView() {
+    auto item_player = item_manager->getCurrentItemPlayer();
+    auto player      = item_player->getPlayer();
+    auto box = player->getBox();
+    //calculate left
+    auto lux = box->LUX() + view_box_.LUX();
+    //out of left threshold
+    if (lux < -scene_->width()/2)
+    {
+        /* code */
+    }
+    // calculate right
+    auto rlx = box->RLX();
+    //out of right threshold
+    if (rlx > scene_->width()/2)
+    {
+        /* code */
+    }
+
+    //calculate top
+    auto luy = box->LUY();
+    //out of top threshold
+    if (luy < -scene_->height()/2)
+    {
+        /* code */
+    }
+
+    //calculate bottom
+    auto rly = box->RLY();
+    //out of bottom threshold
+    if (rly > scene_->height()/2)
+    {
+        /* code */
+    }
+    
+    
+    
+    
+}
+
 void Layout::slotRunTasks() {
     auto item_player = item_manager->getCurrentItemPlayer();
     auto player      = item_player->getPlayer();
     auto run_steps   = player->RunSteps();
     auto db          = DB::getInstance();
     auto paces       = db->getPaces();
-    while (*run_steps) {
-        (*run_steps)--;
-        player->setPosition((player->Position() + 1) % db->getNumPaces());
-        auto pace = (*paces)[player->Position()];
-        player->setPace(pace);
-        item_player->refreshItem();
+    if (player->Orient() == GoOrient::kGoAhead) {
+        while (*run_steps) {
+            (*run_steps)--;
+            player->setPosition((player->Position() + 1) % db->getNumPaces());
+            auto pace = (*paces)[player->Position()];
+            player->setPace(pace);
+            item_player->refreshItem();
+        }
+    } else {
+        while (*run_steps) {
+            (*run_steps)--;
+            player->setPosition((player->Position() - 1 + db->getNumPaces()) % db->getNumPaces());
+            auto pace = (*paces)[player->Position()];
+            player->setPace(pace);
+            item_player->refreshItem();
+        }
     }
 
     auto pace = player->getPace();
@@ -101,4 +151,4 @@ void Layout::slotShowDice() {
 
     emit signalUpdateItems();
 }
-} // namespace Tank
+} // namespace tank

@@ -4,19 +4,25 @@
 #include <QString>
 
 #include "../widget/dice.h"
+#include "box.h"
 #include "graphics_scene.h"
 #include "item_manager.h"
 #include "layout_def.h"
-namespace Tank {
+
+namespace tank {
 class Layout : public QObject {
     Q_OBJECT
   public:
     Layout();
     ~Layout();
 
-    void  addScene(GraphicsScene* scene) { scene_ = scene; };
-    void  setPaceSize(int size) { pace_size_ = size; };
-    void  initiation();
+    void addScene(GraphicsScene* scene) { scene_ = scene; };
+    void setPaceSize(int size) { pace_size_ = size; };
+    void initiation();
+    template<typename T>
+    auto setViewArea(T&& box) { view_box_ = box; };
+    auto getViewArea() { return view_box_; };
+    void adjustPlayerView();
     // Dice* dice{nullptr};
 
   signals:
@@ -31,5 +37,6 @@ class Layout : public QObject {
     GraphicsScene* scene_{nullptr};
     ItemManager*   item_manager{nullptr};
     int            pace_size_{0};
+    Box            view_box_;
 };
 } // namespace Tank

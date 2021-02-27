@@ -1,7 +1,7 @@
 #pragma once
 
 #include "db.h"
-namespace Tank {
+namespace tank {
 class Config {
   public:
     Config();

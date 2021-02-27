@@ -91,10 +91,12 @@
         <player name="Miss Liu">
             <pos>0</pos>
             <color>red</color>
+            <initmoney>100000</initmoney>
         </player>
         <player name="Mr Li">
             <pos>0</pos>
             <color>blue</color>
+            <initmoney>100000</initmoney>
         </player> 
     </players>  
 

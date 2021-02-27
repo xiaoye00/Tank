@@ -2,7 +2,7 @@
 
 #include "item_base.h"
 #include "pace.h"
-namespace Tank {
+namespace tank {
 class ItemPace : public ItemBase {
   public:
     ItemPace(QGraphicsItem* parent = nullptr);

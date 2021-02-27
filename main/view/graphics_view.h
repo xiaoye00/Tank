@@ -3,9 +3,10 @@
 #include "layout.h"
 
 #include <QGraphicsView>
+#include <QScreen>
 #include <QTimer>
 
-namespace Tank {
+namespace tank {
 class GraphicsView : public QGraphicsView {
     Q_OBJECT
   public:
@@ -33,6 +34,7 @@ class GraphicsView : public QGraphicsView {
   protected:
     virtual void mouseMoveEvent(QMouseEvent* event) override;
     virtual void mouseDoubleClickEvent(QMouseEvent* event) override;
+    virtual void resizeEvent(QResizeEvent* event) override;
 
   private:
     //scene of this view
@@ -48,5 +50,7 @@ class GraphicsView : public QGraphicsView {
 
     QTimer* dice_timer_hide_{nullptr};
     QTimer* dice_timer_show_{nullptr};
+    //screen information
+    // QScreen*                screen_{nullptr};
 };
 } // namespace Tank

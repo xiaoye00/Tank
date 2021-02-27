@@ -1,6 +1,6 @@
 #pragma once
 
-namespace Tank {
+namespace tank {
 
 enum class BoxType {
     kPace,

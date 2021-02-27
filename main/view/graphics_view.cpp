@@ -1,8 +1,9 @@
 #include "graphics_view.h"
 
+// #include <QGuiApplication>
 #include <QMouseEvent>
 
-namespace Tank {
+namespace tank {
 
 GraphicsView::GraphicsView(QWidget* parent) : QGraphicsView(parent) {
     setMouseTracking(true);
@@ -43,9 +44,6 @@ void GraphicsView::slotShowDice() {
 
 void GraphicsView::slotDiceHide() {
 
-    // dice_->resetData();
-    // dice_->show();
-
     dice_->hide();
     dice_timer_hide_->stop();
     dice_timer_show_->start(500);
@@ -61,5 +59,11 @@ void GraphicsView::mouseDoubleClickEvent(QMouseEvent* event) {
     QGraphicsView::mouseDoubleClickEvent(event);
 }
 
+void GraphicsView::resizeEvent(QResizeEvent* event) {
+    tank::Box box;
+    // box.setLUX(event->size().)
+    QGraphicsView::resizeEvent(event);
+}
+
 GraphicsView* GraphicsView::inst_ = nullptr;
-} // namespace Tank
+} // namespace tank

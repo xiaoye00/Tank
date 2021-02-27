@@ -1,11 +1,16 @@
 #include "mainwindow.h"
 
-namespace Tank {
+namespace tank {
 
 MainWindow::MainWindow(QWidget* parent)
   : QMainWindow(parent) {
+
+    //set window to the max size
+    showMaximized();
+
     view = GraphicsView::getInstance();
     setCentralWidget(view);
+
     status_bar = new StatusBar(this);
     setStatusBar(status_bar);
 
@@ -14,4 +19,4 @@ MainWindow::MainWindow(QWidget* parent)
 
 MainWindow::~MainWindow() {
 }
-}
+} // namespace Tank

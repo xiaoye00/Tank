@@ -5,7 +5,7 @@
 #include "db.h"
 #include "util.h"
 
-namespace Tank {
+namespace tank {
 Dice::Dice(QWidget* parent) : QDialog(parent) {
     btn        = new QPushButton(this);
     label_num      = new QLabel(this);

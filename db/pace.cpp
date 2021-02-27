@@ -3,7 +3,7 @@
 #include "building.h"
 #include "db.h"
 
-namespace Tank {
+namespace tank {
 Pace::Pace() {
 }
 

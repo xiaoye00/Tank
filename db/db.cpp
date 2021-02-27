@@ -1,6 +1,6 @@
 #include "db.h"
 
-namespace Tank {
+namespace tank {
 
 DB::~DB() {
 }

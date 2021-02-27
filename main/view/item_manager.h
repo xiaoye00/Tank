@@ -13,7 +13,7 @@
 #include "pace.h"
 #include "player.h"
 
-namespace Tank {
+namespace tank {
 
 class ItemPace;
 class ItemBuilding;

@@ -2,7 +2,7 @@
 #include "status_bar.h"
 
 #include <QVBoxLayout>
-namespace Tank {
+namespace tank {
 StatusBar::StatusBar(QWidget* parent) : QStatusBar(parent) {
     line_edit     = new QLineEdit(this);
     auto v_layout = new QVBoxLayout;

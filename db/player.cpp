@@ -1,7 +1,7 @@
 #include "player.h"
 #include "db.h"
 
-namespace Tank {
+namespace tank {
 
 static int playerID    = 0;
 

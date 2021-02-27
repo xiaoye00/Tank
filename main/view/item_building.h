@@ -2,7 +2,7 @@
 
 #include "building.h"
 #include "item_base.h"
-namespace Tank {
+namespace tank {
 class ItemBuilding : public ItemBase {
   public:
     ItemBuilding(QGraphicsItem* parent = nullptr);

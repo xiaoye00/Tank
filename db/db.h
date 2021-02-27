@@ -11,7 +11,7 @@
 #include "db_def.h"
 #include "pace.h"
 #include "player.h"
-namespace Tank {
+namespace tank {
 class DB {
   public:
     ~DB();
@@ -49,6 +49,8 @@ class DB {
     Player* getPlayerByID(int ID);
     Player* getCurrentPlayer();
     auto    getNumPlayers() { return player_list_.size(); };
+    auto    setViewArea(Box box) { view_area_ = box; };
+    auto    getViewArea() { return view_area_; };
 
   private:
     int                    map_size_w_{0};
@@ -67,6 +69,7 @@ class DB {
     std::vector<Pace*>     pace_list_;
     std::vector<Building*> building_list_;
     std::vector<Player*>   player_list_;
+    Box                    view_area_;
 
     static DB* inst_;
     DB(/* args */){};
