@@ -14,6 +14,7 @@ void ItemBuilding::preDraw() {
     fillMapToTransparency();
     QPainter painter(img_);
     QPen     pen("gray");
+    pen.setWidth(4);
     auto     owner = building_->getOwner();
     if (owner) {
         pen.setColor(owner->Color().c_str());
@@ -21,7 +22,9 @@ void ItemBuilding::preDraw() {
     painter.setPen(pen);
     painter.drawRect(0, 0, box_->Width() - 1, box_->Height() - 1);
 
-    QString name = QString::number(box_->ID());
+    auto box_id = box_->ID();
+
+    QString name = QString::number(box_id);
 
     painter.drawText(QRectF(
                        (0),

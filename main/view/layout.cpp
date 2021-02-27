@@ -87,7 +87,7 @@ QPoint Layout::getPlayerView() {
     auto rlx = box->RLX() + view_w_ / 2;
     //out of right threshold
     if (rlx > scene_w / 2) {
-        point.setX(scene_w / 2 - view_w_);
+        point.setX(scene_w / 2 - view_w_ - 1);
         // rect.setWidth(view_w_);
     }
 
@@ -106,7 +106,7 @@ QPoint Layout::getPlayerView() {
     //out of bottom threshold
     if (rly > scene_h / 2) {
         /* code */
-        point.setY(scene_h / 2 - view_h_);
+        point.setY(scene_h / 2 - view_h_ - 1);
         // rect.setHeight(view_h_);
     }
 

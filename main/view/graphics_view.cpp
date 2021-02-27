@@ -56,12 +56,9 @@ void GraphicsView::slotDiceShow() {
     dice_timer_show_->stop();
 }
 
-void GraphicsView::slotViewCurrentPlayer(QPoint point) 
-{
-    auto view_point = mapFromScene(point);
+void GraphicsView::slotViewCurrentPlayer(QPoint point) {
 
-    fitInView(point.rx(),point.ry(),width(),height());
-    
+    fitInView(point.rx(), point.ry(), width(), height());
 }
 
 void GraphicsView::mouseDoubleClickEvent(QMouseEvent* event) {
