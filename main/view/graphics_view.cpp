@@ -27,6 +27,7 @@ void GraphicsView::initiation() {
     // connect(layout_, &Layout::signalUpdateItems, this, slotShowDice);
     connect(dice_, &Dice::signalPostDice, layout_, &Layout::slotRunTasks);
     connect(layout_, &Layout::signalShowDice, this, &GraphicsView::slotShowDice);
+    connect(layout_, &Layout::signalUpdateView, this, &GraphicsView::slotViewCurrentPlayer);
     connect(dice_timer_hide_, &QTimer::timeout, this, &GraphicsView::slotDiceHide);
     connect(dice_timer_show_, &QTimer::timeout, this, &GraphicsView::slotDiceShow);
 }
@@ -55,13 +56,22 @@ void GraphicsView::slotDiceShow() {
     dice_timer_show_->stop();
 }
 
+void GraphicsView::slotViewCurrentPlayer(QPoint point) 
+{
+    auto view_point = mapFromScene(point);
+
+    fitInView(point.rx(),point.ry(),width(),height());
+    
+}
+
 void GraphicsView::mouseDoubleClickEvent(QMouseEvent* event) {
     QGraphicsView::mouseDoubleClickEvent(event);
 }
 
 void GraphicsView::resizeEvent(QResizeEvent* event) {
-    tank::Box box;
-    // box.setLUX(event->size().)
+    auto w = event->size().width();
+    auto h = event->size().height();
+    layout_->setViewArea(w, h);
     QGraphicsView::resizeEvent(event);
 }
 

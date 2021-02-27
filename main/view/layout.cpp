@@ -57,48 +57,60 @@ void Layout::initiation() {
     auto player = db->getPlayerByID(who);
     setCurrentPlayerID(who);
 
+    auto point = getPlayerView();
+
+    emit signalUpdateView(point);
+
     // connect(dice, &Dice::signalPostDice, this, &Layout::slotRunTasks);
     // connect(this, &Layout::signalShowDice, this, &Layout::slotShowDice);
 }
 
-void Layout::adjustPlayerView() {
+QPoint Layout::getPlayerView() {
     auto item_player = item_manager->getCurrentItemPlayer();
     auto player      = item_player->getPlayer();
-    auto box = player->getBox();
+    auto box         = player->getBox();
+
+    QPoint point;
     //calculate left
-    auto lux = box->LUX() + view_box_.LUX();
+    auto lux = box->LUX() - view_w_ / 2;
+
+    auto scene_w = scene_->width();
+    auto scene_h = scene_->height();
     //out of left threshold
-    if (lux < -scene_->width()/2)
-    {
-        /* code */
+    if (lux < -scene_w / 2) {
+        point.setX(-scene_w / 2);
+        // rect.setWidth(view_w_);
+    } else {
+        point.setX(lux);
     }
     // calculate right
-    auto rlx = box->RLX();
+    auto rlx = box->RLX() + view_w_ / 2;
     //out of right threshold
-    if (rlx > scene_->width()/2)
-    {
-        /* code */
+    if (rlx > scene_w / 2) {
+        point.setX(scene_w / 2 - view_w_);
+        // rect.setWidth(view_w_);
     }
 
     //calculate top
-    auto luy = box->LUY();
+    auto luy = box->LUY() - view_h_ / 2;
     //out of top threshold
-    if (luy < -scene_->height()/2)
-    {
-        /* code */
+    if (luy < -scene_h / 2) {
+        point.setY(-scene_h / 2);
+        // rect.setHeight(view_h_);
+    } else {
+        point.setY(luy);
     }
 
     //calculate bottom
-    auto rly = box->RLY();
+    auto rly = box->RLY() + view_h_ / 2;
     //out of bottom threshold
-    if (rly > scene_->height()/2)
-    {
+    if (rly > scene_h / 2) {
         /* code */
+        point.setY(scene_h / 2 - view_h_);
+        // rect.setHeight(view_h_);
     }
-    
-    
-    
-    
+
+    return point;
 }
 
 void Layout::slotRunTasks() {
@@ -142,6 +154,10 @@ void Layout::slotRunTasks() {
     }
 
     setCurrentPlayerID(getNextPlayerID());
+
+    auto point = getPlayerView();
+
+    emit signalUpdateView(point);
 
     emit signalShowDice();
 }

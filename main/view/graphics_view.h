@@ -27,6 +27,7 @@ class GraphicsView : public QGraphicsView {
     void slotShowDice();
     void slotDiceHide();
     void slotDiceShow();
+    void slotViewCurrentPlayer(QPoint point);
 
   signals:
     void sendPos(int x, int y);

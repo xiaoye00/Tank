@@ -19,15 +19,20 @@ class Layout : public QObject {
     void addScene(GraphicsScene* scene) { scene_ = scene; };
     void setPaceSize(int size) { pace_size_ = size; };
     void initiation();
-    template<typename T>
-    auto setViewArea(T&& box) { view_box_ = box; };
-    auto getViewArea() { return view_box_; };
-    void adjustPlayerView();
+    auto setViewArea(int w, int h) {
+        view_w_ = w;
+        view_h_ = h;
+    };
+
+    auto   getViewAreaW() { return view_w_; };
+    auto   getViewAreaH() { return view_h_; };
+    QPoint getPlayerView();
     // Dice* dice{nullptr};
 
   signals:
     void signalShowDice();
     void signalUpdateItems();
+    void signalUpdateView(QPoint);
 
   public slots:
     void slotRunTasks();
@@ -37,6 +42,7 @@ class Layout : public QObject {
     GraphicsScene* scene_{nullptr};
     ItemManager*   item_manager{nullptr};
     int            pace_size_{0};
-    Box            view_box_;
+    int            view_w_{0};
+    int            view_h_{0};
 };
-} // namespace Tank
+} // namespace tank
