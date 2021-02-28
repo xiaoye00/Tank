@@ -3,8 +3,7 @@
 
 namespace tank {
 
-static int playerID    = 0;
-
+static int playerID = 0;
 
 void setCurrentPlayerID(int id) {
     playerID = id;
@@ -20,6 +19,12 @@ int getNextPlayerID() {
     return id;
 }
 
+bool Player::expend(int cost) {
+    if (money_ >= cost) {
+        money_ -= cost;
+        return true;
+    }
+    return false;
+}
 
-
-} // namespace Tank
+} // namespace tank

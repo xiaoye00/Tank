@@ -36,6 +36,7 @@ class Player {
     auto getPace() { return pace_; };
     auto setMoney(int money) { money_ = money; };
     auto Money() { return money_; };
+    bool expend(int cost);
 
   private:
     //player name

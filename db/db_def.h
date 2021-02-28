@@ -10,6 +10,13 @@ enum class BoxType {
     kNull
 };
 
+enum class BuildingType {
+    kMall,
+    kShop,
+    kDefaltBuilding,
+    kNull
+};
+
 enum class PlacementOrient {
     kToRight,
     kToDown,

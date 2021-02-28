@@ -32,7 +32,22 @@
         <starty>300</starty>
     </item>
 
+    <item category="building level">
+        <level>5</level>
+    </item>
 
+    <item category="mall toll">
+        <toll>1000</toll>
+    </item>
+    <item category="shop toll">
+        <toll>300</toll>
+    </item>
+    <item category="defalt toll">
+        <toll>100</toll>
+    </item>
+    <item category="null toll">
+        <toll>0</toll>
+    </item>
 
     <placement>
         <item street="road1">
@@ -91,12 +106,12 @@
         <player name="Miss Liu">
             <pos>0</pos>
             <color>red</color>
-            <initmoney>100000</initmoney>
+            <initmoney>10000</initmoney>
         </player>
         <player name="Mr Li">
             <pos>0</pos>
             <color>blue</color>
-            <initmoney>100000</initmoney>
+            <initmoney>10000</initmoney>
         </player> 
     </players>  
 

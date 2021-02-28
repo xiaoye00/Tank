@@ -1,4 +1,7 @@
 #include "layout.h"
+
+#include <QMessageBox>
+
 #include "../widget/dice.h"
 
 #include "config.h"
@@ -142,8 +145,29 @@ void Layout::slotRunTasks() {
     auto building = pace->getAssociateBuilding();
 
     if (building) {
+        //if no owner
         if (!building->getOwner()) {
+            player->expend(building->getPice());
             building->setOwner(player);
+            building->setLevel(1);
+        }
+        else{
+            if (building->getOwner() == player)
+            {
+                auto level = building->Level();
+                if(level<building->MaxBuildingLevel()){
+                    player->expend(building->getPice());
+                    level++;
+                    building->setLevel(level);
+                }
+            }
+            else{
+                auto toll = building->getToll();
+                if(!player->expend(toll)){
+                    QMessageBox::warning(nullptr,player->Name(),"lose");
+                }
+            }
+            
         }
 
         auto item_building = item_manager->getItemBuildingByBuilding(building);
@@ -152,6 +176,9 @@ void Layout::slotRunTasks() {
 
         item_building->update();
     }
+
+    item_player->preDraw();
+    
 
     setCurrentPlayerID(getNextPlayerID());
 

@@ -97,6 +97,40 @@ bool Config::loadDesign(const char* path) {
                     str                 = child_e.text();
                     auto origin_point_y = str.toUInt();
                     db->setOriginPoint(origin_point_x, origin_point_y);
+                } else if (e.attribute("category") == "building level") {
+                    auto child_list = e.childNodes();
+                    auto child_e    = child_list.at(0).toElement();
+                    auto str        = child_e.text();
+                    auto value      = str.toUInt();
+                    Building::setMaxBuildingLevel(value);
+
+                } else if (e.attribute("category") == "mall toll") {
+                    auto child_list = e.childNodes();
+                    auto child_e    = child_list.at(0).toElement();
+                    auto str        = child_e.text();
+                    auto value      = str.toUInt();
+                    Building::setMallTollBase(value);
+
+                } else if (e.attribute("category") == "null toll") {
+                    auto child_list = e.childNodes();
+                    auto child_e    = child_list.at(0).toElement();
+                    auto str        = child_e.text();
+                    auto value      = str.toUInt();
+                    Building::setNullTollBase(value);
+
+                } else if (e.attribute("category") == "defalt toll") {
+                    auto child_list = e.childNodes();
+                    auto child_e    = child_list.at(0).toElement();
+                    auto str        = child_e.text();
+                    auto value      = str.toUInt();
+                    Building::setDefaltTollBase(value);
+
+                } else if (e.attribute("category") == "shop toll") {
+                    auto child_list = e.childNodes();
+                    auto child_e    = child_list.at(0).toElement();
+                    auto str        = child_e.text();
+                    auto value      = str.toUInt();
+                    Building::setShopTollBase(value);
                 }
             } else if (node.nodeName() == "placement") {
                 BoxCreator creator;

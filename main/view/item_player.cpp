@@ -19,7 +19,7 @@ void ItemPlayer::preDraw() {
 
     QString name;
 
-    name = player_->Name();
+    name = QString(player_->Name()) + "\n" + QString::number(player_->Money());
 
     auto x = 0;
     auto y = box_->Height() / 4;

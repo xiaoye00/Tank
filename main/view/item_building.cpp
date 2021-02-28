@@ -24,7 +24,7 @@ void ItemBuilding::preDraw() {
 
     auto box_id = box_->ID();
 
-    QString name = QString::number(box_id);
+    QString name = QString::number(box_id) + " " +QString::number(building_->Level());
 
     painter.drawText(QRectF(
                        (0),
